@@ -6,7 +6,6 @@
 // ─────────────────────────────────────────────────────────────
 
 import { createBrowserSupabaseClient } from '@/lib/supabase/browser'
-import { createServerSupabaseClient } from '@/lib/supabase/server'
 
 export type EngagementEventType =
   | 'login'
@@ -64,45 +63,6 @@ export async function track(
     // Silent — tracking must never break the app
   }
 }
-
-// ─────────────────────────────────────────────────────────────
-// Server-side tracker
-// Call from Server Components, API routes, and Server Actions.
-// ─────────────────────────────────────────────────────────────
-
-export async function trackServer(
-  eventType: EngagementEventType,
-  options: TrackOptions = {}
-): Promise<void> {
-  try {
-    const supabase = await createServerSupabaseClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return
-
-    await supabase.from('engagement_events').insert({
-      user_id: user.id,
-      event_type: eventType,
-      resource_type: options.resourceType ?? null,
-      resource_id: options.resourceId ?? null,
-      cohort_id: options.cohortId ?? null,
-      duration_seconds: options.durationSeconds ?? null,
-      page_depth_pct: options.pageDepthPct ?? null,
-      metadata: options.metadata ?? {},
-    })
-  } catch {
-    // Silent
-  }
-}
-
-// ─────────────────────────────────────────────────────────────
-// Timer utility
-// Measures time spent on a page/resource.
-// Usage:
-//   const stop = startTimer()
-//   // ... user does something ...
-//   const seconds = stop()
-//   track('lesson_view', { durationSeconds: seconds, ... })
-// ─────────────────────────────────────────────────────────────
 
 export function startTimer(): () => number {
   const start = Date.now()
