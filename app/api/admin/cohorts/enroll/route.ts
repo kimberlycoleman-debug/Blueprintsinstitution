@@ -12,7 +12,7 @@ const EnrollSchema = z.object({
 export async function POST(request: NextRequest) {
   const profile = await getCurrentProfile()
   if (!profile) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  if (profile.role !== 'admin') return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (profile.role !== 'admin' && profile.role !== 'founder') return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const body = await request.json()
   const parsed = EnrollSchema.safeParse(body)

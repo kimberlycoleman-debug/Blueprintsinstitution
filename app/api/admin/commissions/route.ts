@@ -34,7 +34,7 @@ function generateCertNumber(): string {
 // GET /api/admin/commissions — all students with commission status
 export async function GET(request: NextRequest) {
   const profile = await getCurrentProfile()
-  if (!profile || profile.role !== 'admin') {
+  if (!profile || (profile.role !== 'admin' && profile.role !== 'founder')) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -91,7 +91,7 @@ export async function GET(request: NextRequest) {
 // POST /api/admin/commissions — create commission record
 export async function POST(request: NextRequest) {
   const profile = await getCurrentProfile()
-  if (!profile || profile.role !== 'admin') {
+  if (!profile || (profile.role !== 'admin' && profile.role !== 'founder')) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -180,7 +180,7 @@ export async function POST(request: NextRequest) {
 // PATCH /api/admin/commissions — update commission (issue cert, set dates, add declaration)
 export async function PATCH(request: NextRequest) {
   const profile = await getCurrentProfile()
-  if (!profile || profile.role !== 'admin') {
+  if (!profile || (profile.role !== 'admin' && profile.role !== 'founder')) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

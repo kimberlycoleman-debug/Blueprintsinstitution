@@ -7,7 +7,7 @@ import { createAdminSupabaseClient } from '@/lib/supabase/admin'
 export async function GET() {
   const profile = await getCurrentProfile()
   if (!profile) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  if (profile.role !== 'admin') return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (profile.role !== 'admin' && profile.role !== 'founder') return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const supabase = await createServerSupabaseClient()
   const { data, error } = await supabase
@@ -95,7 +95,7 @@ const UpdateCohortSchema = z.object({
 export async function PATCH(request: NextRequest) {
   const profile = await getCurrentProfile()
   if (!profile) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  if (profile.role !== 'admin') return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (profile.role !== 'admin' && profile.role !== 'founder') return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const body = await request.json()
   const parsed = UpdateCohortSchema.safeParse(body)
