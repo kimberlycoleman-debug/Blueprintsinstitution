@@ -15,6 +15,11 @@ export default async function DashboardPage() {
   const profile = await getCurrentProfile()
   if (!profile) redirect('/login')
 
+  // Role-based routing
+  if (profile.role === 'founder') redirect('/founder')
+  if (profile.role === 'admin') redirect('/admin')
+  if (profile.role === 'facilitator') redirect('/facilitator')
+
   // Redirect new students to complete onboarding wizard
   if (profile.onboarding_complete === false) redirect('/onboarding')
 
