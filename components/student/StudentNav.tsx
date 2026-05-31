@@ -8,9 +8,9 @@ interface Profile {
   full_name: string | null
   email: string
   role: string
-  identity_blueprint_complete: boolean
-  purpose_statement_complete: boolean
-  ministry_plan_complete: boolean
+  identity_blueprint_complete: boolean | null
+  purpose_statement_complete: boolean | null
+  ministry_plan_complete: boolean | null
 }
 
 const NAV_LINKS = [
@@ -29,7 +29,7 @@ export default function StudentNav({ profile }: { profile: Profile }) {
   async function signOut() {
     const supabase = createBrowserSupabaseClient()
     await supabase.auth.signOut()
-    router.push('/')
+    router.push('/login')
     router.refresh()
   }
 

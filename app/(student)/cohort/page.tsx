@@ -33,6 +33,7 @@ export default function CohortPage() {
   const [loading, setLoading] = useState(true)
   const [cohortName, setCohortName] = useState<string | null>(null)
   const [noCohort, setNoCohort] = useState(false)
+  const [fetchError, setFetchError] = useState(false)
 
   // New post form
   const [showForm, setShowForm] = useState(false)
@@ -54,7 +55,7 @@ export default function CohortPage() {
         }
         setLoading(false)
       })
-      .catch(() => setLoading(false))
+      .catch(() => { setFetchError(true); setLoading(false) })
   }, [])
 
   async function handlePost(e: React.FormEvent) {
@@ -84,6 +85,18 @@ export default function CohortPage() {
     return (
       <div className="max-w-3xl mx-auto">
         <div className="text-[var(--bp-muted)] text-sm">Loading your cohort…</div>
+      </div>
+    )
+  }
+
+  if (fetchError) {
+    return (
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center py-16">
+          <h1 className="text-2xl font-semibold mb-3">Unable to Load Cohort</h1>
+          <p className="text-[var(--bp-muted)] mb-6">Something went wrong loading your cohort. Please refresh the page.</p>
+          <Link href="/dashboard" className="bp-btn bp-btn-secondary">← Back to Dashboard</Link>
+        </div>
       </div>
     )
   }

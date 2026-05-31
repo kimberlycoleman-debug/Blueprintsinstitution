@@ -37,7 +37,17 @@ function ResetPasswordForm() {
       setError(updateError.message)
     } else {
       setDone(true)
-      setTimeout(() => router.push('/onboarding'), 1500)
+      const { data: { user } } = await supabase.auth.getUser()
+      let dest = '/onboarding'
+      if (user) {
+        const { data: prof } = await supabase
+          .from('profiles')
+          .select('onboarding_complete')
+          .eq('id', user.id)
+          .single()
+        if (prof?.onboarding_complete) dest = '/dashboard'
+      }
+      setTimeout(() => router.push(dest), 1500)
     }
   }
 

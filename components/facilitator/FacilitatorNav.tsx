@@ -25,7 +25,7 @@ export default function FacilitatorNav({ profile }: { profile: Profile }) {
   async function signOut() {
     const supabase = createBrowserSupabaseClient()
     await supabase.auth.signOut()
-    router.push('/')
+    router.push('/login')
     router.refresh()
   }
 

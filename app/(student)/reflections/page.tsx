@@ -27,6 +27,7 @@ function ReflectionsContent() {
 
   const [reflections, setReflections] = useState<Reflection[]>([])
   const [loading, setLoading] = useState(true)
+  const [fetchError, setFetchError] = useState(false)
 
   // Write new reflection
   const [response, setResponse] = useState('')
@@ -43,7 +44,7 @@ function ReflectionsContent() {
         setReflections(data ?? [])
         setLoading(false)
       })
-      .catch(() => setLoading(false))
+      .catch(() => { setFetchError(true); setLoading(false) })
   }, [])
 
   async function handleSubmit(e: React.FormEvent) {
@@ -180,6 +181,10 @@ function ReflectionsContent() {
         <h2 className="font-semibold mb-4">All Reflections</h2>
         {loading ? (
           <div className="text-[var(--bp-muted)] text-sm">Loading…</div>
+        ) : fetchError ? (
+          <div className="bp-card p-8 text-center">
+            <p className="text-[var(--bp-muted)]">Unable to load reflections. Please refresh the page.</p>
+          </div>
         ) : reflections.length === 0 ? (
           <div className="bp-card p-8 text-center">
             <p className="text-[var(--bp-muted)] mb-4">

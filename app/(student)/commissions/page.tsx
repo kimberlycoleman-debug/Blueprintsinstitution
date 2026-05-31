@@ -58,6 +58,7 @@ export default function CommissioningPage() {
   const [eligibility, setEligibility] = useState<Eligibility | null>(null)
   const [meetsThreshold, setMeetsThreshold] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [fetchError, setFetchError] = useState(false)
 
   useEffect(() => {
     fetch('/api/commissions')
@@ -68,12 +69,22 @@ export default function CommissioningPage() {
         setMeetsThreshold(json.meetsThreshold ?? false)
         setLoading(false)
       })
+      .catch(() => { setFetchError(true); setLoading(false) })
   }, [])
 
   if (loading) {
     return (
       <div className="py-20 text-center text-[var(--bp-muted)] text-sm">
         Loading commissioning status...
+      </div>
+    )
+  }
+
+  if (fetchError) {
+    return (
+      <div className="py-20 text-center">
+        <p className="text-[var(--bp-muted)] mb-4">Unable to load commissioning status. Please refresh the page.</p>
+        <Link href="/dashboard" className="bp-btn bp-btn-secondary text-sm">← Back to Dashboard</Link>
       </div>
     )
   }
