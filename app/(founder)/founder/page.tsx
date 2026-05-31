@@ -80,7 +80,7 @@ export default async function FounderCommandCenter() {
       {/* Institute vitals */}
       <div>
         <div className="text-overline mb-5">Institute Vitals — Live Snapshot</div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {vitals.map(({ label, value, href }) => (
             <Link
               key={label}
@@ -100,14 +100,14 @@ export default async function FounderCommandCenter() {
           <div className="text-overline mb-5" style={{ color: 'var(--bp-gold)' }}>
             Transformation Index™ — The Founding Distinctive
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { label: 'Avg index (all-time)', value: metrics.avg_transformation_index_alltime ?? '—' },
               { label: 'Avg gain per graduate', value: metrics.avg_index_gain_per_graduate ?? '—' },
               { label: 'Retention rate', value: metrics.overall_retention_rate != null ? `${metrics.overall_retention_rate}%` : '—' },
               { label: 'Attendance avg', value: metrics.avg_attendance_rate_allcohorts != null ? `${metrics.avg_attendance_rate_allcohorts}%` : '—' },
             ].map(({ label, value }) => (
-              <div key={label}>
+              <div key={label} className="relative z-10">
                 <p className="text-xs mb-2" style={{ color: 'rgba(240,217,181,0.65)' }}>{label}</p>
                 <p className="font-display font-light" style={{ fontSize: '2rem', lineHeight: 1, color: 'var(--bp-gold)' }}>{String(value)}</p>
               </div>

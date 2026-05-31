@@ -40,7 +40,7 @@ export default function FounderNav() {
         </div>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map(({ href, label, exact }) => (
             <Link
               key={href}
@@ -67,7 +67,7 @@ export default function FounderNav() {
           </div>
           <button
             onClick={handleSignOut}
-            className="text-xs transition-colors hidden sm:block"
+            className="text-xs transition-colors hidden lg:block"
             style={{ color: 'rgba(240,217,181,0.6)' }}
             onMouseEnter={e => (e.currentTarget.style.color = 'var(--bp-gold-light)')}
             onMouseLeave={e => (e.currentTarget.style.color = 'rgba(240,217,181,0.6)')}
@@ -77,8 +77,8 @@ export default function FounderNav() {
         </div>
       </div>
 
-      {/* Mobile nav row */}
-      <div className="md:hidden overflow-x-auto flex" style={{ borderTop: '1px solid rgba(196,146,58,0.15)' }}>
+      {/* Mobile nav row — shows on viewports < lg */}
+      <div className="lg:hidden overflow-x-auto flex" style={{ borderTop: '1px solid rgba(196,146,58,0.15)' }}>
         {NAV_LINKS.map(({ href, label, exact }) => (
           <Link
             key={href}
