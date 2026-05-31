@@ -5,7 +5,7 @@ import { createServerSupabaseClient, getCurrentProfile } from '@/lib/supabase/se
 export default async function FacilitatorDashboard() {
   const profile = await getCurrentProfile()
   if (!profile) redirect('/login')
-  if (profile.role !== 'facilitator' && profile.role !== 'admin') redirect('/dashboard')
+  if (profile.role !== 'facilitator' && profile.role !== 'admin' && profile.role !== 'founder') redirect('/dashboard')
 
   const supabase = await createServerSupabaseClient()
 

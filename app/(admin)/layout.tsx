@@ -6,7 +6,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const profile = await getCurrentProfile()
 
   if (!profile) redirect('/login')
-  if (profile.role !== 'admin') redirect('/dashboard')
+  if (profile.role !== 'admin' && profile.role !== 'founder') redirect('/dashboard')
 
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--bp-cream) 0%, var(--bp-white) 220px, var(--bp-white) 100%)' }}>

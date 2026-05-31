@@ -6,7 +6,7 @@ export default async function FacilitatorLayout({ children }: { children: React.
   const profile = await getCurrentProfile()
 
   if (!profile) redirect('/login')
-  if (profile.role !== 'facilitator' && profile.role !== 'admin') {
+  if (profile.role !== 'facilitator' && profile.role !== 'admin' && profile.role !== 'founder') {
     redirect('/dashboard')
   }
 

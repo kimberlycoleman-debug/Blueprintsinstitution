@@ -30,7 +30,7 @@ export default function OfflinePage() {
 
         <button
           onClick={() => window.location.reload()}
-          className="bp-btn-primary px-6 py-2.5 text-sm w-full"
+          className="bp-btn bp-btn-primary px-6 py-2.5 text-sm w-full"
         >
           Try again
         </button>

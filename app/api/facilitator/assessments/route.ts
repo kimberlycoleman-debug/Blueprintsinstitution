@@ -16,7 +16,7 @@ const AssessmentSchema = z.object({
 export async function GET(request: NextRequest) {
   const profile = await getCurrentProfile()
   if (!profile) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  if (profile.role !== 'facilitator' && profile.role !== 'admin') {
+  if (profile.role !== 'facilitator' && profile.role !== 'admin' && profile.role !== 'founder') {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const profile = await getCurrentProfile()
   if (!profile) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  if (profile.role !== 'facilitator' && profile.role !== 'admin') {
+  if (profile.role !== 'facilitator' && profile.role !== 'admin' && profile.role !== 'founder') {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 

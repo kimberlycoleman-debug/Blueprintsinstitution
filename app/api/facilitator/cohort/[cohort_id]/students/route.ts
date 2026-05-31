@@ -10,14 +10,14 @@ export async function GET(
   const { cohort_id } = await params
   const profile = await getCurrentProfile()
   if (!profile) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  if (profile.role !== 'facilitator' && profile.role !== 'admin') {
+  if (profile.role !== 'facilitator' && profile.role !== 'admin' && profile.role !== 'founder') {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
   const supabase = await createServerSupabaseClient()
 
-  // Verify facilitator is assigned to this cohort (or is admin)
-  if (profile.role !== 'admin') {
+  // Verify facilitator is assigned to this cohort (or is admin/founder)
+  if (profile.role !== 'admin' && profile.role !== 'founder') {
     const { data: assignment } = await supabase
       .from('cohort_facilitators')
       .select('id')

@@ -6,7 +6,7 @@ import { createServerSupabaseClient, getCurrentProfile } from '@/lib/supabase/se
 export async function GET() {
   const profile = await getCurrentProfile()
   if (!profile) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  if (profile.role !== 'facilitator' && profile.role !== 'admin') {
+  if (profile.role !== 'facilitator' && profile.role !== 'admin' && profile.role !== 'founder') {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
