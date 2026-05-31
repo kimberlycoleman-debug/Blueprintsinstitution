@@ -7,7 +7,7 @@
 >
 > **Update this document at the end of every work session.** It is the project's memory. As long as this file survives, nothing is ever lost.
 >
-> **⚠️ UPDATED — June 2026 (Session 3).** Phase 4 Facilitator Dashboard COMPLETE. All API routes + all pages built. See SESSION LOG for full details.
+> **⚠️ UPDATED — May 31, 2026 (Session 4).** Phase 5 Admin Dashboard COMPLETE. See SESSION LOG for full details.
 
 ---
 
@@ -195,10 +195,23 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 | `app/api/facilitator/attendance/route.ts` | GET session attendance; POST bulk upsert |
 | `app/api/facilitator/assessments/route.ts` | GET student assessments; POST upsert single score |
 
+### Admin Experience (Phase 5 — complete ✅)
+| Path | Purpose |
+|------|---------|
+| `app/(admin)/layout.tsx` | Role guard (admin only) + AdminNav wrapper |
+| `app/(admin)/admin/page.tsx` | Dashboard — 4 live stats, pending applications preview, quick actions |
+| `app/(admin)/admin/applications/page.tsx` | Application review — status filter tabs, split-pane detail + actions panel, inline notes + interview date + cohort assignment |
+| `app/(admin)/admin/cohorts/page.tsx` | Cohort management — list with enrollment bars, create new cohort form with facilitator assignment, inline status edit |
+| `app/(admin)/admin/users/page.tsx` | User management — searchable table, inline role change dropdown, active/inactive toggle |
+| `components/admin/AdminNav.tsx` | Admin nav — 4 links, role badge, initials avatar, sign out |
+| `app/api/admin/applications/route.ts` | GET paginated applications; PATCH status/notes/cohort/interview date |
+| `app/api/admin/cohorts/route.ts` | GET all cohorts with enrollment; POST create; PATCH status/name |
+| `app/api/admin/cohorts/enroll/route.ts` | POST enroll student (capacity check); GET facilitators list |
+| `app/api/admin/users/route.ts` | GET users with search/filter; PATCH role/is_active |
+
 ### ⏳ NOT YET BUILT — Code
 | Path | What it will do |
 |------|---------|
-| Admin dashboard | Application review, cohort creation, user management |
 | Founder dashboard UI | Vault browser, audit log, compute_institute_metrics(), cross-cohort analytics |
 | Analytics dashboards | Student progress, facilitator view, founder intelligence, funder reporting |
 
@@ -223,10 +236,12 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - ✅ Five canonical strategy documents saved to project root
 - ✅ `vercel.json` — framework: nextjs (fixes Vercel output directory error)
 - ✅ Phase 4: Complete facilitator dashboard — layout, nav, dashboard page, cohort health page, student detail + assessment entry page, attendance capture page, 6 API routes
+- ✅ Phase 5: Complete admin dashboard — layout, nav, dashboard, applications review, cohort management (create/assign/status), user management (role/active), 4 API routes
 
 ### NEXT (in build priority order)
 - ✅ **Phase 4:** Facilitator dashboard — COMPLETE (layout, nav, dashboard, cohort health, student detail + assessment entry, attendance capture, 6 API routes)
-- ⏳ **Phase 5 (NEXT):** Admin dashboard — application review, cohort creation, user management
+- ✅ **Phase 5:** Admin dashboard — COMPLETE (layout, nav, dashboard, applications review, cohort management, user management, 4 API routes)
+- ⏳ **Phase 6 (NEXT):** Founder dashboard UI — vault browser, audit log viewer, compute_institute_metrics() caller, cross-cohort analytics (DB 100% complete)
 - ⏳ **Phase 6:** Founder dashboard UI — vault browser, audit log viewer, `compute_institute_metrics()` caller, cross-cohort analytics (DB is 100% complete, only UI needed)
 - ⏳ **Analytics dashboards:** Student progress view, facilitator view, founder cross-cohort intelligence, funder/partner reporting
 - ⏳ **Phase 7:** Commissioning ceremony + certificates
@@ -336,6 +351,21 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - `app/(facilitator)/facilitator/student/[student_id]/page.tsx` — Student detail with checkpoint tabs × 5-dimension assessment entry (score_numeric, qualitative, narrative)
 - `app/(facilitator)/facilitator/attendance/page.tsx` — Attendance capture with session selector, bulk status buttons, notes on absence/late/excused
 - **NEXT:** Phase 5 — Admin dashboard (application review, cohort creation, user management)
+
+**Session — Phase 5 Complete (May 31, 2026 — Session 4)**
+- Built complete Admin Dashboard (Phase 5) — all pages + all API routes
+- Fixed Vercel build error: split `trackServer` out of `track.ts` into `lib/analytics/track-server.ts` (next/headers was being bundled into client code via TrackPageView)
+- `app/(admin)/layout.tsx` — admin-only role guard + AdminNav
+- `components/admin/AdminNav.tsx` — 4-link nav, Admin badge, initials avatar
+- `app/(admin)/admin/page.tsx` — dashboard with 4 live stats + pending applications preview + quick actions
+- `app/(admin)/admin/applications/page.tsx` — full application review: status filter tabs, split-pane detail + action panel, inline notes/interview date/cohort assignment, status workflow transitions
+- `app/(admin)/admin/cohorts/page.tsx` — cohort management: create cohort form (name/code/dates/capacity/facilitators), list with enrollment bars + capacity %, inline status edit
+- `app/(admin)/admin/users/page.tsx` — user management: search + role filter, inline role dropdown, active/inactive toggle
+- `app/api/admin/applications/route.ts` — GET paginated with status filter; PATCH status/reviewer_notes/interview_date/decision_notes/assigned_cohort_id
+- `app/api/admin/cohorts/route.ts` — GET all; POST create + assign facilitators; PATCH status/name
+- `app/api/admin/cohorts/enroll/route.ts` — POST enroll student with capacity check; GET facilitators list
+- `app/api/admin/users/route.ts` — GET searchable with role filter; PATCH role/is_active (self-demotion blocked)
+- **NEXT:** Phase 6 — Founder dashboard UI
 
 ---
 
