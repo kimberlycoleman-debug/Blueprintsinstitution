@@ -15,6 +15,7 @@ const NAV_LINKS = [
   { href: '/facilitator/cohort', label: 'Cohort Health' },
   { href: '/facilitator/attendance', label: 'Attendance' },
   { href: '/facilitator/assessments', label: 'Assessments' },
+  { href: '/facilitator/analytics', label: 'Analytics' },
 ]
 
 export default function FacilitatorNav({ profile }: { profile: Profile }) {

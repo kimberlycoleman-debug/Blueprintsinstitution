@@ -7,7 +7,7 @@
 >
 > **Update this document at the end of every work session.** It is the project's memory. As long as this file survives, nothing is ever lost.
 >
-> **⚠️ UPDATED — May 31, 2026 (Session 6).** Phase 7 Commissioning + Certificates COMPLETE. See SESSION LOG.
+> **⚠️ UPDATED — May 31, 2026 (Session 7).** Phase 8 Analytics Dashboards COMPLETE. See SESSION LOG.
 
 ---
 
@@ -229,10 +229,19 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 | `app/api/commissions/route.ts` | GET — student's own commission record + live eligibility check (capstones, attendance, lesson count) + `studentName` |
 | `app/api/admin/commissions/route.ts` | GET all commissions + uncommissioned students; POST create commission (auto-computes eligibility, generates cert number); PATCH update/issue |
 
+### Analytics Dashboards (Phase 8 — COMPLETE ✅)
+| Path | Purpose |
+|------|---------|
+| `app/(student)/analytics/page.tsx` | Student formation journey — TI over checkpoints, dimension scores, reflection depth trend, engagement activity |
+| `app/(facilitator)/facilitator/analytics/page.tsx` | Facilitator cohort analytics — TI gain, engagement rates, student comparison table, at-risk students |
+| `app/(admin)/admin/analytics/page.tsx` | Admin/funder accountability — institute vitals, formation outcomes, funding summary, cohort outcomes |
+| `app/api/analytics/student/route.ts` | GET student's TI records, reflection analysis trend, engagement summary, capstone/progress status |
+| `app/api/analytics/facilitator/route.ts` | GET cohort analytics snapshots, student TI table, at-risk students |
+| `app/api/analytics/admin/route.ts` | GET institutional_metrics (triggers compute), funding records + summary, cohort outcomes |
+
 ### ⏳ NOT YET BUILT — Code
 | Path | What it will do |
 |------|------|
-| Analytics dashboards | Student progress view, facilitator analytics, funder accountability reporting |
 | PWA manifest | Service worker, offline mode, home-screen install |
 | Launch prep | Email system, onboarding flow, legal/privacy pages |
 
@@ -260,14 +269,15 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - ✅ Phase 5: Complete admin dashboard — layout, nav, dashboard, applications review, cohort management (create/assign/status), user management (role/active), 4 API routes
 - ✅ Phase 6: Complete founder sovereign dashboard — Command Center, Vault browser, Analytics (compute_institute_metrics()), Audit Log, Funding Records, 4 API routes
 - ✅ Phase 7: Commissioning + Certificates — student commissioning page (eligibility + declarations), printable certificate, admin commissioning management, 2 API routes
+- ✅ Phase 8: Analytics Dashboards — student formation journey, facilitator cohort analytics, admin/funder accountability reporting, 3 API routes
 
 ### NEXT (in build priority order)
 - ✅ **Phase 4:** Facilitator dashboard — COMPLETE
 - ✅ **Phase 5:** Admin dashboard — COMPLETE
 - ✅ **Phase 6:** Founder Sovereign Dashboard — COMPLETE (Command Center, Vault, Analytics, Audit Log, Funding + 4 API routes)
 - ✅ **Phase 7:** Commissioning + Certificates — COMPLETE (student page, printable cert, admin management, 2 API routes)
-- ⏳ **Phase 8 (NEXT):** Analytics dashboards — student progress view, facilitator analytics view, funder accountability reporting
-- ⏳ **Phase 9:** PWA / mobile readiness — service worker, offline mode, home-screen install prompt
+- ✅ **Phase 8:** Analytics Dashboards — COMPLETE (student formation journey, facilitator cohort analytics, admin/funder accountability, 3 API routes)
+- ⏳ **Phase 9 (NEXT):** PWA / mobile readiness — service worker, offline mode, home-screen install prompt
 - ⏳ **Phase 10:** Launch prep — email system, onboarding flow, legal/privacy pages
 
 ---
@@ -416,6 +426,20 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - `components/student/StudentNav.tsx` — added Commissioning link (5th nav item)
 - `middleware.ts` — added `/commissions` and `/founder` to protected routes
 - **NEXT:** Phase 8 — Analytics dashboards (student progress, facilitator view, funder reporting)
+
+**Session — Phase 8 Complete (May 31, 2026 — Session 7)**
+- Built complete Analytics Dashboards (Phase 8) — 3 pages + 3 API routes
+- `app/(student)/analytics/page.tsx` — Student formation journey: Transformation Index across checkpoints (table + dimension bars), reflection depth timeline (bar chart with depth labels), engagement activity breakdown (streak, active days, event counts)
+- `app/(facilitator)/facilitator/analytics/page.tsx` — Facilitator cohort analytics: cohort health cards (enrollment, attendance, lesson completion, TI gain panel, capstone progress), student TI comparison table (sortable, cohort filter), at-risk students view
+- `app/(admin)/admin/analytics/page.tsx` — Admin funder accountability: institute vitals (graduates, free seats, TI avg), formation outcomes (capstone counts), engagement rates, funding records breakdown (type/status badges, deployed vs. awarded), cohort outcomes table
+- `app/api/analytics/student/route.ts` — GET: TI records all checkpoints, reflection_analysis (depth + identity language), engagement_events summary (30-day, streak), progress/capstone status
+- `app/api/analytics/facilitator/route.ts` — GET: cohort_analytics latest snapshots, student TI table (latest per student + gain from baseline), at-risk students (composite < 40)
+- `app/api/analytics/admin/route.ts` — GET: triggers compute_institute_metrics() RPC, institutional_metrics, funding_records with summary (totalAwarded/Deployed/FreeSeats), upcoming reporting deadlines, cohort outcomes
+- `components/student/StudentNav.tsx` — added My Formation link (6th nav item)
+- `components/facilitator/FacilitatorNav.tsx` — added Analytics link (5th nav item)
+- `components/admin/AdminNav.tsx` — added Analytics link (6th nav item)
+- `middleware.ts` — added `/analytics` to protected routes
+- **NEXT:** Phase 9 — PWA / mobile readiness (service worker, offline, home-screen install)
 
 ---
 

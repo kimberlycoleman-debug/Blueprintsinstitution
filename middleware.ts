@@ -40,6 +40,7 @@ export async function middleware(request: NextRequest) {
     '/ministry-plan',
     '/commissions',
     '/founder',
+    '/analytics',
   ]
 
   const isProtected = protectedRoutes.some(route =>

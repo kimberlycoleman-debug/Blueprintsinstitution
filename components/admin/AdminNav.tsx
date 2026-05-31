@@ -17,6 +17,7 @@ const NAV_LINKS = [
   { href: '/admin/cohorts', label: 'Cohorts' },
   { href: '/admin/users', label: 'Users' },
   { href: '/admin/commissions', label: 'Commissioning' },
+  { href: '/admin/analytics', label: 'Analytics' },
 ]
 
 export default function AdminNav({ profile }: { profile: Profile }) {
