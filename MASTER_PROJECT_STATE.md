@@ -7,7 +7,7 @@
 >
 > **Update this document at the end of every work session.** It is the project's memory. As long as this file survives, nothing is ever lost.
 >
-> **⚠️ UPDATED — May 31, 2026 (Session 7).** Phase 8 Analytics Dashboards COMPLETE. See SESSION LOG.
+> **⚠️ UPDATED — May 31, 2026 (Session 8).** Phase 9 PWA / Mobile Readiness COMPLETE. See SESSION LOG.
 
 ---
 
@@ -239,11 +239,19 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 | `app/api/analytics/facilitator/route.ts` | GET cohort analytics snapshots, student TI table, at-risk students |
 | `app/api/analytics/admin/route.ts` | GET institutional_metrics (triggers compute), funding records + summary, cohort outcomes |
 
+### PWA / Mobile Readiness (Phase 9 — COMPLETE ✅)
+| Path | Purpose |
+|------|---------|
+| `public/manifest.json` | Web app manifest — name, short_name, icons, display: standalone, shortcuts (Lessons, Reflect, Cohort), theme_color |
+| `public/sw.js` | Service worker — cache-first for static assets, network-first for navigation, never caches API/auth routes, background sync stub |
+| `app/offline/page.tsx` | Offline fallback page — branded, Ephesians 2:10 anchor, try-again button |
+| `app/layout.tsx` | Updated — manifest link, apple-touch-icon, mobile-web-app-capable, SW registration script, `<InstallPrompt>` |
+| `components/shared/InstallPrompt.tsx` | PWA install banner — listens for `beforeinstallprompt`, shows after 3s, dismisses to session storage, dark gold + amber design |
+
 ### ⏳ NOT YET BUILT — Code
 | Path | What it will do |
 |------|------|
-| PWA manifest | Service worker, offline mode, home-screen install |
-| Launch prep | Email system, onboarding flow, legal/privacy pages |
+| Launch prep | Email system (welcome + cohort reminders), onboarding flow, legal/privacy pages, hardening |
 
 ---
 
@@ -270,6 +278,7 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - ✅ Phase 6: Complete founder sovereign dashboard — Command Center, Vault browser, Analytics (compute_institute_metrics()), Audit Log, Funding Records, 4 API routes
 - ✅ Phase 7: Commissioning + Certificates — student commissioning page (eligibility + declarations), printable certificate, admin commissioning management, 2 API routes
 - ✅ Phase 8: Analytics Dashboards — student formation journey, facilitator cohort analytics, admin/funder accountability reporting, 3 API routes
+- ✅ Phase 9: PWA / Mobile Readiness — manifest, service worker, offline page, install prompt, layout PWA meta
 
 ### NEXT (in build priority order)
 - ✅ **Phase 4:** Facilitator dashboard — COMPLETE
@@ -277,8 +286,8 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - ✅ **Phase 6:** Founder Sovereign Dashboard — COMPLETE (Command Center, Vault, Analytics, Audit Log, Funding + 4 API routes)
 - ✅ **Phase 7:** Commissioning + Certificates — COMPLETE (student page, printable cert, admin management, 2 API routes)
 - ✅ **Phase 8:** Analytics Dashboards — COMPLETE (student formation journey, facilitator cohort analytics, admin/funder accountability, 3 API routes)
-- ⏳ **Phase 9 (NEXT):** PWA / mobile readiness — service worker, offline mode, home-screen install prompt
-- ⏳ **Phase 10:** Launch prep — email system, onboarding flow, legal/privacy pages
+- ✅ **Phase 9:** PWA / Mobile Readiness — COMPLETE (manifest, service worker, offline page, install prompt)
+- ⏳ **Phase 10 (NEXT):** Launch prep — email system, onboarding flow, legal/privacy pages, hardening
 
 ---
 
@@ -440,6 +449,15 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - `components/admin/AdminNav.tsx` — added Analytics link (6th nav item)
 - `middleware.ts` — added `/analytics` to protected routes
 - **NEXT:** Phase 9 — PWA / mobile readiness (service worker, offline, home-screen install)
+
+**Session — Phase 9 Complete (May 31, 2026 — Session 8)**
+- Built complete PWA / Mobile Readiness (Phase 9) — 5 files
+- `public/manifest.json` — Full Web App Manifest: name/short_name, icons (192+512), display: standalone, theme_color #5C4A2A, background_color #FAFAF8, 3 shortcuts (Lessons, Reflect, Cohort)
+- `public/sw.js` — Service Worker: cache-first for `/_next/static/` + image assets; network-first with offline fallback for navigation; hard skip for `/api/` and Supabase (auth-sensitive); background sync stub for future offline reflection drafts
+- `app/offline/page.tsx` — Branded offline page: WiFi icon, message, Ephesians 2:10 blockquote, try-again button
+- `app/layout.tsx` — Updated: added `manifest` metadata, `appleWebApp` metadata, `apple-touch-icon` link, `maximumScale: 1`, dual `themeColor` (light/dark), SW registration `<Script strategy="afterInteractive">`, `<InstallPrompt>` component
+- `components/shared/InstallPrompt.tsx` — PWA install banner: `beforeinstallprompt` event listener, 3s delay, session storage dismiss, dark gold / amber design, Install + Not now buttons. Auto-hidden if already standalone.
+- **NEXT:** Phase 10 — Launch prep (email system, onboarding flow, legal/privacy pages)
 
 ---
 
