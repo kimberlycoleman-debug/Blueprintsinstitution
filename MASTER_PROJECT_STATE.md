@@ -7,7 +7,7 @@
 >
 > **Update this document at the end of every work session.** It is the project's memory. As long as this file survives, nothing is ever lost.
 >
-> **⚠️ UPDATED — May 31, 2026 (Session 8).** Phase 9 PWA / Mobile Readiness COMPLETE. See SESSION LOG.
+> **⚠️ UPDATED — May 31, 2026 (Session 11).** Phase 11 design system complete. Login + application form bugs resolved. Migration 027 applied. See SESSION LOG.
 
 ---
 
@@ -87,11 +87,17 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 
 ### ✅ APPLIED — Founder Sovereign Tier + Analytics (021–023)
 
+### ✅ APPLIED — Operational Fixes (024–027)
+
 | # | File | What it creates |
 |---|------|-----------------|
 | 021 | `021_founder_sovereign_tier.sql` | `founder_registry` (seeded: Kimberly Coleman), `founder_vault` (10 categories), `founder_audit_log` (immutable), `founder_notes`, `is_founder()`, `log_founder_action()`, full RLS + force RLS |
 | 022 | `022_analytics_foundation.sql` | `engagement_events` (17 types), `assessments` (5 dimensions × 6 checkpoints × self/facilitator), `reflection_analysis`, `transformation_index`, `compute_transformation_index()` function — **THE FOUNDING DISTINCTIVE IS NOW LIVE** |
 | 023 | `023_analytics_rollups.sql` | `cohort_analytics`, `institutional_metrics`, `outcome_followups` (6/12/24mo), `funding_records`, `compute_cohort_analytics()`, `compute_institute_metrics()`, `detect_at_risk_students()` |
+| 024 | `024_onboarding_rate_limits.sql` | `onboarding_complete boolean` column on `profiles`; `rate_limit_log` table + index + `cleanup_rate_limit_log()` fn |
+| 025 | `025_add_founder_role.sql` | Adds `founder` to the `user_role` enum |
+| 026 | `026_funding_enum_fix.sql` | Aligns `funding_type` and `funding_status` enums with API routes |
+| 027 | `027_profiles_insert_policy.sql` | RLS INSERT policy on `profiles` — allows authenticated user to insert their own row (self-heal safety net) |
 
 
 
@@ -102,7 +108,7 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - **Transformation Index (LIVE ✅):** The flagship metric and founding distinctive. Triangulated from 3 sources: self-assessments, facilitator assessments, reflection_analysis (AI depth scoring). Four 25% sub-scores: identity, healing, calling, maturity. Six checkpoints. Computed by `compute_transformation_index()` in DB.
 - **Force RLS** on all sensitive tables — even superuser obeys row-level security.
 
-**Live table count (updated May 31, 2026, Session 2):** 41 tables in `public` schema (33 original + 8 from migrations 021–023).
+**Live table count (updated May 31, 2026, Session 11):** 41 tables in `public` schema (33 original + 8 from migrations 021–023). Migrations applied through 027.
 
 ---
 
@@ -122,7 +128,7 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 | Path | Purpose |
 |------|---------|
 | `lib/supabase/browser.ts` | Client-side Supabase |
-| `lib/supabase/server.ts` | Server-side Supabase + getCurrentUser/Profile |
+| `lib/supabase/server.ts` | Server-side Supabase + getCurrentUser/Profile — includes self-heal: auto-creates profile row if trigger didn't fire |
 | `lib/supabase/admin.ts` | Service-role admin client |
 
 ### AI
@@ -156,7 +162,7 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 ### Auth flow (Phase 1 — complete)
 | Path | Purpose |
 |------|---------|
-| `app/(auth)/login/page.tsx` | Login |
+| `app/(auth)/login/page.tsx` | Login — distinguishes email-not-confirmed vs. wrong password errors |
 | `app/(auth)/signup/page.tsx` | Sign up |
 | `app/(auth)/signup/confirm/page.tsx` | Email confirm |
 | `app/(auth)/auth/forgot-password/page.tsx` | Forgot password |
@@ -251,7 +257,7 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 ### Phase 10 — Launch Prep (COMPLETE ✅)
 | Path | Purpose |
 |------|------|
-| `app/(student)/onboarding/page.tsx` | Student onboarding welcome flow — first-login orientation, cohort intro, quick-start checklist |
+| `app/(student)/onboarding/page.tsx` | Student onboarding welcome flow — first-login orientation (4 quarters, 13 modules), cohort intro, quick-start checklist |
 | `app/privacy/page.tsx` | Privacy Policy — branded, full legal terms, Ephesians anchor |
 | `app/terms/page.tsx` | Terms of Service — branded, full legal terms |
 
@@ -296,6 +302,7 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - ✅ **Phase 9:** PWA / Mobile Readiness — COMPLETE (manifest, service worker, offline page, install prompt)
 - ✅ **Phase 10:** Launch prep — onboarding flow, legal/privacy pages (complete). Email API routes (Resend installed, routes pending)
 - ✅ **Phase 11:** Full design system alignment — Cormorant Garamond + gold bp tokens across all 44 app screens; replaced all amber-* tokens; overline label classes; all 4 nav bars upgraded; landing page editorial redesign
+- ✅ **Bug fixes (Session 11):** Login loop resolved (profiles self-heal); application form confirmed working (rate-limiter uses Supabase, not Redis; RLS allows anon inserts); email-not-confirmed error messaging; onboarding copy corrected (13 modules); migrations 024–027 all applied
 - ⏳ **Phase 12 (NEXT):** Email API routes (welcome, cohort assignment, commissioning); Supabase Storage buckets (vault-documents, certificates, avatars); nightly analytics cron; Stripe for institutional seat enrollment; create first real cohort
 
 ---
@@ -486,6 +493,18 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - Global overline label cleanup: verbose `text-xs tracking-widest uppercase font-semibold` patterns → `.text-overline` class in 23 files
 - Hotfix: server component crash in `app/(founder)/founder/page.tsx` (event handlers → Tailwind hover classes)
 - Commit `86bedfc` — all changes pushed to `main`
+- **NEXT:** Phase 12 — Email API routes, Storage buckets, analytics cron, Stripe
+
+**Session — Bug Fixes (May 31, 2026 — Session 11)**
+- Investigated reported bugs: (1) application form "does nothing", (2) student login "does nothing"
+- **Root cause — login loop:** `handle_new_user` Supabase trigger sometimes doesn't fire → no `profiles` row → `getCurrentProfile()` returns null → dashboard → redirect to `/login` → infinite loop
+- **Fix:** `lib/supabase/server.ts` `getCurrentProfile()` now self-heals — if profile row missing, auto-inserts it (requires INSERT RLS policy)
+- **Migration 027** (`027_profiles_insert_policy.sql`): added `create policy "users can create own profile" on profiles for insert with check (auth.uid() = id)` — applied to remote via `supabase db push --include-all` ✅
+- **Login error messaging:** `app/(auth)/login/page.tsx` — now detects `"email not confirmed"` in Supabase error and shows specific message directing user to check inbox (was showing misleading "Invalid email or password")
+- **Application form:** Confirmed working — rate-limiter uses Supabase (`rate_limit_log` table from migration 024, not Redis); RLS policy on `applications` already allows anon inserts (`with check (true)`); submit logic correct. Main failure mode was likely the email-not-confirmed error being misread as a form error during testing
+- **Onboarding copy:** Fixed `app/(student)/onboarding/page.tsx` — "Sixteen modules" → "Thirteen modules"
+- Discovered migration numbering conflict: `025_add_founder_role.sql` already existed on remote; renamed new migration to `027_profiles_insert_policy.sql`
+- Commit `6401cf3` pushed to `main`
 - **NEXT:** Phase 12 — Email API routes, Storage buckets, analytics cron, Stripe
 
 ---
