@@ -22,11 +22,9 @@
 **Where the project lives:**
 - Working/build folder: `C:\Users\kim22\OneDrive\Desktop\BPINSTITUTION\blueprint-discipleship-institute`
 - Supabase project ref: `yhpemsoojtgjvjmmzxut`
-- This is a STANDALONE system — completely independent from Solavian OS.
+- This is a STANDALONE system — completely independent of any external platform.
 
 **Who the founder is:** Kimberly Coleman — Founding Architect. Email: `kimberly@theblueprintsfoundation.org`.
-
-> **Note:** The Founder Sovereign Tier (founder_registry, vault, audit log) is **NOT YET BUILT** in the live database. It is next in the build queue.
 
 ---
 
@@ -69,7 +67,7 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 | 008 | `008_applications_reflections_capstones.sql` | `applications`, `reflections`, `identity_blueprints`, `purpose_statements`, `ministry_plans`, `commissions` |
 | 009 | `009_cohort_feed_ai_conversations.sql` | `cohort_posts`, `cohort_post_responses`, `ai_conversations`, `ai_messages` |
 | 010 | `010_rls_policies.sql` | Full RLS for all tables, three-role access, force RLS |
-| 011 | `011_seed_curriculum.sql` | Seeds structure: 4 quarters + 16 modules (lesson rows populated by 013–014) |
+| 011 | `011_seed_curriculum.sql` | Initial structural seed — superseded by migration 012 which sets the final 5 quarters / 13 modules |
 
 ### ✅ APPLIED — Curriculum Content (012–020)
 
@@ -85,18 +83,18 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 | 019 | `019_curriculum_discussions_workbook.sql` | 3–4 discussion questions + 3 workbook elements per lesson |
 | 020 | `020_rename_curriculum_track_enum.sql` | Renamed enum values: `solavian_core` → `blueprint_core`, `solavian_advanced` → `blueprint_advanced` |
 
-### ❌ NOT YET BUILT — Next migrations (021+)
+### ✅ APPLIED — Founder Sovereign Tier + Analytics (021–023)
 
-| # | Planned file | What it will create |
+| # | File | What it creates |
 |---|------|-----------------|
 | 021 | `021_founder_sovereign_tier.sql` | `founder_registry` (seeded: Kimberly Coleman), `founder_vault` (10 categories), `founder_audit_log` (immutable), `founder_notes`, `is_founder()`, `log_founder_action()`, full RLS + force RLS |
 | 022 | `022_analytics_foundation.sql` | `engagement_events` (17 types), `assessments` (5 dimensions × 6 checkpoints × self/facilitator), `reflection_analysis`, `transformation_index`, `compute_transformation_index()` function — **THE FOUNDING DISTINCTIVE IS NOW LIVE** |
 | 023 | `023_analytics_rollups.sql` | `cohort_analytics`, `institutional_metrics`, `outcome_followups` (6/12/24mo), `funding_records`, `compute_cohort_analytics()`, `compute_institute_metrics()`, `detect_at_risk_students()` |
 
-**⚠️ These were planned — they are now ALL built. See the Code section below.**
+
 
 **Key database concepts:**
-- **Three roles:** student, facilitator, admin (enum in `profiles`). Founder is SEPARATE — will be email-locked in `founder_registry` (migration 021).
+- **Three roles:** student, facilitator, admin (enum in `profiles`). Founder is SEPARATE — email-locked in `founder_registry` (migration 021, applied ✅).
 - **Curriculum:** 52 lessons across 5 quarters (Q1 Alpha/Identity, Q2 Formation/Maturity, Q3 Maturity/Healing, Q4 Ministry/Activation, Advanced). Fully populated.
 - **Dual scoring:** numeric (0-100) + qualitative (not_demonstrated/emerging/demonstrated/embodied) — maps to Depth Levels (Foundation→Discernment→Practice→Embodiment).
 - **Transformation Index (LIVE ✅):** The flagship metric and founding distinctive. Triangulated from 3 sources: self-assessments, facilitator assessments, reflection_analysis (AI depth scoring). Four 25% sub-scores: identity, healing, calling, maturity. Six checkpoints. Computed by `compute_transformation_index()` in DB.
@@ -246,12 +244,19 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 | `public/sw.js` | Service worker — cache-first for static assets, network-first for navigation, never caches API/auth routes, background sync stub |
 | `app/offline/page.tsx` | Offline fallback page — branded, Ephesians 2:10 anchor, try-again button |
 | `app/layout.tsx` | Updated — manifest link, apple-touch-icon, mobile-web-app-capable, SW registration script, `<InstallPrompt>` |
-| `components/shared/InstallPrompt.tsx` | PWA install banner — listens for `beforeinstallprompt`, shows after 3s, dismisses to session storage, dark gold + amber design |
+| `components/shared/InstallPrompt.tsx` | PWA install banner — listens for `beforeinstallprompt`, shows after 3s, dismisses to session storage, gold-on-dark design |
+
+### Phase 10 — Launch Prep (COMPLETE ✅)
+| Path | Purpose |
+|------|------|
+| `app/(student)/onboarding/page.tsx` | Student onboarding welcome flow — first-login orientation, cohort intro, quick-start checklist |
+| `app/privacy/page.tsx` | Privacy Policy — branded, full legal terms, Ephesians anchor |
+| `app/terms/page.tsx` | Terms of Service — branded, full legal terms |
 
 ### ⏳ NOT YET BUILT — Code
-| Path | What it will do |
+| What | Notes |
 |------|------|
-| Launch prep | Email system (welcome + cohort reminders), onboarding flow, legal/privacy pages, hardening |
+| Email API routes | `resend` package installed + `RESEND_API_KEY` in Vercel; no `/api/email` routes built yet. Needed: welcome email on signup, cohort assignment notice, commissioning congratulations |
 
 ---
 
@@ -287,7 +292,9 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - ✅ **Phase 7:** Commissioning + Certificates — COMPLETE (student page, printable cert, admin management, 2 API routes)
 - ✅ **Phase 8:** Analytics Dashboards — COMPLETE (student formation journey, facilitator cohort analytics, admin/funder accountability, 3 API routes)
 - ✅ **Phase 9:** PWA / Mobile Readiness — COMPLETE (manifest, service worker, offline page, install prompt)
-- ⏳ **Phase 10 (NEXT):** Launch prep — email system, onboarding flow, legal/privacy pages, hardening
+- ✅ **Phase 10:** Launch prep — onboarding flow, legal/privacy pages (complete). Email API routes (Resend installed, routes pending)
+- ✅ **Phase 11:** Full design system alignment — Cormorant Garamond + gold bp tokens across all 44 app screens; replaced all amber-* tokens; overline label classes; all 4 nav bars upgraded; landing page editorial redesign
+- ⏳ **Phase 12 (NEXT):** Email API routes (welcome, cohort assignment, commissioning); Supabase Storage buckets (vault-documents, certificates, avatars); nightly analytics cron; Stripe for institutional seat enrollment; create first real cohort
 
 ---
 
@@ -301,10 +308,10 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 6. **Transformation Promise:** "You are becoming who you were always meant to be."
 7. **Three roles + founder:** student, facilitator, admin (enum roles) + founder (email-locked sovereign tier).
 8. **Hybrid delivery:** Some lessons live, some in-app.
-9. **Separate database:** Standalone from Solavian OS. Never connected.
+9. **Standalone database:** Completely separate. Never connected to any external platform.
 10. **Stack:** Next.js 15 web-first with AI, PWA for mobile (not native React Native for v1).
 11. **Brand:** Warm neutrals (#FAFAF8, #F5F0E8, #8B7355, #7C9A7E), Inter + Cormorant Garamond, 16px rounded cards.
-12. **Curriculum:** 4 active quarters (Alpha/Identity, Formation/Maturity, Maturity/Healing, Ministry/Activation) + Advanced track. 16 modules. **52 lessons fully populated** in the live database (migrations 013–019). No Notion import needed — curriculum is already loaded.
+12. **Curriculum:** 5 quarters (Q1 Alpha/Identity, Q2 Formation/Maturity, Q3 Maturity/Healing, Q4 Ministry/Activation, Advanced). **13 modules. 52 lessons fully populated** in the live database (migrations 013–019). No Notion import needed — curriculum is already loaded.
 13. **Theology anchors:** Matthew 28:19-20 (mandate) + Ephesians 2:10 (blueprint theology).
 
 ---
@@ -457,7 +464,27 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - `app/offline/page.tsx` — Branded offline page: WiFi icon, message, Ephesians 2:10 blockquote, try-again button
 - `app/layout.tsx` — Updated: added `manifest` metadata, `appleWebApp` metadata, `apple-touch-icon` link, `maximumScale: 1`, dual `themeColor` (light/dark), SW registration `<Script strategy="afterInteractive">`, `<InstallPrompt>` component
 - `components/shared/InstallPrompt.tsx` — PWA install banner: `beforeinstallprompt` event listener, 3s delay, session storage dismiss, dark gold / amber design, Install + Not now buttons. Auto-hidden if already standalone.
-- **NEXT:** Phase 10 — Launch prep (email system, onboarding flow, legal/privacy pages)
+- **NEXT:** Phase 11 — Full design system alignment
+
+**Session — Phase 10 Complete (May 31, 2026 — Session 9)**
+- Built onboarding flow: `app/(student)/onboarding/page.tsx` — welcome screen, cohort intro, quick-start checklist
+- Built legal pages: `app/privacy/page.tsx` (Privacy Policy), `app/terms/page.tsx` (Terms of Service) — both branded with Ephesians anchor
+- `resend` package installed (`^4.8.0`) + `RESEND_API_KEY` added to Vercel + custom domain `theblueprintsfoundation.org` connected
+- Email API routes NOT YET built — next session
+- **NEXT:** Phase 11 — Design system alignment across all screens
+
+**Session — Phase 11 Complete (May 31, 2026 — Session 10)**
+- Full design system alignment across all 44 app tsx files
+- Landing page (`app/page.tsx`) — full editorial redesign: animated hero, mandate section, 10-pillar grid, 4-quarter journey cards, 3-capstone section, dark CTA footer
+- `app/globals.css` — new CSS design system: `--bp-gold`, `--bp-dark`, `--bp-gold-light`, `--gradient-gold`, `--gradient-dark`, all `.bp-card-*`, `.bp-btn-gold`, `.text-overline`, `.bp-dark-section`, `.bp-mandate`, `.bp-badge` classes
+- `tailwind.config.ts` — bp token extensions: `bp.gold`, `bp.dark`, `bp.gold-light`, font-display variable, custom animations + shadows
+- All 4 nav bars upgraded: brand name in `font-display font-light`, gold avatar, gold active underline
+- Founder dashboard: `text-overline` labels, `bp-dark-section` Transformation Index, font-display numerics
+- Global amber token replacement (Node.js script): replaced `amber-*` → `var(--bp-gold|--bp-brown|--bp-cream|...)` across all files
+- Global overline label cleanup: verbose `text-xs tracking-widest uppercase font-semibold` patterns → `.text-overline` class in 23 files
+- Hotfix: server component crash in `app/(founder)/founder/page.tsx` (event handlers → Tailwind hover classes)
+- Commit `86bedfc` — all changes pushed to `main`
+- **NEXT:** Phase 12 — Email API routes, Storage buckets, analytics cron, Stripe
 
 ---
 
