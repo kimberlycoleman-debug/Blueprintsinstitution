@@ -112,7 +112,7 @@ function LoginForm() {
       </div>
 
       {/* Scripture */}
-      <p className="text-center mt-8 text-sm font-display italic" style={{ color: 'rgba(245,240,232,0.35)' }}>
+      <p className="text-center mt-8 text-sm font-display italic" style={{ color: 'rgba(245,240,232,0.5)' }}>
         &ldquo;You are becoming who you were always meant to be.&rdquo;
       </p>
     </div>

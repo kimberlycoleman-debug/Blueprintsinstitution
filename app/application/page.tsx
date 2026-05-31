@@ -360,8 +360,8 @@ export default function ApplicationPage() {
   // ---- Submitted state ------------------------------------
   if (submitted) {
     return (
-      <div className="w-full max-w-xl text-center">
-        <div className="bp-card p-10">
+      <div className="w-full max-w-xl">
+        <div className="bp-card-elevated p-10 text-center">
           <div className="text-5xl mb-5">🙏</div>
           <h1 className="text-2xl font-semibold mb-3">Application received</h1>
           <p className="text-[var(--bp-muted)] mb-2">
@@ -389,16 +389,13 @@ export default function ApplicationPage() {
     <div className="w-full max-w-xl">
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="text-overline mb-3">
-          Application
-        </div>
-        <h1 className="text-3xl font-semibold mb-2">Apply to the Institute</h1>
-        <p className="text-[var(--bp-muted)]">
+        <h1 className="font-display font-light text-4xl mb-2" style={{ color: 'var(--bp-cream)' }}>Apply to the Institute</h1>
+        <p style={{ color: 'rgba(245,240,232,0.55)' }}>
           This is the beginning of your formation journey. Take your time.
         </p>
       </div>
 
-      <div className="bp-card p-8">
+      <div className="bp-card-elevated p-8">
         <StepIndicator current={step} total={4} />
 
         {step === 1 && <Step1 data={form} update={update} />}

@@ -136,7 +136,7 @@ export default function VaultPage() {
           <p className="text-overline mb-1">Sovereign Vault</p>
           <h1 className="text-2xl font-semibold">Document &amp; Asset Store</h1>
         </div>
-        <button onClick={openCreate} className="bp-btn-primary text-sm px-4 py-2">
+        <button onClick={openCreate} className="bp-btn bp-btn-primary text-sm px-4 py-2">
           + Add Item
         </button>
       </div>
@@ -256,7 +256,7 @@ export default function VaultPage() {
                 <label className="bp-label">Tags</label>
                 <div className="flex gap-2">
                   <input className="bp-input flex-1" value={tagInput} onChange={e => setTagInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addTag())} placeholder="Add tag + Enter" />
-                  <button type="button" onClick={addTag} className="bp-btn-secondary text-sm px-3">Add</button>
+                  <button type="button" onClick={addTag} className="bp-btn bp-btn-secondary text-sm px-3">Add</button>
                 </div>
                 {form.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-2">
@@ -271,10 +271,10 @@ export default function VaultPage() {
               </div>
 
               <div className="flex gap-3 pt-2">
-                <button onClick={handleSave} disabled={saving || !form.title.trim()} className="bp-btn-primary text-sm px-5 py-2 disabled:opacity-50">
+                <button onClick={handleSave} disabled={saving || !form.title.trim()} className="bp-btn bp-btn-primary text-sm px-5 py-2 disabled:opacity-50">
                   {saving ? 'Saving...' : editId ? 'Update' : 'Create'}
                 </button>
-                <button onClick={() => setShowForm(false)} className="bp-btn-secondary text-sm px-4 py-2">Cancel</button>
+                <button onClick={() => setShowForm(false)} className="bp-btn bp-btn-secondary text-sm px-4 py-2">Cancel</button>
               </div>
             </div>
           ) : selected ? (
@@ -322,7 +322,7 @@ export default function VaultPage() {
               </p>
 
               <div className="flex gap-2">
-                <button onClick={() => openEdit(selected)} className="bp-btn-secondary text-sm px-4 py-2">Edit</button>
+                <button onClick={() => openEdit(selected)} className="bp-btn bp-btn-secondary text-sm px-4 py-2">Edit</button>
                 <button onClick={() => handleArchive(selected.id)} className="text-sm text-red-500 hover:text-red-700 px-3 py-2">Archive</button>
               </div>
             </div>

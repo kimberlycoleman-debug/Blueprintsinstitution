@@ -175,7 +175,7 @@ export default function FundingPage() {
           <p className="text-overline mb-1">Funding &amp; Development</p>
           <h1 className="text-2xl font-semibold">Funding Records</h1>
         </div>
-        <button onClick={openCreate} className="bp-btn-primary text-sm px-4 py-2">+ Add Record</button>
+        <button onClick={openCreate} className="bp-btn bp-btn-primary text-sm px-4 py-2">+ Add Record</button>
       </div>
 
       {/* Funding totals */}
@@ -351,10 +351,10 @@ export default function FundingPage() {
               </div>
 
               <div className="flex gap-3 pt-2">
-                <button onClick={handleSave} disabled={saving || !form.source_name.trim()} className="bp-btn-primary text-sm px-5 py-2 disabled:opacity-50">
+                <button onClick={handleSave} disabled={saving || !form.source_name.trim()} className="bp-btn bp-btn-primary text-sm px-5 py-2 disabled:opacity-50">
                   {saving ? 'Saving...' : editId ? 'Update' : 'Create'}
                 </button>
-                <button onClick={() => setShowForm(false)} className="bp-btn-secondary text-sm px-4 py-2">Cancel</button>
+                <button onClick={() => setShowForm(false)} className="bp-btn bp-btn-secondary text-sm px-4 py-2">Cancel</button>
               </div>
             </div>
           ) : selected ? (
@@ -407,7 +407,7 @@ export default function FundingPage() {
               </div>
 
               <div className="flex gap-2 mt-4">
-                <button onClick={() => openEdit(selected)} className="bp-btn-secondary text-sm px-4 py-2">Edit</button>
+                <button onClick={() => openEdit(selected)} className="bp-btn bp-btn-secondary text-sm px-4 py-2">Edit</button>
               </div>
             </div>
           ) : (

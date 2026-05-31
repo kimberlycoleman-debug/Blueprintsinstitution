@@ -146,7 +146,7 @@ export default function AuditLogPage() {
           <button
             disabled={page === 1}
             onClick={() => setPage(p => p - 1)}
-            className="bp-btn-secondary text-sm px-4 py-2 disabled:opacity-40"
+            className="bp-btn bp-btn-secondary text-sm px-4 py-2 disabled:opacity-40"
           >
             ← Previous
           </button>
@@ -154,7 +154,7 @@ export default function AuditLogPage() {
           <button
             disabled={page >= totalPages}
             onClick={() => setPage(p => p + 1)}
-            className="bp-btn-secondary text-sm px-4 py-2 disabled:opacity-40"
+            className="bp-btn bp-btn-secondary text-sm px-4 py-2 disabled:opacity-40"
           >
             Next →
           </button>

@@ -139,33 +139,33 @@ export default function CohortsPage() {
           {error && <p className="text-sm text-red-600">{error}</p>}
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium mb-1 text-[var(--bp-muted)]">Cohort name *</label>
+              <label className="block text-sm font-medium mb-1.5 text-[var(--bp-text)]">Cohort name *</label>
               <input value={form.cohort_name} onChange={(e) => setForm((p) => ({ ...p, cohort_name: e.target.value }))}
                 className="bp-input w-full" placeholder="e.g. Cohort Alpha 2026" />
             </div>
             <div>
-              <label className="block text-xs font-medium mb-1 text-[var(--bp-muted)]">Cohort code *</label>
+              <label className="block text-sm font-medium mb-1.5 text-[var(--bp-text)]">Cohort code *</label>
               <input value={form.cohort_code} onChange={(e) => setForm((p) => ({ ...p, cohort_code: e.target.value.toUpperCase() }))}
                 className="bp-input w-full" placeholder="e.g. ALPHA-2026" maxLength={20} />
             </div>
             <div>
-              <label className="block text-xs font-medium mb-1 text-[var(--bp-muted)]">Start date *</label>
+              <label className="block text-sm font-medium mb-1.5 text-[var(--bp-text)]">Start date *</label>
               <input type="date" value={form.start_date} onChange={(e) => setForm((p) => ({ ...p, start_date: e.target.value }))}
                 className="bp-input w-full" />
             </div>
             <div>
-              <label className="block text-xs font-medium mb-1 text-[var(--bp-muted)]">End date *</label>
+              <label className="block text-sm font-medium mb-1.5 text-[var(--bp-text)]">End date *</label>
               <input type="date" value={form.end_date} onChange={(e) => setForm((p) => ({ ...p, end_date: e.target.value }))}
                 className="bp-input w-full" />
             </div>
             <div>
-              <label className="block text-xs font-medium mb-1 text-[var(--bp-muted)]">Max students</label>
+              <label className="block text-sm font-medium mb-1.5 text-[var(--bp-text)]">Max students</label>
               <input type="number" min={1} max={200} value={form.max_students}
                 onChange={(e) => setForm((p) => ({ ...p, max_students: parseInt(e.target.value) || 25 }))}
                 className="bp-input w-full" />
             </div>
             <div>
-              <label className="block text-xs font-medium mb-1 text-[var(--bp-muted)]">Status</label>
+              <label className="block text-sm font-medium mb-1.5 text-[var(--bp-text)]">Status</label>
               <select value={form.status} onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))} className="bp-input w-full">
                 <option value="upcoming">Upcoming</option>
                 <option value="active">Active</option>
@@ -173,7 +173,7 @@ export default function CohortsPage() {
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium mb-1 text-[var(--bp-muted)]">Notes (optional)</label>
+            <label className="block text-sm font-medium mb-1.5 text-[var(--bp-text)]">Notes (optional)</label>
             <textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))}
               className="bp-input w-full h-16 resize-none" />
           </div>
