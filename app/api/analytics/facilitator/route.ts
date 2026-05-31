@@ -1,6 +1,19 @@
 import { NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 
+interface TIRecord {
+  student_id: string
+  checkpoint: string
+  composite_index: number | null
+  identity_score: number | null
+  healing_score: number | null
+  calling_score: number | null
+  maturity_score: number | null
+  composite_delta: number | null
+  confidence_flag: string | null
+  computed_at: string
+}
+
 export async function GET() {
   const supabase = await createServerSupabaseClient()
 
@@ -61,7 +74,8 @@ export async function GET() {
     .order('snapshot_date', { ascending: false })
 
   // De-duplicate: keep only the most recent snapshot per cohort
-  const latestByCohort = new Map<string, typeof allSnapshots extends (infer T)[] | null ? T : never>()
+  type CohortSnap = NonNullable<typeof allSnapshots>[number]
+  const latestByCohort = new Map<string, CohortSnap>()
   for (const snap of allSnapshots ?? []) {
     if (!latestByCohort.has(snap.cohort_id)) {
       latestByCohort.set(snap.cohort_id, snap)
@@ -92,8 +106,8 @@ export async function GET() {
   const studentIds = [...new Set((cohortStudents ?? []).map(s => s.student_id))]
 
   // Transformation Index — latest per student
-  const { data: tiAllRecords } = studentIds.length > 0
-    ? await supabase
+  const tiAllRecords: TIRecord[] = studentIds.length > 0
+    ? ((await supabase
         .from('transformation_index')
         .select(`
           student_id,
@@ -108,12 +122,12 @@ export async function GET() {
           computed_at
         `)
         .in('student_id', studentIds)
-        .order('computed_at', { ascending: false })
-    : { data: [] }
+        .order('computed_at', { ascending: false })).data ?? [])
+    : []
 
   // Latest TI per student
-  const latestTIByStudent = new Map<string, typeof tiAllRecords extends (infer T)[] | null ? T : never>()
-  for (const ti of tiAllRecords ?? []) {
+  const latestTIByStudent = new Map<string, TIRecord>()
+  for (const ti of tiAllRecords) {
     if (!latestTIByStudent.has(ti.student_id)) {
       latestTIByStudent.set(ti.student_id, ti)
     }
@@ -121,7 +135,7 @@ export async function GET() {
 
   // Baseline TI per student (checkpoint = 'baseline')
   const baselineTIByStudent = new Map<string, number>()
-  for (const ti of tiAllRecords ?? []) {
+  for (const ti of tiAllRecords) {
     if (ti.checkpoint === 'baseline') {
       baselineTIByStudent.set(ti.student_id, ti.composite_index ?? 0)
     }

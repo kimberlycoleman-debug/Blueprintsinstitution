@@ -105,7 +105,8 @@ export async function GET() {
     .order('snapshot_date', { ascending: false })
 
   // Latest snapshot per cohort
-  const latestByCohort = new Map<string, typeof completedCohorts extends (infer T)[] | null ? T : never>()
+  type CohortSnap = NonNullable<typeof completedCohorts>[number]
+  const latestByCohort = new Map<string, CohortSnap>()
   for (const snap of completedCohorts ?? []) {
     if (!latestByCohort.has(snap.cohort_id)) {
       latestByCohort.set(snap.cohort_id, snap)
