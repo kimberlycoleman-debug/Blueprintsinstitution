@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     'A 12-month intensive discipleship training program. Discover your God-given identity, develop Christ-like character, experience holistic healing, and activate your unique calling.',
   applicationName: 'Blueprint Discipleship Institute',
-  authors: [{ name: 'The Blueprint Foundation' }],
+  authors: [{ name: 'The B.L.U.E.P.R.I.N.T.S. Foundation' }],
   keywords: [
     'discipleship',
     'identity formation',

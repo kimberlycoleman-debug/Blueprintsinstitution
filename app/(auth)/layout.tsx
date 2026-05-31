@@ -20,7 +20,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
       {/* Footer */}
       <footer className="py-5 px-6 text-center text-xs text-[var(--bp-muted)]">
-        © 2026 The Blueprint Foundation. All rights reserved.
+        © 2026 The B.L.U.E.P.R.I.N.T.S. Foundation. All rights reserved.
       </footer>
     </div>
   )

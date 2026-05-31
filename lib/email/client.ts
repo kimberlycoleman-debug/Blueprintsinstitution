@@ -12,4 +12,4 @@ export function getResendClient(): Resend {
   return _client
 }
 
-export const FROM_ADDRESS = 'Blueprint Foundation <noreply@theblueprintsfoundation.org>'
+export const FROM_ADDRESS = 'The B.L.U.E.P.R.I.N.T.S. Foundation <noreply@theblueprintsfoundation.org>'

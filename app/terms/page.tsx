@@ -1,13 +1,13 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Terms of Service — The Blueprint Foundation',
+  title: 'Terms of Service — The B.L.U.E.P.R.I.N.T.S. Foundation',
 }
 
 const SECTIONS = [
   {
     title: '1. Acceptance of Terms',
-    content: `By accessing or using the B.L.U.E.P.R.I.N.T.S. Discipleship Institute platform ("the Platform") operated by The Blueprint Foundation ("we," "our," "us"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Platform.`,
+    content: `By accessing or using the B.L.U.E.P.R.I.N.T.S. Discipleship Institute platform ("the Platform") operated by The B.L.U.E.P.R.I.N.T.S. Foundation ("we," "our," "us"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Platform.`,
   },
   {
     title: '2. Eligibility and Enrollment',
@@ -27,9 +27,9 @@ Violations of the Code of Conduct may result in suspension or permanent removal 
   },
   {
     title: '4. Curriculum and Intellectual Property',
-    content: `All curriculum content, lesson materials, AI prompts, and Platform design are the intellectual property of The Blueprint Foundation. "Discipleship OS™," "B.L.U.E.P.R.I.N.T.S.™," "R.E.S.T.O.R.E.™," and "K.I.N.D.™" are trademarks of The Blueprint Foundation. You may not reproduce, distribute, or create derivative works from any Platform content without express written permission.
+    content: `All curriculum content, lesson materials, AI prompts, and Platform design are the intellectual property of The B.L.U.E.P.R.I.N.T.S. Foundation. "Discipleship OS™," "B.L.U.E.P.R.I.N.T.S.™," "R.E.S.T.O.R.E.™," and "K.I.N.D.™" are trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation. You may not reproduce, distribute, or create derivative works from any Platform content without express written permission.
 
-Your personal submissions — Identity Blueprints, Purpose Statements, Ministry Plans, and reflections — remain your intellectual property. By submitting them to the Platform, you grant The Blueprint Foundation a limited license to display them to your facilitator and administrators for program support.`,
+Your personal submissions — Identity Blueprints, Purpose Statements, Ministry Plans, and reflections — remain your intellectual property. By submitting them to the Platform, you grant The B.L.U.E.P.R.I.N.T.S. Foundation a limited license to display them to your facilitator and administrators for program support.`,
   },
   {
     title: '5. AI Companion',
@@ -41,15 +41,15 @@ Your personal submissions — Identity Blueprints, Purpose Statements, Ministry 
   },
   {
     title: '7. Fees and Payments',
-    content: `Program fees, if applicable, are disclosed at the time of enrollment confirmation. Scholarship and grant-funded seats are subject to the terms communicated at enrollment. Refund policies are disclosed separately at enrollment. The Blueprint Foundation reserves the right to adjust fees for future cohorts.`,
+    content: `Program fees, if applicable, are disclosed at the time of enrollment confirmation. Scholarship and grant-funded seats are subject to the terms communicated at enrollment. Refund policies are disclosed separately at enrollment. The B.L.U.E.P.R.I.N.T.S. Foundation reserves the right to adjust fees for future cohorts.`,
   },
   {
     title: '8. Disclaimers',
-    content: `The Platform is provided "as is" without warranties of any kind, express or implied. We do not guarantee that the Platform will be uninterrupted, error-free, or free from harmful components. To the fullest extent permitted by law, The Blueprint Foundation disclaims all warranties related to the Platform and its content.`,
+    content: `The Platform is provided "as is" without warranties of any kind, express or implied. We do not guarantee that the Platform will be uninterrupted, error-free, or free from harmful components. To the fullest extent permitted by law, The B.L.U.E.P.R.I.N.T.S. Foundation disclaims all warranties related to the Platform and its content.`,
   },
   {
     title: '9. Limitation of Liability',
-    content: `To the fullest extent permitted by applicable law, The Blueprint Foundation shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Platform, even if advised of the possibility of such damages. Our total liability to you for any claim arising from these Terms shall not exceed the total fees you have paid to us in the twelve months preceding the claim.`,
+    content: `To the fullest extent permitted by applicable law, The B.L.U.E.P.R.I.N.T.S. Foundation shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Platform, even if advised of the possibility of such damages. Our total liability to you for any claim arising from these Terms shall not exceed the total fees you have paid to us in the twelve months preceding the claim.`,
   },
   {
     title: '10. Governing Law',
@@ -63,7 +63,7 @@ Your personal submissions — Identity Blueprints, Purpose Statements, Ministry 
     title: '12. Contact',
     content: `Questions about these Terms may be directed to:
 
-The Blueprint Foundation
+The B.L.U.E.P.R.I.N.T.S. Foundation
 Email: legal@theblueprintsfoundation.org
 Website: theblueprintsfoundation.org`,
   },
@@ -74,7 +74,7 @@ export default function TermsPage() {
     <main className="min-h-screen bg-[#FAF5EF]">
       <header className="bg-[#5C4A2A] py-10 px-6 text-center">
         <div className="text-xs tracking-widest text-amber-300 uppercase font-semibold mb-2">
-          The Blueprint Foundation
+          The B.L.U.E.P.R.I.N.T.S. Foundation
         </div>
         <h1 className="text-3xl font-semibold text-white" style={{ fontFamily: 'Georgia, serif' }}>
           Terms of Service
@@ -86,7 +86,7 @@ export default function TermsPage() {
         <p className="text-[#4A3820] leading-relaxed mb-8">
           Please read these Terms of Service carefully before using the
           B.L.U.E.P.R.I.N.T.S. Discipleship Institute platform. These terms
-          constitute a binding agreement between you and The Blueprint Foundation.
+          constitute a binding agreement between you and The B.L.U.E.P.R.I.N.T.S. Foundation.
         </p>
 
         <div className="space-y-8">
@@ -103,7 +103,7 @@ export default function TermsPage() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-amber-200 text-center text-sm text-[#7A6245]">
-          <div className="mb-4">© {new Date().getFullYear()} The Blueprint Foundation</div>
+          <div className="mb-4">© {new Date().getFullYear()} The B.L.U.E.P.R.I.N.T.S. Foundation</div>
           <div className="flex gap-4 justify-center">
             <Link href="/privacy" className="text-[#5C4A2A] hover:underline">Privacy Policy</Link>
             <Link href="/" className="text-[#5C4A2A] hover:underline">Home</Link>

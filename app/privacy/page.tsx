@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Privacy Policy — The Blueprint Foundation',
+  title: 'Privacy Policy — The B.L.U.E.P.R.I.N.T.S. Foundation',
 }
 
 const SECTIONS = [
@@ -66,7 +66,7 @@ To exercise these rights, contact us using the information in Section 8.`,
     title: '8. Contact Us',
     content: `If you have questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us at:
 
-The Blueprint Foundation
+The B.L.U.E.P.R.I.N.T.S. Foundation
 Email: privacy@theblueprintsfoundation.org
 Website: theblueprintsfoundation.org`,
   },
@@ -81,7 +81,7 @@ export default function PrivacyPage() {
     <main className="min-h-screen bg-[#FAF5EF]">
       <header className="bg-[#5C4A2A] py-10 px-6 text-center">
         <div className="text-xs tracking-widest text-amber-300 uppercase font-semibold mb-2">
-          The Blueprint Foundation
+          The B.L.U.E.P.R.I.N.T.S. Foundation
         </div>
         <h1 className="text-3xl font-semibold text-white" style={{ fontFamily: 'Georgia, serif' }}>
           Privacy Policy
@@ -91,7 +91,7 @@ export default function PrivacyPage() {
 
       <div className="max-w-3xl mx-auto px-6 py-12">
         <p className="text-[#4A3820] leading-relaxed mb-8">
-          The Blueprint Foundation (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting
+          The B.L.U.E.P.R.I.N.T.S. Foundation (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting
           your privacy. This Privacy Policy explains how we collect, use, and safeguard your
           information when you use the B.L.U.E.P.R.I.N.T.S. Discipleship Institute platform.
         </p>
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-amber-200 text-center text-sm text-[#7A6245]">
-          <div className="mb-4">© {new Date().getFullYear()} The Blueprint Foundation</div>
+          <div className="mb-4">© {new Date().getFullYear()} The B.L.U.E.P.R.I.N.T.S. Foundation</div>
           <div className="flex gap-4 justify-center">
             <Link href="/terms" className="text-[#5C4A2A] hover:underline">Terms of Service</Link>
             <Link href="/" className="text-[#5C4A2A] hover:underline">Home</Link>

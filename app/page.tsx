@@ -6,7 +6,7 @@ export default function HomePage() {
       {/* Header */}
       <header className="bp-container py-6 flex justify-between items-center">
         <div className="font-semibold text-bp-brown-deep">
-          B.L.U.E.P.R.I.N.T.S. Foundation
+          The B.L.U.E.P.R.I.N.T.S. Foundation
         </div>
         <nav className="flex gap-2">
           <Link href="/login" className="bp-btn bp-btn-ghost">
@@ -101,9 +101,9 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="bp-container py-12 mt-16 border-t border-bp-warm text-center text-sm text-bp-muted">
-        <div className="mb-2">© 2026 The Blueprint Foundation</div>
+        <div className="mb-2">© 2026 The B.L.U.E.P.R.I.N.T.S. Foundation</div>
         <div className="text-xs mb-3">
-          Discipleship OS™, B.L.U.E.P.R.I.N.T.™, R.E.S.T.O.R.E.™, K.I.N.D.™ are trademarks of The Blueprint Foundation.
+          Discipleship OS™, B.L.U.E.P.R.I.N.T.™, R.E.S.T.O.R.E.™, K.I.N.D.™ are trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation.
         </div>
         <div className="flex gap-4 justify-center text-xs">
           <Link href="/privacy" className="hover:text-bp-brown transition-colors">Privacy Policy</Link>

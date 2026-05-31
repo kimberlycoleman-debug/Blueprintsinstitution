@@ -38,13 +38,13 @@ function wrap(inner: string): string {
 <body style="margin:0;padding:0;background:#F0E8D8;">
   <table style="${BASE}" cellpadding="0" cellspacing="0" width="100%">
     <tr><td style="${HEADER}">
-      <div style="font-size:11px;letter-spacing:4px;color:#D4A953;text-transform:uppercase;margin-bottom:8px;">The Blueprint Foundation</div>
+      <div style="font-size:11px;letter-spacing:4px;color:#D4A953;text-transform:uppercase;margin-bottom:8px;">The B.L.U.E.P.R.I.N.T.S. Foundation</div>
       <div style="font-size:22px;color:#FDFAF5;font-weight:600;">B.L.U.E.P.R.I.N.T.S. Discipleship Institute</div>
     </td></tr>
     <tr><td style="${BODY}">${inner}</td></tr>
     <tr><td style="${FOOTER_STYLE}">
-      © ${new Date().getFullYear()} The Blueprint Foundation · theblueprintsfoundation.org<br>
-      <span style="font-size:10px;">Discipleship OS™ and B.L.U.E.P.R.I.N.T.S.™ are trademarks of The Blueprint Foundation.</span>
+      © ${new Date().getFullYear()} The B.L.U.E.P.R.I.N.T.S. Foundation · theblueprintsfoundation.org<br>
+      <span style="font-size:10px;">Discipleship OS™ and B.L.U.E.P.R.I.N.T.S.™ are trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation.</span>
     </td></tr>
   </table>
 </body>
@@ -68,7 +68,7 @@ export function applicationReceivedHtml(name: string): string {
       Our admissions team will review your application and reach out within 5–7 business days.
       In the meantime, continue to pray and prepare — your transformation journey begins here.
     </p>
-    <p style="line-height:1.7;color:#3D2E1A;">In His service,<br><strong>The Blueprint Foundation Admissions Team</strong></p>
+    <p style="line-height:1.7;color:#3D2E1A;">In His service,<br><strong>The B.L.U.E.P.R.I.N.T.S. Foundation Admissions Team</strong></p>
   `)
 }
 
@@ -94,7 +94,7 @@ export function enrollmentConfirmedHtml(name: string, cohortName: string): strin
         Access Your Dashboard
       </a>
     </div>
-    <p style="line-height:1.7;color:#3D2E1A;">Welcome to the family,<br><strong>The Blueprint Foundation</strong></p>
+    <p style="line-height:1.7;color:#3D2E1A;">Welcome to the family,<br><strong>The B.L.U.E.P.R.I.N.T.S. Foundation</strong></p>
   `)
 }
 
@@ -128,6 +128,6 @@ export function commissioningGrantedHtml(
         View Your Certificate
       </a>
     </div>
-    <p style="line-height:1.7;color:#3D2E1A;">Go and make disciples,<br><strong>The Blueprint Foundation</strong></p>
+    <p style="line-height:1.7;color:#3D2E1A;">Go and make disciples,<br><strong>The B.L.U.E.P.R.I.N.T.S. Foundation</strong></p>
   `)
 }
