@@ -166,8 +166,8 @@ export default function HomePage() {
             Twelve Months. One Transformation.
           </h2>
           <p className="text-bp-muted text-center max-w-2xl mx-auto mb-16" style={{ lineHeight: '1.75' }}>
-            Four quarters. Sixteen modules. Eighty lessons. Every session builds on the last —
-            iron sharpening iron, scripture anchoring soul.
+            Four quarters. Thirteen modules. Forty-eight core lessons — plus four in the advanced track.
+            Every session builds on the last — iron sharpening iron, scripture anchoring soul.
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -27,7 +27,7 @@ Violations of the Code of Conduct may result in suspension or permanent removal 
   },
   {
     title: '4. Curriculum and Intellectual Property',
-    content: `All curriculum content, lesson materials, AI prompts, and Platform design are the intellectual property of The B.L.U.E.P.R.I.N.T.S. Foundation. "Discipleship OS™," "B.L.U.E.P.R.I.N.T.S.™," "R.E.S.T.O.R.E.™," and "K.I.N.D.™" are trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation. You may not reproduce, distribute, or create derivative works from any Platform content without express written permission.
+    content: `All curriculum content, lesson materials, AI prompts, and Platform design are the intellectual property of The B.L.U.E.P.R.I.N.T.S. Foundation. "B.L.U.E.P.R.I.N.T.S.™," "Identity Blueprint Formation™," "Identity Blueprint Statement™," "Purpose Statement™," and "Ministry Launch Plan™" are trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation. You may not reproduce, distribute, or create derivative works from any Platform content without express written permission.
 
 Your personal submissions — Identity Blueprints, Purpose Statements, Ministry Plans, and reflections — remain your intellectual property. By submitting them to the Platform, you grant The B.L.U.E.P.R.I.N.T.S. Foundation a limited license to display them to your facilitator and administrators for program support.`,
   },

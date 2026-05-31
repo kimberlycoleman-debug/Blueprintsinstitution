@@ -311,7 +311,7 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 9. **Standalone database:** Completely separate. Never connected to any external platform.
 10. **Stack:** Next.js 15 web-first with AI, PWA for mobile (not native React Native for v1).
 11. **Brand:** Warm neutrals (#FAFAF8, #F5F0E8, #8B7355, #7C9A7E), Inter + Cormorant Garamond, 16px rounded cards.
-12. **Curriculum:** 5 quarters (Q1 Alpha/Identity, Q2 Formation/Maturity, Q3 Maturity/Healing, Q4 Ministry/Activation, Advanced). **13 modules. 52 lessons fully populated** in the live database (migrations 013–019). No Notion import needed — curriculum is already loaded.
+12. **Curriculum (verified, locked):** 52 lessons total = 48 core (4 quarters, Q1–Q4) + 4 advanced. 13 modules. 5 quarters including Advanced track. Public/invitational framing leads with “a 12-month formation pathway” (no lesson count). Structural/funder framing states “48 core lessons across 4 quarters, plus a 4-lesson advanced track — 52 total.” Verified against live DB via SQL. **Do not write ‘80 lessons,” ‘16 modules,” or ‘4 quarters’ as the complete structure anywhere.** Fully populated via migrations 013–019. No Notion import needed.
 13. **Theology anchors:** Matthew 28:19-20 (mandate) + Ephesians 2:10 (blueprint theology).
 
 ---
