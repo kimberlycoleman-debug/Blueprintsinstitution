@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { TrackPageView } from '@/components/analytics/TrackPageView'
 
 type PostType = 'reflection_share' | 'prayer_request' | 'celebration' | 'question' | 'announcement' | 'resource_share'
 
@@ -108,6 +109,7 @@ export default function CohortPage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
+      <TrackPageView eventType="resource_view" resourceType="cohort" metadata={{ page: 'cohort' }} />
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>

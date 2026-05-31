@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import { TrackPageView } from '@/components/analytics/TrackPageView'
 
 interface Reflection {
   id: string
@@ -79,6 +80,7 @@ function ReflectionsContent() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
+      <TrackPageView eventType="reflection_start" metadata={{ page: 'reflections' }} />
       <div>
         <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-1">
           Reflection Journal

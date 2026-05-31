@@ -2,6 +2,7 @@ import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createServerSupabaseClient, getCurrentProfile } from '@/lib/supabase/server'
 import LessonCompleteButton from '@/components/student/LessonCompleteButton'
+import { TrackPageView } from '@/components/analytics/TrackPageView'
 
 interface PageProps {
   params: Promise<{ lesson_id: string }>
@@ -77,6 +78,12 @@ export default async function LessonPage({ params }: PageProps) {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
+      <TrackPageView
+        eventType="lesson_view"
+        resourceType="lesson"
+        resourceId={lesson_id}
+        metadata={{ lesson_title: lesson.title }}
+      />
 
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-[var(--bp-muted)]">

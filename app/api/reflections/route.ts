@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { after, NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createServerSupabaseClient, getCurrentUser } from '@/lib/supabase/server'
+import { createAdminSupabaseClient } from '@/lib/supabase/admin'
 import { getOpenAIClient, DEFAULT_MODEL } from '@/lib/ai/client'
-import { REFLECTION_COMPANION_PROMPT } from '@/lib/ai/prompts'
+import { REFLECTION_COMPANION_PROMPT, REFLECTION_ANALYSIS_PROMPT } from '@/lib/ai/prompts'
 
 const ReflectionSchema = z.object({
   lesson_id: z.string().uuid(),
@@ -12,6 +13,51 @@ const ReflectionSchema = z.object({
   is_private: z.boolean().default(true),
   shared_with_facilitator: z.boolean().default(false),
 })
+
+async function analyzeReflection(reflectionId: string, studentId: string, text: string) {
+  try {
+    const openai = getOpenAIClient()
+    const completion = await openai.chat.completions.create({
+      model: DEFAULT_MODEL,
+      response_format: { type: 'json_object' },
+      messages: [
+        { role: 'system', content: REFLECTION_ANALYSIS_PROMPT },
+        { role: 'user', content: text },
+      ],
+      max_tokens: 500,
+      temperature: 0.3,
+    })
+
+    const raw = completion.choices[0]?.message?.content ?? '{}'
+    let parsed: Record<string, unknown> = {}
+    try { parsed = JSON.parse(raw) } catch { return }
+
+    const depthLabel = parsed.depth_label as string
+    const validDepthLabels = ['surface', 'developing', 'substantive', 'profound']
+    const adminSupabase = createAdminSupabaseClient()
+    await adminSupabase.from('reflection_analysis').insert({
+      reflection_id: reflectionId,
+      student_id: studentId,
+      depth_score: typeof parsed.depth_score === 'number'
+        ? Math.min(100, Math.max(0, Math.round(parsed.depth_score as number))) : null,
+      depth_label: validDepthLabels.includes(depthLabel) ? depthLabel : null,
+      themes: Array.isArray(parsed.themes) ? (parsed.themes as string[]).slice(0, 5) : [],
+      sentiment: typeof parsed.sentiment === 'string' ? parsed.sentiment : null,
+      word_count: text.split(/\s+/).length,
+      identity_language_score: typeof parsed.identity_language_score === 'number'
+        ? Math.min(100, Math.max(0, Math.round(parsed.identity_language_score as number))) : null,
+      performance_language_markers: Array.isArray(parsed.performance_language_markers)
+        ? parsed.performance_language_markers : [],
+      identity_language_markers: Array.isArray(parsed.identity_language_markers)
+        ? parsed.identity_language_markers : [],
+      model_used: DEFAULT_MODEL,
+      prompt_version: '1.0',
+      raw_analysis: parsed,
+    })
+  } catch (err) {
+    console.error('[reflection-analysis] background analysis failed:', err)
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -88,6 +134,9 @@ export async function POST(request: NextRequest) {
       console.error('[reflection] insert error:', error.message)
       return NextResponse.json({ error: 'Failed to save reflection' }, { status: 500 })
     }
+
+    // Fire reflection analysis in background — non-blocking, runs after response is sent
+    after(() => analyzeReflection(saved.id, user.id, data.response))
 
     return NextResponse.json({ data: saved }, { status: 201 })
   } catch (err) {
