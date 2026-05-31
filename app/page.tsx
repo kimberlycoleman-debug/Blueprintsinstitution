@@ -75,10 +75,7 @@ export default function HomePage() {
       {/* ── Navigation ───────────────────────────────────────── */}
       <header className="bp-container py-5 flex justify-between items-center">
         <div className="font-display text-lg font-light tracking-wide text-bp-dark">
-          B.L.U.E.P.R.I.N.T.S.
-          <span className="block text-[0.6rem] font-sans font-bold tracking-[0.2em] uppercase text-bp-brown leading-none mt-0.5">
-            Foundation
-          </span>
+          The B.L.U.E.P.R.I.N.T.S. Foundation
         </div>
         <nav className="flex items-center gap-2">
           <Link href="/login" className="bp-btn bp-btn-ghost text-sm">
