@@ -15,6 +15,9 @@ export default async function DashboardPage() {
   const profile = await getCurrentProfile()
   if (!profile) redirect('/login')
 
+  // Redirect new students to complete onboarding wizard
+  if (profile.onboarding_complete === false) redirect('/onboarding')
+
   const supabase = await createServerSupabaseClient()
 
   // Fetch quarters + modules + lesson counts

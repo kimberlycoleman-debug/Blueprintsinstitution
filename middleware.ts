@@ -41,6 +41,7 @@ export async function middleware(request: NextRequest) {
     '/commissions',
     '/founder',
     '/analytics',
+    '/onboarding',
   ]
 
   const isProtected = protectedRoutes.some(route =>

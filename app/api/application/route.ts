@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
+import { checkRateLimit } from '@/lib/rate-limit'
+import { sendApplicationConfirmation } from '@/lib/email/send'
 
 const ApplicationSchema = z.object({
   full_name: z.string().min(2, 'Full name is required'),
@@ -24,6 +26,16 @@ const ApplicationSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit: 5 applications per hour per IP
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+    const rl = await checkRateLimit(`ip:application:${ip}`, 5, 3600)
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { error: 'Too many submissions. Please try again later.' },
+        { status: 429 }
+      )
+    }
+
     const body = await request.json()
     const parsed = ApplicationSchema.safeParse(body)
 
@@ -71,6 +83,13 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('[application] insert error:', error.message)
       return NextResponse.json({ error: 'Failed to submit application. Please try again.' }, { status: 500 })
+    }
+
+    // Send confirmation email (non-blocking on failure)
+    try {
+      await sendApplicationConfirmation(data.email, data.full_name)
+    } catch (emailErr) {
+      console.error('[application] email error:', emailErr)
     }
 
     return NextResponse.json({ message: 'Application submitted successfully.' }, { status: 201 })

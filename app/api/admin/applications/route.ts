@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createServerSupabaseClient, getCurrentProfile } from '@/lib/supabase/server'
 import { createAdminSupabaseClient } from '@/lib/supabase/admin'
+import { sendEnrollmentConfirmation } from '@/lib/email/send'
 
 // GET  /api/admin/applications?status=submitted&page=1
 export async function GET(request: NextRequest) {
@@ -73,6 +74,33 @@ export async function PATCH(request: NextRequest) {
   if (error) {
     console.error('[admin/applications] update error:', error.message)
     return NextResponse.json({ error: 'Failed to update application' }, { status: 500 })
+  }
+
+  // Send enrollment email when application is approved
+  if (parsed.data.status === 'approved') {
+    try {
+      const adminSupabase2 = createAdminSupabaseClient()
+      const { data: app } = await adminSupabase2
+        .from('applications')
+        .select('email, full_name, assigned_cohort_id')
+        .eq('id', parsed.data.id)
+        .single()
+
+      if (app?.email) {
+        let cohortName = 'your upcoming cohort'
+        if (app.assigned_cohort_id) {
+          const { data: cohort } = await adminSupabase2
+            .from('cohorts')
+            .select('cohort_name')
+            .eq('id', app.assigned_cohort_id)
+            .single()
+          if (cohort) cohortName = cohort.cohort_name
+        }
+        await sendEnrollmentConfirmation(app.email, app.full_name ?? 'Student', cohortName)
+      }
+    } catch (emailErr) {
+      console.error('[admin/applications] enrollment email error:', emailErr)
+    }
   }
 
   return NextResponse.json({ success: true })

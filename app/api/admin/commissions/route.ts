@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { getCurrentProfile } from '@/lib/supabase/server'
 import { createAdminSupabaseClient } from '@/lib/supabase/admin'
+import { sendCommissioningCertificate } from '@/lib/email/send'
 
 const CreateSchema = z.object({
   student_id: z.string().uuid(),
@@ -30,7 +31,6 @@ function generateCertNumber(): string {
   const rand = Math.floor(1000 + Math.random() * 9000)
   return `BLUE-${year}-${rand}`
 }
-
 // GET /api/admin/commissions — all students with commission status
 export async function GET(request: NextRequest) {
   const profile = await getCurrentProfile()
@@ -129,11 +129,13 @@ export async function POST(request: NextRequest) {
     .eq('student_id', parsed.data.student_id)
     .not('completed_at', 'is', null)
 
+  const certNumber = generateCertNumber()
+
   const { data, error } = await admin
     .from('commissions')
     .insert({
       ...parsed.data,
-      certificate_number: generateCertNumber(),
+      certificate_number: certNumber,
       identity_blueprint_complete: !!ibRes.data,
       purpose_statement_complete: !!psRes.data,
       ministry_plan_complete: !!mpRes.data,
@@ -149,6 +151,27 @@ export async function POST(request: NextRequest) {
     }
     console.error('[admin/commissions] create error:', error.message)
     return NextResponse.json({ error: 'Failed to create commission' }, { status: 500 })
+  }
+
+  // Send commissioning email to the student
+  try {
+    const { data: studentProfile } = await admin
+      .from('profiles')
+      .select('email, full_name')
+      .eq('id', parsed.data.student_id)
+      .single()
+
+    if (studentProfile?.email) {
+      const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      await sendCommissioningCertificate(
+        studentProfile.email,
+        studentProfile.full_name ?? 'Student',
+        certNumber,
+        dateStr
+      )
+    }
+  } catch (emailErr) {
+    console.error('[admin/commissions] commissioning email error:', emailErr)
   }
 
   return NextResponse.json({ success: true, id: data.id })

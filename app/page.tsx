@@ -102,8 +102,12 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="bp-container py-12 mt-16 border-t border-bp-warm text-center text-sm text-bp-muted">
         <div className="mb-2">© 2026 The Blueprint Foundation</div>
-        <div className="text-xs">
+        <div className="text-xs mb-3">
           Discipleship OS™, B.L.U.E.P.R.I.N.T.™, R.E.S.T.O.R.E.™, K.I.N.D.™ are trademarks of The Blueprint Foundation.
+        </div>
+        <div className="flex gap-4 justify-center text-xs">
+          <Link href="/privacy" className="hover:text-bp-brown transition-colors">Privacy Policy</Link>
+          <Link href="/terms" className="hover:text-bp-brown transition-colors">Terms of Service</Link>
         </div>
       </footer>
     </main>
