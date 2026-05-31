@@ -7,7 +7,7 @@
 >
 > **Update this document at the end of every work session.** It is the project's memory. As long as this file survives, nothing is ever lost.
 >
-> **⚠️ UPDATED — May 31, 2026 (Session 11).** Phase 11 design system complete. Login + application form bugs resolved. Migration 027 applied. See SESSION LOG.
+> **⚠️ UPDATED — Session 12.** Full site design elevation complete — dark auth layout, glass navs, shimmer system, stats strip, page heroes, elevated cards, warm gradient shells. Commit `817fa62`. See SESSION LOG.
 
 ---
 
@@ -493,6 +493,34 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - Global overline label cleanup: verbose `text-xs tracking-widest uppercase font-semibold` patterns → `.text-overline` class in 23 files
 - Hotfix: server component crash in `app/(founder)/founder/page.tsx` (event handlers → Tailwind hover classes)
 - Commit `86bedfc` — all changes pushed to `main`
+- **NEXT:** Phase 12 — Email API routes, Storage buckets, analytics cron, Stripe
+
+**Session — Full Site Design Elevation (Session 12)**
+- **Objective:** Elevate all pages from "basic" to top-level editorial quality — matching the B.L.U.E.P.R.I.N.T.S. brand without compromise
+- **`app/globals.css`** — Added premium design primitives:
+  - `.bp-dark-section` upgraded: `position: relative; overflow: hidden;` + `::before` dual radial gold glows + all child content `z-index: 1`
+  - `.bp-glass` — glassmorphism utility (cream, `backdrop-filter: blur(24px)`)
+  - `.bp-glass-nav` — nav-specific glass (88% opacity, `blur(20px)`, warm border)
+  - `.bp-glass-dark` — dark glassmorphism for dark-bg contexts
+  - `.bp-card-elevated` — 24px radius, 3-layer shadow system, inset highlight
+  - `.bp-page-hero` — inner-page gradient hero strip with radial glow `::after`
+  - `.bp-section-rule` — vertical gradient divider
+  - `.bp-shimmer` — animated shimmer text with gold gradient
+  - `.bp-card-gold-border` — warm gradient card with gold border
+- **`app/(auth)/layout.tsx`** — COMPLETE REDESIGN: dark `var(--bp-dark)` background, dual radial ambient glows, `B.L.U.E.P.R.I.N.T.S.` wordmark in Cormorant above form, gold overline, gold hairline divider. Header shows back-link left + wordmark right.
+- **`app/(auth)/login/page.tsx`** — Card upgraded: `bp-card` → `bp-card-elevated`. Header text now renders on dark bg: Cormorant `font-light text-4xl` in `var(--bp-cream)`. Overline removed (redundant). Scripture footer in muted cream.
+- **`app/(auth)/signup/page.tsx`** — Same treatment as login page.
+- **`app/page.tsx`** — Landing page: (1) Nav upgraded to `bp-glass-nav sticky top-0 z-50`, always-on glass effect. (2) Hero: `pt-20 pb-28`, font scales with `clamp(3rem, 6.5vw, 5.5rem)`. (3) **Stats strip** added below CTA buttons: 12 months · 52 lessons · 4 quarters · 3 capstones · ∞ transformation with Cormorant numbers + tracking label.
+- **All 4 nav components** (StudentNav, AdminNav, FacilitatorNav, FounderNav):
+  - `h-14` → `h-16` on all
+  - `bg-white` → `bp-glass-nav` class on student/admin/facilitator
+  - FounderNav: inline `rgba(26,18,11,0.92)` + `backdropFilter: blur(20px)` 
+- **`app/(student)/layout.tsx`** — Shell: `bg-white` → `linear-gradient(180deg, var(--bp-cream) 0%, var(--bp-white) 220px)`
+- **`app/(admin)/layout.tsx`** — Same warm gradient shell
+- **`app/(facilitator)/layout.tsx`** — Same warm gradient shell
+- **`app/(founder)/layout.tsx`** — Shell: `bg-white` → `var(--bp-dark)` (dark theme for founder)
+- **`app/(student)/dashboard/page.tsx`** — Greeting header replaced: plain div → rounded editorial card with warm gradient, radial glow, Cormorant `font-light text-4xl` heading, italic formation tagline in gold-brown
+- Commit `817fa62` — 14 files changed, 210 insertions, pushed to `main`
 - **NEXT:** Phase 12 — Email API routes, Storage buckets, analytics cron, Stripe
 
 **Session — Bug Fixes (May 31, 2026 — Session 11)**
