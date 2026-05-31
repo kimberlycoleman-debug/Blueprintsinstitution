@@ -7,7 +7,7 @@
 >
 > **Update this document at the end of every work session.** It is the project's memory. As long as this file survives, nothing is ever lost.
 >
-> **⚠️ UPDATED — May 31, 2026 (Session 4).** Phase 5 Admin Dashboard COMPLETE. See SESSION LOG for full details.
+> **⚠️ UPDATED — May 31, 2026 (Session 5).** Phase 6 Founder Sovereign Dashboard COMPLETE. See SESSION LOG for full details.
 
 ---
 
@@ -131,10 +131,21 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 | `lib/ai/client.ts` | OpenAI setup — `DEFAULT_MODEL` (gpt-4o-mini), `PREMIUM_MODEL` (gpt-4o) |
 | `lib/ai/prompts.ts` | Formation-grade system prompts: `REFLECTION_COMPANION_PROMPT`, `IDENTITY_BLUEPRINT_PROMPT`, `PURPOSE_STATEMENT_PROMPT`, `MINISTRY_PLAN_PROMPT`, `REFLECTION_ANALYSIS_PROMPT`, `FACILITATOR_INSIGHTS_PROMPT`, `ADMIN_INTELLIGENCE_PROMPT` |
 
-### Founder Sovereign Tier (Phase 6 — DB complete, UI pending)
+### Founder Sovereign Tier (Phase 6 — COMPLETE ✅)
 | Path | Purpose |
 |------|---------|
 | `lib/founder/protection.ts` | `isFounder()`, `requireFounder()` guard, `logFounderAction()`, `getVaultItems()`, `createVaultItem()`, `getFounderProfile()` |
+| `app/(founder)/layout.tsx` | Sovereign guard (`requireFounder()`) — email-locked, not role-based + FounderNav |
+| `components/founder/FounderNav.tsx` | 5-link nav (Command Center, Vault, Analytics, Funding, Audit Log) — gold-on-dark, "Sovereign" badge |
+| `app/(founder)/founder/page.tsx` | Command Center — institute vitals (8 metrics), Transformation Index panel, sovereign actions, recent audit feed |
+| `app/(founder)/founder/vault/page.tsx` | Vault browser — 10 category tabs, split-pane list + detail, create/edit form with visibility, tags, content, external_url |
+| `app/(founder)/founder/analytics/page.tsx` | Analytics — institute metrics (compute_institute_metrics()), active cohort health table, completed cohort outcome record |
+| `app/(founder)/founder/audit/page.tsx` | Immutable audit log — paginated 50/page, action filter, expandable JSON detail panel |
+| `app/(founder)/founder/funding/page.tsx` | Funding records — grants/donors/partners, amount tracking, free-seat counting, reporting deadline alerts |
+| `app/api/founder/vault/route.ts` | GET (category filter); POST create; PATCH update; DELETE soft-archive (all behind `isFounder()`) |
+| `app/api/founder/metrics/route.ts` | GET — triggers `compute_institute_metrics()` RPC, returns latest snapshot + all cohort analytics |
+| `app/api/founder/audit/route.ts` | GET — paginated audit log, action filter, read-only |
+| `app/api/founder/funding/route.ts` | GET (status/type filter); POST create; PATCH update funding records |
 
 ### Analytics + Tracking (Phase 2 — complete)
 | Path | Purpose |
@@ -212,8 +223,10 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 ### ⏳ NOT YET BUILT — Code
 | Path | What it will do |
 |------|---------|
-| Founder dashboard UI | Vault browser, audit log, compute_institute_metrics(), cross-cohort analytics |
-| Analytics dashboards | Student progress, facilitator view, founder intelligence, funder reporting |
+| Analytics dashboards | Student progress view, facilitator analytics, funder accountability reporting |
+| Commissioning ceremony | Digital commissioning page + certificate generation |
+| PWA manifest | Service worker, offline mode, home-screen install |
+| Launch prep | Email system, onboarding flow, legal/privacy pages |
 
 ---
 
@@ -237,16 +250,16 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - ✅ `vercel.json` — framework: nextjs (fixes Vercel output directory error)
 - ✅ Phase 4: Complete facilitator dashboard — layout, nav, dashboard page, cohort health page, student detail + assessment entry page, attendance capture page, 6 API routes
 - ✅ Phase 5: Complete admin dashboard — layout, nav, dashboard, applications review, cohort management (create/assign/status), user management (role/active), 4 API routes
+- ✅ Phase 6: Complete founder sovereign dashboard — Command Center, Vault browser, Analytics (compute_institute_metrics()), Audit Log, Funding Records, 4 API routes
 
 ### NEXT (in build priority order)
-- ✅ **Phase 4:** Facilitator dashboard — COMPLETE (layout, nav, dashboard, cohort health, student detail + assessment entry, attendance capture, 6 API routes)
-- ✅ **Phase 5:** Admin dashboard — COMPLETE (layout, nav, dashboard, applications review, cohort management, user management, 4 API routes)
-- ⏳ **Phase 6 (NEXT):** Founder dashboard UI — vault browser, audit log viewer, compute_institute_metrics() caller, cross-cohort analytics (DB 100% complete)
-- ⏳ **Phase 6:** Founder dashboard UI — vault browser, audit log viewer, `compute_institute_metrics()` caller, cross-cohort analytics (DB is 100% complete, only UI needed)
-- ⏳ **Analytics dashboards:** Student progress view, facilitator view, founder cross-cohort intelligence, funder/partner reporting
-- ⏳ **Phase 7:** Commissioning ceremony + certificates
-- ⏳ **Phase 8:** PWA / mobile readiness
-- ⏳ **Phase 9:** Launch prep (email, onboarding, legal)
+- ✅ **Phase 4:** Facilitator dashboard — COMPLETE
+- ✅ **Phase 5:** Admin dashboard — COMPLETE
+- ✅ **Phase 6:** Founder Sovereign Dashboard — COMPLETE (Command Center, Vault, Analytics, Audit Log, Funding + 4 API routes)
+- ⏳ **Phase 7 (NEXT):** Commissioning ceremony — digital commissioning page + certificate generation (`/commissions`, admin trigger)
+- ⏳ **Phase 8:** Analytics dashboards — student progress view, facilitator analytics view, funder accountability reporting
+- ⏳ **Phase 9:** PWA / mobile readiness — service worker, offline mode, home-screen install prompt
+- ⏳ **Phase 10:** Launch prep — email system, onboarding flow, legal/privacy pages
 
 ---
 
@@ -366,6 +379,22 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - `app/api/admin/cohorts/enroll/route.ts` — POST enroll student with capacity check; GET facilitators list
 - `app/api/admin/users/route.ts` — GET searchable with role filter; PATCH role/is_active (self-demotion blocked)
 - **NEXT:** Phase 6 — Founder dashboard UI
+
+**Session — Phase 6 Complete (May 31, 2026 — Session 5)**
+- Built complete Founder Sovereign Dashboard (Phase 6) — all pages + all API routes
+- `app/(founder)/layout.tsx` — email-locked sovereign guard (`requireFounder()`) + FounderNav wrapper
+- `components/founder/FounderNav.tsx` — 5-link nav, gold-on-dark theme, "Sovereign" badge
+- `app/(founder)/founder/page.tsx` — Command Center: 8 institute vitals (live via Supabase), Transformation Index panel (dark gold card), Sovereign Actions quick links, Recent Activity audit feed
+- `app/(founder)/founder/vault/page.tsx` — Vault browser: 10 category tabs with live counts, split-pane list + detail, create/edit form (title, category, visibility, content, external_url, tags), soft-archive
+- `app/(founder)/founder/analytics/page.tsx` — Institute analytics: triggers `compute_institute_metrics()` RPC, displays all-time vitals, capstone completions, active cohort health table (TI gain, at-risk count), completed cohort outcome record
+- `app/(founder)/founder/audit/page.tsx` — Immutable audit log: paginated 50/page, 11-action type filter, expandable JSON detail, timestamps
+- `app/(founder)/founder/funding/page.tsx` — Funding records: 6 funding types + 7 statuses, amount tracking (requested/awarded/deployed), free-seat counting, reporting deadline alerts, proposal/report URL links
+- `app/api/founder/vault/route.ts` — GET (category/archived filter); POST create; PATCH update; DELETE soft-archive — all behind `isFounder()`, uses admin client for writes
+- `app/api/founder/metrics/route.ts` — GET triggers `compute_institute_metrics()` RPC then returns latest snapshot + all cohort analytics with nested `cohort_analytics[]`
+- `app/api/founder/audit/route.ts` — GET paginated (50/page), action filter, read-only
+- `app/api/founder/funding/route.ts` — GET (status/type filter); POST create (logs `grant_report_generate`); PATCH update
+- Every founder action is audit-logged via `logFounderAction()` — vault access, analytics views, dashboard views
+- **NEXT:** Phase 7 — Commissioning ceremony + certificates
 
 ---
 
