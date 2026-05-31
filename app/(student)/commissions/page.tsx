@@ -84,7 +84,7 @@ export default function CommissioningPage() {
     <div className="max-w-2xl mx-auto space-y-8">
       {/* Header */}
       <div className="text-center pt-4">
-        <p className="text-xs tracking-widest text-amber-600 uppercase font-semibold mb-2">
+        <p className="text-overline mb-2">
           Identity Blueprint Formation™
         </p>
         <h1 className="text-3xl font-semibold">Commissioning</h1>
@@ -96,23 +96,23 @@ export default function CommissioningPage() {
 
       {/* Certificate issued — primary state */}
       {commission?.certificate_issued && (
-        <div className="bg-[#1a120b] text-white rounded-2xl p-8 text-center">
-          <p className="text-amber-400 text-xs tracking-widest uppercase font-semibold mb-3">
+        <div className="bg-[var(--bp-dark)] text-white rounded-2xl p-8 text-center">
+          <p className="text-[var(--bp-gold)] text-xs tracking-widest uppercase font-semibold mb-3">
             Commissioned ✦
           </p>
           <p className="text-2xl font-semibold mb-1">You are commissioned.</p>
           {commission.commissioning_date && (
-            <p className="text-amber-200 text-sm mb-4">
+            <p className="text-[var(--bp-gold-light)] text-sm mb-4">
               {new Date(commission.commissioning_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               {commission.commissioning_location && ` · ${commission.commissioning_location}`}
             </p>
           )}
           {commission.certificate_number && (
-            <p className="text-xs text-amber-300 mb-6">Certificate #{commission.certificate_number}</p>
+            <p className="text-xs text-[var(--bp-gold-light)] mb-6">Certificate #{commission.certificate_number}</p>
           )}
           <Link
             href="/commissions/certificate"
-            className="inline-block bg-amber-500 text-[#1a120b] font-semibold px-6 py-2.5 rounded-lg hover:bg-amber-400 transition-colors"
+            className="inline-block bg-[var(--bp-cream)]0 text-[#1a120b] font-semibold px-6 py-2.5 rounded-lg hover:bg-[var(--bp-gold)] transition-colors"
           >
             View &amp; Print Certificate →
           </Link>
@@ -121,15 +121,15 @@ export default function CommissioningPage() {
 
       {/* Commission record exists but cert not issued yet */}
       {commission && !commission.certificate_issued && (
-        <div className="bp-card p-6 border-amber-300 bg-amber-50">
-          <p className="text-sm font-semibold text-amber-800 mb-1">Commissioning scheduled</p>
+        <div className="bp-card p-6 border-[var(--bp-sand)] bg-[var(--bp-cream)]">
+          <p className="text-sm font-semibold text-[var(--bp-brown-deep)] mb-1">Commissioning scheduled</p>
           {commission.commissioning_date ? (
-            <p className="text-sm text-amber-700">
+            <p className="text-sm text-[var(--bp-brown)]">
               {new Date(commission.commissioning_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               {commission.commissioning_location && ` at ${commission.commissioning_location}`}
             </p>
           ) : (
-            <p className="text-sm text-amber-700">Your facilitator or administrator will confirm the date.</p>
+            <p className="text-sm text-[var(--bp-brown)]">Your facilitator or administrator will confirm the date.</p>
           )}
         </div>
       )}
@@ -194,7 +194,7 @@ export default function CommissioningPage() {
       {commission?.calling_declaration && (
         <div className="bp-card p-6">
           <h2 className="font-semibold mb-3">Your Calling Declaration</h2>
-          <blockquote className="border-l-4 border-amber-400 pl-4 italic text-[var(--bp-brown)] text-sm leading-relaxed">
+          <blockquote className="border-l-4 border-[var(--bp-gold)] pl-4 italic text-[var(--bp-brown)] text-sm leading-relaxed">
             "{commission.calling_declaration}"
           </blockquote>
         </div>
@@ -203,7 +203,7 @@ export default function CommissioningPage() {
       {/* Final blessing */}
       {commission?.final_blessing && (
         <div className="bg-[var(--bp-cream)] rounded-xl p-6 text-center">
-          <p className="text-xs tracking-widest text-amber-600 uppercase font-semibold mb-3">Final Blessing</p>
+          <p className="text-overline mb-3">Final Blessing</p>
           <p className="text-[var(--bp-brown)] italic leading-relaxed">"{commission.final_blessing}"</p>
         </div>
       )}
@@ -215,7 +215,7 @@ export default function CommissioningPage() {
           <div className="space-y-2">
             {commission.prophetic_words.map((word, i) => (
               <div key={i} className="flex gap-3 text-sm">
-                <span className="text-amber-500 flex-shrink-0 mt-0.5">✦</span>
+                <span className="text-[var(--bp-gold)] flex-shrink-0 mt-0.5">✦</span>
                 <p className="text-[var(--bp-brown)] italic">"{word}"</p>
               </div>
             ))}

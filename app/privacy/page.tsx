@@ -79,14 +79,14 @@ Website: theblueprintsfoundation.org`,
 export default function PrivacyPage() {
   return (
     <main className="min-h-screen bg-[#FAF5EF]">
-      <header className="bg-[#5C4A2A] py-10 px-6 text-center">
-        <div className="text-xs tracking-widest text-amber-300 uppercase font-semibold mb-2">
+      <header className="bg-[var(--bp-brown-deep)] py-10 px-6 text-center">
+        <div className="text-overline text-[var(--bp-gold-light)] mb-2">
           The B.L.U.E.P.R.I.N.T.S. Foundation
         </div>
         <h1 className="text-3xl font-semibold text-white" style={{ fontFamily: 'Georgia, serif' }}>
           Privacy Policy
         </h1>
-        <p className="text-amber-200 text-sm mt-2">Last updated: May 2026</p>
+        <p className="text-[var(--bp-gold-light)] text-sm mt-2">Last updated: May 2026</p>
       </header>
 
       <div className="max-w-3xl mx-auto px-6 py-12">
@@ -109,7 +109,7 @@ export default function PrivacyPage() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-amber-200 text-center text-sm text-[#7A6245]">
+        <div className="mt-12 pt-8 border-t border-[var(--bp-sand)] text-center text-sm text-[#7A6245]">
           <div className="mb-4">© {new Date().getFullYear()} The B.L.U.E.P.R.I.N.T.S. Foundation</div>
           <div className="flex gap-4 justify-center">
             <Link href="/terms" className="text-[#5C4A2A] hover:underline">Terms of Service</Link>

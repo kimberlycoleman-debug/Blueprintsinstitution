@@ -21,7 +21,7 @@ export default function OfflinePage() {
         </p>
 
         {/* Scripture anchor */}
-        <blockquote className="border-l-2 border-amber-400 pl-4 text-left mb-8">
+        <blockquote className="border-l-2 border-[var(--bp-gold)] pl-4 text-left mb-8">
           <p className="text-sm italic text-[var(--bp-brown)] serif">
             &ldquo;For we are God&rsquo;s handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.&rdquo;
           </p>

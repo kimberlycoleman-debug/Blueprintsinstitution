@@ -62,13 +62,13 @@ interface AnalyticsData {
 
 function Pct({ value }: { value: number | null }) {
   if (value == null) return <span className="text-[var(--bp-muted)]">—</span>
-  const color = value >= 80 ? 'text-green-600' : value >= 60 ? 'text-amber-600' : 'text-red-500'
+  const color = value >= 80 ? 'text-green-600' : value >= 60 ? 'text-[var(--bp-brown)]' : 'text-red-500'
   return <span className={`font-medium ${color}`}>{value.toFixed(0)}%</span>
 }
 
 function Score({ value }: { value: number | null }) {
   if (value == null) return <span className="text-[var(--bp-muted)]">—</span>
-  const color = value >= 70 ? 'text-green-600' : value >= 50 ? 'text-amber-600' : 'text-red-500'
+  const color = value >= 70 ? 'text-green-600' : value >= 50 ? 'text-[var(--bp-brown)]' : 'text-red-500'
   return <span className={`font-medium ${color}`}>{value}</span>
 }
 
@@ -246,7 +246,7 @@ export default function FacilitatorAnalyticsPage() {
                   <div>
                     <p className="text-xs text-[var(--bp-muted)] mb-1">Attendance</p>
                     <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-amber-400 rounded-full" style={{ width: `${c.avg_attendance_rate ?? 0}%` }} />
+                      <div className="h-full bg-[var(--bp-gold)] rounded-full" style={{ width: `${c.avg_attendance_rate ?? 0}%` }} />
                     </div>
                     <p className="text-xs mt-1"><Pct value={c.avg_attendance_rate} /></p>
                   </div>
@@ -267,23 +267,23 @@ export default function FacilitatorAnalyticsPage() {
                 </div>
 
                 {/* TI panel */}
-                <div className="bg-[#1a120b] rounded-xl p-4 text-amber-100">
+                <div className="bg-[var(--bp-dark)] rounded-xl p-4 text-[var(--bp-gold-light)]">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-medium tracking-widest uppercase text-amber-400">Transformation Index</span>
+                    <span className="text-overline text-[var(--bp-gold)]">Transformation Index</span>
                     <GainBadge gain={c.avg_index_gain} />
                   </div>
                   <div className="grid grid-cols-3 gap-3 text-center">
                     <div>
-                      <p className="text-2xl font-bold text-amber-300">{c.avg_baseline_index?.toFixed(0) ?? '—'}</p>
-                      <p className="text-xs text-amber-600 mt-0.5">Baseline avg</p>
+                      <p className="text-2xl font-bold text-[var(--bp-gold-light)]">{c.avg_baseline_index?.toFixed(0) ?? '—'}</p>
+                      <p className="text-xs text-[var(--bp-brown)] mt-0.5">Baseline avg</p>
                     </div>
-                    <div className="text-amber-500 text-xl flex items-center justify-center">→</div>
+                    <div className="text-[var(--bp-gold)] text-xl flex items-center justify-center">→</div>
                     <div>
-                      <p className="text-2xl font-bold text-amber-300">{c.avg_current_index?.toFixed(0) ?? '—'}</p>
-                      <p className="text-xs text-amber-600 mt-0.5">Current avg</p>
+                      <p className="text-2xl font-bold text-[var(--bp-gold-light)]">{c.avg_current_index?.toFixed(0) ?? '—'}</p>
+                      <p className="text-xs text-[var(--bp-brown)] mt-0.5">Current avg</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-4 gap-2 mt-3 pt-3 border-t border-amber-900 text-center text-xs">
+                  <div className="grid grid-cols-4 gap-2 mt-3 pt-3 border-t border-[var(--bp-warm)] text-center text-xs">
                     {[
                       { label: 'Identity', val: c.avg_identity_score },
                       { label: 'Healing', val: c.avg_healing_score },
@@ -291,8 +291,8 @@ export default function FacilitatorAnalyticsPage() {
                       { label: 'Maturity', val: c.avg_maturity_score },
                     ].map(({ label, val }) => (
                       <div key={label}>
-                        <p className="text-amber-300 font-semibold">{val?.toFixed(0) ?? '—'}</p>
-                        <p className="text-amber-600 mt-0.5">{label}</p>
+                        <p className="text-[var(--bp-gold-light)] font-semibold">{val?.toFixed(0) ?? '—'}</p>
+                        <p className="text-[var(--bp-brown)] mt-0.5">{label}</p>
                       </div>
                     ))}
                   </div>
@@ -361,7 +361,7 @@ export default function FacilitatorAnalyticsPage() {
                   </thead>
                   <tbody>
                     {filteredStudents.map(s => (
-                      <tr key={s.student_id} className="border-b border-[var(--bp-warm)] hover:bg-amber-50/50 last:border-0">
+                      <tr key={s.student_id} className="border-b border-[var(--bp-warm)] hover:bg-[var(--bp-cream)]/50 last:border-0">
                         <td className="px-4 py-3">
                           <p className="font-medium text-[var(--bp-brown)]">{s.full_name}</p>
                           <p className="text-xs text-[var(--bp-muted)]">{s.cohort_name}</p>
@@ -399,7 +399,7 @@ export default function FacilitatorAnalyticsPage() {
             </div>
           ) : (
             <>
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-900">
+              <div className="bg-[var(--bp-cream)] border border-[var(--bp-sand)] rounded-xl p-4 text-sm text-[var(--bp-brown-deep)]">
                 <p className="font-medium">At-Risk Threshold</p>
                 <p className="mt-0.5">Students with a composite TI below 40 are flagged for pastoral attention. Review their engagement and schedule a check-in.</p>
               </div>

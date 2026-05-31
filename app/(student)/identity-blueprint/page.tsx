@@ -122,7 +122,7 @@ export default function IdentityBlueprintPage() {
       <TrackPageView eventType="capstone_start" resourceType="identity_blueprint" metadata={{ page: 'identity-blueprint' }} />
 
       <div>
-        <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-1">Q1 Capstone</div>
+        <div className="text-overline mb-1">Q1 Capstone</div>
         <h1 className="text-3xl font-semibold">Identity Blueprint Statement™</h1>
         <p className="text-[var(--bp-muted)] mt-1">
           A declaration of who you are — not what you do. Built over three months. Written in your voice.

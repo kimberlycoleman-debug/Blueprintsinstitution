@@ -86,7 +86,7 @@ export default function FounderAnalyticsPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-10">
       <div>
-        <p className="text-xs tracking-widest text-amber-600 uppercase font-semibold mb-1">Sovereign Analytics</p>
+        <p className="text-overline mb-1">Sovereign Analytics</p>
         <h1 className="text-2xl font-semibold">Institute-Wide Metrics</h1>
         {m && (
           <p className="text-xs text-[var(--bp-muted)] mt-1">
@@ -104,9 +104,9 @@ export default function FounderAnalyticsPage() {
           { label: 'Graduates', value: m?.total_graduates ?? 0 },
           { label: 'Retention rate', value: m?.overall_retention_rate != null ? `${m.overall_retention_rate}%` : '—' },
         ].map(({ label, value }) => (
-          <div key={label} className="bg-[#1a120b] rounded-xl p-5 text-white">
-            <p className="text-xs text-amber-300 mb-1">{label}</p>
-            <p className="text-3xl font-semibold text-amber-400">{String(value)}</p>
+          <div key={label} className="bg-[var(--bp-dark)] rounded-xl p-5 text-white">
+            <p className="text-xs text-[var(--bp-gold-light)] mb-1">{label}</p>
+            <p className="text-3xl font-semibold text-[var(--bp-gold)]">{String(value)}</p>
           </div>
         ))}
       </div>
@@ -133,7 +133,7 @@ export default function FounderAnalyticsPage() {
 
       {/* Capstone completions */}
       <div>
-        <h2 className="text-xs tracking-widest text-[var(--bp-muted)] uppercase font-semibold mb-4">
+        <h2 className="text-overline text-[var(--bp-muted)] mb-4">
           Capstone Completions — All Time
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -150,7 +150,7 @@ export default function FounderAnalyticsPage() {
       {/* Active cohorts breakdown */}
       {activeCohortList.length > 0 && (
         <div>
-          <h2 className="text-xs tracking-widest text-[var(--bp-muted)] uppercase font-semibold mb-4">
+          <h2 className="text-overline text-[var(--bp-muted)] mb-4">
             Active Cohorts — Formation Health
           </h2>
           <div className="space-y-3">
@@ -207,7 +207,7 @@ export default function FounderAnalyticsPage() {
       {/* Completed cohorts */}
       {completedCohortList.length > 0 && (
         <div>
-          <h2 className="text-xs tracking-widest text-[var(--bp-muted)] uppercase font-semibold mb-4">
+          <h2 className="text-overline text-[var(--bp-muted)] mb-4">
             Completed Cohorts — Outcome Record
           </h2>
           <div className="overflow-x-auto">

@@ -32,7 +32,7 @@ const SIGNAL_LABELS: Record<string, string> = {
 
 const RISK_COLORS: Record<string, string> = {
   high: 'bg-red-50 text-red-700 border-red-200',
-  medium: 'bg-amber-50 text-amber-700 border-amber-200',
+  medium: 'bg-[var(--bp-cream)] text-[var(--bp-brown)] border-[var(--bp-sand)]',
   low: 'bg-yellow-50 text-yellow-700 border-yellow-200',
 }
 
@@ -148,13 +148,13 @@ export default function CohortHealthPage() {
           {students.map((s) => {
             const progressPct = s.lessons_total > 0 ? Math.round((s.lessons_completed / s.lessons_total) * 100) : 0
             return (
-              <div key={s.student_id} className={`bp-card p-5 ${atRiskIds.has(s.student_id) ? 'border-l-4 border-l-amber-400' : ''}`}>
+              <div key={s.student_id} className={`bp-card p-5 ${atRiskIds.has(s.student_id) ? 'border-l-4 border-l-[var(--bp-gold)]' : ''}`}>
                 <div className="flex items-center justify-between">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <p className="font-medium">{s.full_name ?? s.email}</p>
                       {atRiskIds.has(s.student_id) && (
-                        <span className="text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full">at-risk</span>
+                        <span className="text-xs bg-[var(--bp-cream)] text-[var(--bp-brown)] px-2 py-0.5 rounded-full">at-risk</span>
                       )}
                     </div>
                     <div className="flex items-center gap-4 text-xs text-[var(--bp-muted)]">

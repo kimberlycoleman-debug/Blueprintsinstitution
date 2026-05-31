@@ -172,7 +172,7 @@ export default function FundingPage() {
     <div className="max-w-5xl mx-auto space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs tracking-widest text-amber-600 uppercase font-semibold mb-1">Funding &amp; Development</p>
+          <p className="text-overline mb-1">Funding &amp; Development</p>
           <h1 className="text-2xl font-semibold">Funding Records</h1>
         </div>
         <button onClick={openCreate} className="bp-btn-primary text-sm px-4 py-2">+ Add Record</button>
@@ -180,9 +180,9 @@ export default function FundingPage() {
 
       {/* Funding totals */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-[#1a120b] rounded-xl p-5 text-white">
-          <p className="text-xs text-amber-300 mb-1">Total awarded</p>
-          <p className="text-2xl font-semibold text-amber-400">{fmt(totalAwarded)}</p>
+        <div className="bg-[var(--bp-dark)] rounded-xl p-5 text-white">
+          <p className="text-xs text-[var(--bp-gold-light)] mb-1">Total awarded</p>
+          <p className="text-2xl font-semibold text-[var(--bp-gold)]">{fmt(totalAwarded)}</p>
         </div>
         <div className="bp-card p-5">
           <p className="text-xs text-[var(--bp-muted)] mb-1">Total deployed</p>
@@ -223,7 +223,7 @@ export default function FundingPage() {
               <button
                 key={r.id}
                 onClick={() => { setSelected(r); setShowForm(false) }}
-                className={`w-full text-left p-4 rounded-xl border transition-all ${selected?.id === r.id ? 'border-amber-400 bg-amber-50' : 'border-[var(--bp-warm)] bg-white hover:border-amber-200'}`}
+                className={`w-full text-left p-4 rounded-xl border transition-all ${selected?.id === r.id ? 'border-[var(--bp-gold)] bg-[var(--bp-cream)]' : 'border-[var(--bp-warm)] bg-white hover:border-[var(--bp-sand)]'}`}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div>
@@ -377,9 +377,9 @@ export default function FundingPage() {
               </div>
 
               {selected.reporting_deadline && (
-                <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm">
-                  <p className="text-xs text-amber-700 font-medium">Report due</p>
-                  <p className="text-amber-900">{new Date(selected.reporting_deadline).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                <div className="mb-4 p-3 bg-[var(--bp-cream)] border border-[var(--bp-sand)] rounded-lg text-sm">
+                  <p className="text-xs text-[var(--bp-brown)] font-medium">Report due</p>
+                  <p className="text-[var(--bp-brown-deep)]">{new Date(selected.reporting_deadline).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
                 </div>
               )}
 

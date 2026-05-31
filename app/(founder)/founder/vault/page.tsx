@@ -37,7 +37,7 @@ const CATEGORIES: { value: VaultCategory; label: string; color: string }[] = [
 ]
 
 const VISIBILITY_LABELS: Record<VaultVisibility, { label: string; color: string }> = {
-  founder_only: { label: 'Founder Only', color: 'bg-amber-100 text-amber-700' },
+  founder_only: { label: 'Founder Only', color: 'bg-[var(--bp-cream)] text-[var(--bp-brown)]' },
   admin_visible: { label: 'Admin Visible', color: 'bg-blue-100 text-blue-700' },
   board_visible: { label: 'Board Visible', color: 'bg-green-100 text-green-700' },
 }
@@ -133,7 +133,7 @@ export default function VaultPage() {
     <div className="max-w-5xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <p className="text-xs tracking-widest text-amber-600 uppercase font-semibold mb-1">Sovereign Vault</p>
+          <p className="text-overline mb-1">Sovereign Vault</p>
           <h1 className="text-2xl font-semibold">Document &amp; Asset Store</h1>
         </div>
         <button onClick={openCreate} className="bp-btn-primary text-sm px-4 py-2">
@@ -145,7 +145,7 @@ export default function VaultPage() {
       <div className="flex gap-2 flex-wrap mb-6">
         <button
           onClick={() => setActiveCategory('all')}
-          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeCategory === 'all' ? 'bg-[var(--bp-brown-deep)] text-white' : 'bg-[var(--bp-cream)] text-[var(--bp-brown)] hover:bg-amber-100'}`}
+          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeCategory === 'all' ? 'bg-[var(--bp-brown-deep)] text-white' : 'bg-[var(--bp-cream)] text-[var(--bp-brown)] hover:bg-[var(--bp-cream)]'}`}
         >
           All ({items.length})
         </button>
@@ -155,7 +155,7 @@ export default function VaultPage() {
             <button
               key={cat.value}
               onClick={() => setActiveCategory(cat.value)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeCategory === cat.value ? 'bg-[var(--bp-brown-deep)] text-white' : 'bg-[var(--bp-cream)] text-[var(--bp-brown)] hover:bg-amber-100'}`}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeCategory === cat.value ? 'bg-[var(--bp-brown-deep)] text-white' : 'bg-[var(--bp-cream)] text-[var(--bp-brown)] hover:bg-[var(--bp-cream)]'}`}
             >
               {cat.label} {count > 0 && `(${count})`}
             </button>
@@ -182,7 +182,7 @@ export default function VaultPage() {
               <button
                 key={item.id}
                 onClick={() => { setSelected(item); setShowForm(false) }}
-                className={`w-full text-left p-4 rounded-xl border transition-all ${selected?.id === item.id ? 'border-amber-400 bg-amber-50' : 'border-[var(--bp-warm)] bg-white hover:border-amber-200'}`}
+                className={`w-full text-left p-4 rounded-xl border transition-all ${selected?.id === item.id ? 'border-[var(--bp-gold)] bg-[var(--bp-cream)]' : 'border-[var(--bp-warm)] bg-white hover:border-[var(--bp-sand)]'}`}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
@@ -261,7 +261,7 @@ export default function VaultPage() {
                 {form.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-2">
                     {form.tags.map(t => (
-                      <span key={t} className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span key={t} className="text-xs bg-[var(--bp-cream)] text-[var(--bp-brown)] px-2 py-0.5 rounded-full flex items-center gap-1">
                         {t}
                         <button onClick={() => setForm(f => ({ ...f, tags: f.tags.filter(x => x !== t) }))} className="hover:text-red-500">×</button>
                       </span>
@@ -312,7 +312,7 @@ export default function VaultPage() {
               {selected.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {selected.tags.map(t => (
-                    <span key={t} className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">{t}</span>
+                    <span key={t} className="text-xs bg-[var(--bp-cream)] text-[var(--bp-brown)] px-2 py-0.5 rounded-full">{t}</span>
                   ))}
                 </div>
               )}

@@ -20,7 +20,7 @@ interface Post {
 }
 
 const POST_TYPE_LABELS: Record<PostType, { label: string; emoji: string; color: string }> = {
-  reflection_share: { label: 'Reflection', emoji: '📖', color: 'bg-amber-50 text-amber-800' },
+  reflection_share: { label: 'Reflection', emoji: '📖', color: 'bg-[var(--bp-cream)] text-[var(--bp-brown-deep)]' },
   prayer_request: { label: 'Prayer Request', emoji: '🙏', color: 'bg-blue-50 text-blue-800' },
   celebration: { label: 'Celebration', emoji: '🎉', color: 'bg-green-50 text-green-800' },
   question: { label: 'Question', emoji: '❓', color: 'bg-purple-50 text-purple-800' },
@@ -113,7 +113,7 @@ export default function CohortPage() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-1">
+          <div className="text-overline mb-1">
             Cohort Space
           </div>
           <h1 className="text-3xl font-semibold">{cohortName ?? 'My Cohort'}</h1>
@@ -191,7 +191,7 @@ export default function CohortPage() {
       {/* Pinned Posts */}
       {pinned.length > 0 && (
         <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bp-brown)]">Pinned</p>
+          <p className="text-overline">Pinned</p>
           {pinned.map((post) => <PostCard key={post.id} post={post} />)}
         </div>
       )}

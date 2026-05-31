@@ -31,7 +31,7 @@ export default async function LessonsPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-10">
       <div>
-        <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-1">
+        <div className="text-overline mb-1">
           Curriculum
         </div>
         <h1 className="text-3xl font-semibold">All Lessons</h1>

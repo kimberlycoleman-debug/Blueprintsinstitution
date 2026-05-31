@@ -30,13 +30,13 @@ export default async function AdminDashboard() {
 
   const stats = [
     { label: 'Total students', value: totalStudents ?? 0, href: '/admin/users?role=student', color: 'text-[var(--bp-brown-deep)]' },
-    { label: 'Pending applications', value: pendingApplications ?? 0, href: '/admin/applications', color: 'text-amber-600' },
+    { label: 'Pending applications', value: pendingApplications ?? 0, href: '/admin/applications', color: 'text-[var(--bp-brown)]' },
     { label: 'Active cohorts', value: activeCohorts ?? 0, href: '/admin/cohorts', color: 'text-green-700' },
     { label: 'Facilitators', value: totalFacilitators ?? 0, href: '/admin/users?role=facilitator', color: 'text-[var(--bp-brown)]' },
   ]
 
   const STATUS_STYLE: Record<string, string> = {
-    submitted: 'bg-amber-50 text-amber-700',
+    submitted: 'bg-[var(--bp-cream)] text-[var(--bp-brown)]',
     under_review: 'bg-blue-50 text-blue-700',
     approved: 'bg-green-50 text-green-700',
     declined: 'bg-red-50 text-red-700',
@@ -46,7 +46,7 @@ export default async function AdminDashboard() {
   return (
     <div className="max-w-5xl mx-auto space-y-8">
       <div>
-        <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-1">
+        <div className="text-overline mb-1">
           Admin Dashboard
         </div>
         <h1 className="text-3xl font-semibold">Institute Overview</h1>

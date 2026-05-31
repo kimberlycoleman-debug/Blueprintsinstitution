@@ -95,7 +95,7 @@ const FUNDING_TYPE_COLORS: Record<string, string> = {
   grant: 'bg-blue-100 text-blue-700',
   major_donor: 'bg-purple-100 text-purple-700',
   institutional_partner: 'bg-green-100 text-green-700',
-  board_gift: 'bg-amber-100 text-amber-700',
+  board_gift: 'bg-[var(--bp-cream)] text-[var(--bp-brown)]',
   general_donation: 'bg-gray-100 text-gray-600',
 }
 
@@ -104,7 +104,7 @@ const STATUS_COLORS: Record<string, string> = {
   applied: 'bg-blue-100 text-blue-600',
   awarded: 'bg-green-100 text-green-700',
   declined: 'bg-red-100 text-red-500',
-  reporting: 'bg-amber-100 text-amber-700',
+  reporting: 'bg-[var(--bp-cream)] text-[var(--bp-brown)]',
   closed: 'bg-gray-100 text-gray-400',
 }
 
@@ -172,11 +172,11 @@ export default function AdminAnalyticsPage() {
             </div>
           ))}
           {upcomingSoon.map(f => (
-            <div key={f.id} className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 flex items-center justify-between">
+            <div key={f.id} className="bg-[var(--bp-cream)] border border-[var(--bp-sand)] rounded-xl px-4 py-3 text-sm text-[var(--bp-brown-deep)] flex items-center justify-between">
               <span>
                 <strong>Report due soon:</strong> {f.source_name} — {f.reporting_deadline}
               </span>
-              <span className="text-xs text-amber-600">Within 60 days</span>
+              <span className="text-xs text-[var(--bp-brown)]">Within 60 days</span>
             </div>
           ))}
         </div>
@@ -261,7 +261,7 @@ export default function AdminAnalyticsPage() {
                   </div>
                   <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-amber-400 rounded-full"
+                      className="h-full bg-[var(--bp-gold)] rounded-full"
                       style={{ width: `${val ?? 0}%` }}
                     />
                   </div>
@@ -271,20 +271,20 @@ export default function AdminAnalyticsPage() {
           </div>
 
           {/* Transformation Index panel */}
-          <div className="bg-[#1a120b] rounded-xl p-6 text-amber-100">
-            <p className="text-xs font-medium tracking-widest uppercase text-amber-400 mb-4">Transformation Index — All-Time</p>
+          <div className="bg-[var(--bp-dark)] rounded-xl p-6 text-[var(--bp-gold-light)]">
+            <p className="text-overline text-[var(--bp-gold)] mb-4">Transformation Index — All-Time</p>
             <div className="grid grid-cols-3 gap-6 text-center">
               <div>
-                <p className="text-3xl font-bold text-amber-300">{m.avg_transformation_index_alltime?.toFixed(0) ?? '—'}</p>
-                <p className="text-xs text-amber-600 mt-1">Avg composite (all graduates)</p>
+                <p className="text-3xl font-bold text-[var(--bp-gold-light)]">{m.avg_transformation_index_alltime?.toFixed(0) ?? '—'}</p>
+                <p className="text-xs text-[var(--bp-brown)] mt-1">Avg composite (all graduates)</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-amber-300">{m.avg_index_gain_per_graduate?.toFixed(0) ?? '—'}</p>
-                <p className="text-xs text-amber-600 mt-1">Avg gain per graduate</p>
+                <p className="text-3xl font-bold text-[var(--bp-gold-light)]">{m.avg_index_gain_per_graduate?.toFixed(0) ?? '—'}</p>
+                <p className="text-xs text-[var(--bp-brown)] mt-1">Avg gain per graduate</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-amber-300">{m.total_commissionings}</p>
-                <p className="text-xs text-amber-600 mt-1">Commissioned</p>
+                <p className="text-3xl font-bold text-[var(--bp-gold-light)]">{m.total_commissionings}</p>
+                <p className="text-xs text-[var(--bp-brown)] mt-1">Commissioned</p>
               </div>
             </div>
           </div>

@@ -112,7 +112,7 @@ export default function PurposeStatementPage() {
       <TrackPageView eventType="capstone_start" resourceType="purpose_statement" metadata={{ page: 'purpose-statement' }} />
 
       <div>
-        <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-1">Q4 Capstone</div>
+        <div className="text-overline mb-1">Q4 Capstone</div>
         <h1 className="text-3xl font-semibold">Purpose Statement™</h1>
         <p className="text-[var(--bp-muted)] mt-1">
           Identity becomes assignment. Built from everything you have learned about who you are.

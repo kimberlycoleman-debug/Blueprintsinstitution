@@ -232,7 +232,7 @@ export default async function LessonPage({ params }: PageProps) {
           {workbook.map((elem) => (
             <div key={elem.id} className="bp-card p-6 bg-[var(--bp-cream)]">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-semibold uppercase tracking-widest text-[var(--bp-brown)]">
+                <span className="text-overline">
                   {elem.element_type.replace(/_/g, ' ')}
                 </span>
               </div>

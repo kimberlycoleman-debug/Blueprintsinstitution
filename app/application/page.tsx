@@ -389,7 +389,7 @@ export default function ApplicationPage() {
     <div className="w-full max-w-xl">
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-3">
+        <div className="text-overline mb-3">
           Application
         </div>
         <h1 className="text-3xl font-semibold mb-2">Apply to the Institute</h1>

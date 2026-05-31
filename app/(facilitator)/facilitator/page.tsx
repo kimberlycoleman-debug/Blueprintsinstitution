@@ -27,7 +27,7 @@ export default async function FacilitatorDashboard() {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div>
-        <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-1">
+        <div className="text-overline mb-1">
           Facilitator Dashboard
         </div>
         <h1 className="text-3xl font-semibold">Welcome back, {firstName}.</h1>
@@ -63,7 +63,7 @@ export default async function FacilitatorDashboard() {
 
             const statusColors: Record<string, string> = {
               active: 'bg-green-50 text-green-700',
-              upcoming: 'bg-amber-50 text-amber-700',
+              upcoming: 'bg-[var(--bp-cream)] text-[var(--bp-brown)]',
               completed: 'bg-[var(--bp-warm)] text-[var(--bp-brown)]',
             }
 

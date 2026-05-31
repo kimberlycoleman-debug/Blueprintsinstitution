@@ -158,7 +158,7 @@ export default function MinistryPlanPage() {
       <TrackPageView eventType="capstone_start" resourceType="ministry_plan" metadata={{ page: 'ministry-plan' }} />
 
       <div>
-        <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-1">Q4 Capstone</div>
+        <div className="text-overline mb-1">Q4 Capstone</div>
         <h1 className="text-3xl font-semibold">Ministry Launch Plan™</h1>
         <p className="text-[var(--bp-muted)] mt-1">
           Purpose made actionable. Not a business plan — a movement plan.

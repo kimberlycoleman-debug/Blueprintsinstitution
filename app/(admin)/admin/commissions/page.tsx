@@ -185,7 +185,7 @@ export default function AdminCommissionsPage() {
                   <button
                     key={c.id}
                     onClick={() => openCommission(c)}
-                    className={`w-full text-left p-4 rounded-xl border transition-all ${selected?.id === c.id ? 'border-amber-400 bg-amber-50' : 'border-[var(--bp-warm)] bg-white hover:border-amber-200'}`}
+                    className={`w-full text-left p-4 rounded-xl border transition-all ${selected?.id === c.id ? 'border-[var(--bp-gold)] bg-[var(--bp-cream)]' : 'border-[var(--bp-warm)] bg-white hover:border-[var(--bp-sand)]'}`}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
@@ -196,7 +196,7 @@ export default function AdminCommissionsPage() {
                         {c.certificate_issued ? (
                           <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">Cert issued</span>
                         ) : (
-                          <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">Pending</span>
+                          <span className="text-xs bg-[var(--bp-cream)] text-[var(--bp-brown)] px-2 py-0.5 rounded-full font-medium">Pending</span>
                         )}
                       </div>
                     </div>
@@ -229,7 +229,7 @@ export default function AdminCommissionsPage() {
                 uncommissioned.map(s => (
                   <div
                     key={s.student_id}
-                    className={`p-4 rounded-xl border transition-all ${creating?.student_id === s.student_id ? 'border-amber-400 bg-amber-50' : 'border-[var(--bp-warm)] bg-white'}`}
+                    className={`p-4 rounded-xl border transition-all ${creating?.student_id === s.student_id ? 'border-[var(--bp-gold)] bg-[var(--bp-cream)]' : 'border-[var(--bp-warm)] bg-white'}`}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
@@ -245,7 +245,7 @@ export default function AdminCommissionsPage() {
                       </button>
                     </div>
                     {creating?.student_id === s.student_id && (
-                      <div className="mt-4 space-y-3 border-t border-amber-200 pt-4">
+                      <div className="mt-4 space-y-3 border-t border-[var(--bp-sand)] pt-4">
                         <div>
                           <label className="bp-label">Calling Declaration (optional)</label>
                           <textarea
@@ -366,7 +366,7 @@ export default function AdminCommissionsPage() {
                     <div className="mt-2 space-y-1">
                       {prophWords.map((w, i) => (
                         <div key={i} className="flex items-start gap-2 text-sm">
-                          <span className="text-amber-500 mt-0.5 flex-shrink-0">✦</span>
+                          <span className="text-[var(--bp-gold)] mt-0.5 flex-shrink-0">✦</span>
                           <p className="flex-1 italic text-[var(--bp-brown)]">"{w}"</p>
                           <button onClick={() => setProphWords(words => words.filter((_, j) => j !== i))} className="text-red-400 hover:text-red-600 text-xs flex-shrink-0">×</button>
                         </div>
@@ -383,7 +383,7 @@ export default function AdminCommissionsPage() {
                     <button
                       onClick={handleIssueCert}
                       disabled={saving}
-                      className="bp-btn-primary text-sm px-4 py-2 disabled:opacity-50 bg-amber-500 hover:bg-amber-600"
+                      className="bp-btn bp-btn-gold text-sm px-4 py-2 disabled:opacity-50"
                     >
                       Issue Certificate
                     </button>

@@ -58,7 +58,7 @@ function SignupForm() {
     <div className="w-full max-w-md">
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-3">
+        <div className="text-overline mb-3">
           The Blueprint Discipleship Institute
         </div>
         <h1 className="text-3xl font-semibold mb-2">Create your account</h1>

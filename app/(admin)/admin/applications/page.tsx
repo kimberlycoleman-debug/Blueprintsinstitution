@@ -44,7 +44,7 @@ const STATUS_FILTERS = [
 ]
 
 const STATUS_STYLE: Record<string, string> = {
-  submitted: 'bg-amber-50 text-amber-700 border-amber-200',
+  submitted: 'bg-[var(--bp-cream)] text-[var(--bp-brown)] border-[var(--bp-sand)]',
   under_review: 'bg-blue-50 text-blue-700 border-blue-200',
   interview_scheduled: 'bg-purple-50 text-purple-700 border-purple-200',
   interview_complete: 'bg-indigo-50 text-indigo-700 border-indigo-200',

@@ -21,7 +21,7 @@ interface Cohort {
 
 const STATUS_COLORS: Record<string, string> = {
   active: 'bg-green-50 text-green-700',
-  upcoming: 'bg-amber-50 text-amber-700',
+  upcoming: 'bg-[var(--bp-cream)] text-[var(--bp-brown)]',
   completed: 'bg-[var(--bp-warm)] text-[var(--bp-brown)]',
   paused: 'bg-gray-100 text-gray-600',
 }

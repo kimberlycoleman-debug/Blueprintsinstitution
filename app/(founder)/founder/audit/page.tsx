@@ -16,7 +16,7 @@ interface AuditEvent {
 const ACTION_LABELS: Record<string, { label: string; color: string }> = {
   founder_dashboard_view: { label: 'Dashboard viewed', color: 'bg-gray-100 text-gray-600' },
   founder_analytics_view: { label: 'Analytics viewed', color: 'bg-blue-100 text-blue-600' },
-  vault_view: { label: 'Vault accessed', color: 'bg-amber-100 text-amber-700' },
+  vault_view: { label: 'Vault accessed', color: 'bg-[var(--bp-cream)] text-[var(--bp-brown)]' },
   vault_create: { label: 'Vault item created', color: 'bg-green-100 text-green-700' },
   vault_update: { label: 'Vault item updated', color: 'bg-yellow-100 text-yellow-700' },
   vault_delete: { label: 'Vault item archived', color: 'bg-orange-100 text-orange-700' },
@@ -60,7 +60,7 @@ export default function AuditLogPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div>
-        <p className="text-xs tracking-widest text-amber-600 uppercase font-semibold mb-1">Sovereign Audit</p>
+        <p className="text-overline mb-1">Sovereign Audit</p>
         <h1 className="text-2xl font-semibold">Immutable Audit Log</h1>
         <p className="text-sm text-[var(--bp-muted)] mt-1">
           Every privileged action is recorded and cannot be edited or deleted. {total} total events.

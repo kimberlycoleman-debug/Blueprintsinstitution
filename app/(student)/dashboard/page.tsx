@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createServerSupabaseClient, getCurrentProfile } from '@/lib/supabase/server'
 
 const QUARTER_COLORS: Record<string, { bg: string; border: string; text: string }> = {
-  Q1: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-800' },
+  Q1: { bg: 'bg-[var(--bp-cream)]', border: 'border-[var(--bp-sand)]', text: 'text-[var(--bp-brown-deep)]' },
   Q2: { bg: 'bg-sage-50', border: 'border-green-200', text: 'text-green-800' },
   Q3: { bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800' },
   Q4: { bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-800' },
@@ -89,7 +89,7 @@ export default async function DashboardPage() {
 
       {/* Greeting */}
       <div>
-        <div className="text-xs tracking-widest text-[var(--bp-brown)] uppercase font-semibold mb-1">
+        <div className="text-overline mb-1">
           Formation Dashboard
         </div>
         <h1 className="text-3xl font-semibold">Welcome back, {firstName}.</h1>
@@ -138,7 +138,7 @@ export default async function DashboardPage() {
 
         {/* Next Session */}
         <div className="bp-card p-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bp-brown)] mb-4">
+          <p className="text-overline mb-4">
             This Week
           </p>
           {nextSession ? (
@@ -175,7 +175,7 @@ export default async function DashboardPage() {
 
         {/* Cohort Card */}
         <div className="bp-card p-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bp-brown)] mb-4">
+          <p className="text-overline mb-4">
             My Cohort
           </p>
           {cohortMembership?.cohorts ? (
@@ -208,7 +208,7 @@ export default async function DashboardPage() {
 
       {/* Capstone progress */}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bp-brown)] mb-4">
+        <p className="text-overline mb-4">
           Capstone Deliverables
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -255,7 +255,7 @@ export default async function DashboardPage() {
 
       {/* Quarter overview */}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bp-brown)] mb-4">
+        <p className="text-overline mb-4">
           Curriculum Overview
         </p>
         <div className="grid md:grid-cols-2 gap-4">

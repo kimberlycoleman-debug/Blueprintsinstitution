@@ -66,12 +66,12 @@ const CHECKPOINT_LABELS: Record<string, string> = {
 
 const DEPTH_COLORS: Record<string, string> = {
   surface: 'bg-gray-200 text-gray-600',
-  developing: 'bg-amber-100 text-amber-700',
+  developing: 'bg-[var(--bp-cream)] text-[var(--bp-brown)]',
   substantive: 'bg-blue-100 text-blue-700',
-  profound: 'bg-[#1a120b] text-amber-300',
+  profound: 'bg-[var(--bp-dark)] text-[var(--bp-gold-light)]',
 }
 
-function ScoreBar({ score, label, color = 'bg-amber-400' }: { score: number | null; label: string; color?: string }) {
+function ScoreBar({ score, label, color = 'bg-[var(--bp-gold)]' }: { score: number | null; label: string; color?: string }) {
   const pct = score ?? 0
   return (
     <div>
@@ -199,13 +199,13 @@ export default function StudentAnalyticsPage() {
                     <div className="flex items-center gap-2">
                       <span className="text-xs text-[var(--bp-muted)]">{CHECKPOINT_LABELS[latest.checkpoint] ?? latest.checkpoint}</span>
                       {latest.confidence_flag && (
-                        <span className="text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full">
+                        <span className="text-xs bg-[var(--bp-cream)] text-[var(--bp-brown)] px-2 py-0.5 rounded-full">
                           {latest.confidence_flag} confidence
                         </span>
                       )}
                     </div>
                   </div>
-                  <ScoreBar score={latest.identity_score} label="Identity — I know who God created me to be" color="bg-amber-400" />
+                  <ScoreBar score={latest.identity_score} label="Identity — I know who God created me to be" color="bg-[var(--bp-gold)]" />
                   <ScoreBar score={latest.healing_score} label="Healing — I am free from what wounded me" color="bg-green-400" />
                   <ScoreBar score={latest.calling_score} label="Calling — I know what I am called to do" color="bg-blue-400" />
                   <ScoreBar score={latest.maturity_score} label="Maturity — I have sustainable spiritual disciplines" color="bg-purple-400" />
@@ -242,7 +242,7 @@ export default function StudentAnalyticsPage() {
                           <td className="py-2.5 pr-4 font-medium text-[var(--bp-brown)]">
                             {CHECKPOINT_LABELS[record.checkpoint] ?? record.checkpoint}
                             {i === ti.records.length - 1 && (
-                              <span className="ml-2 text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">current</span>
+                              <span className="ml-2 text-xs bg-[var(--bp-cream)] text-[var(--bp-brown)] px-1.5 py-0.5 rounded-full">current</span>
                             )}
                           </td>
                           <td className="text-center py-2.5 px-2">{record.identity_score ?? '—'}</td>
@@ -274,7 +274,7 @@ export default function StudentAnalyticsPage() {
                     <a
                       key={label}
                       href={href}
-                      className={`p-4 rounded-xl border text-center transition-all hover:border-amber-300 ${done ? 'border-green-200 bg-green-50' : 'border-[var(--bp-warm)] bg-white'}`}
+                      className={`p-4 rounded-xl border text-center transition-all hover:border-[var(--bp-sand)] ${done ? 'border-green-200 bg-green-50' : 'border-[var(--bp-warm)] bg-white'}`}
                     >
                       <div className="text-2xl mb-2">{done ? '✓' : '○'}</div>
                       <p className="text-xs font-medium text-[var(--bp-brown)]">{label}</p>
@@ -319,7 +319,7 @@ export default function StudentAnalyticsPage() {
               </div>
 
               {/* Identity language explanation */}
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-900">
+              <div className="bg-[var(--bp-cream)] border border-[var(--bp-sand)] rounded-xl p-4 text-sm text-[var(--bp-brown-deep)]">
                 <p className="font-medium mb-1">What is Identity Language?</p>
                 <p>A higher identity language score means your reflections use language rooted in <em>who you are</em> ("I am," "God made me," "I carry") rather than what you do ("I achieved," "I failed"). This shift is a marker of genuine formation.</p>
               </div>
@@ -335,7 +335,7 @@ export default function StudentAnalyticsPage() {
                       </span>
                       <div className="flex-1 h-4 bg-gray-100 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-amber-400 rounded-full transition-all"
+                          className="h-full bg-[var(--bp-gold)] rounded-full transition-all"
                           style={{ width: `${r.depth_score ?? 0}%` }}
                         />
                       </div>
@@ -392,7 +392,7 @@ export default function StudentAnalyticsPage() {
                         </span>
                         <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-amber-300 rounded-full"
+                            className="h-full bg-[var(--bp-gold-light)] rounded-full"
                             style={{ width: `${(count / maxCount) * 100}%` }}
                           />
                         </div>
@@ -410,7 +410,7 @@ export default function StudentAnalyticsPage() {
           )}
 
           {/* Scripture anchor */}
-          <blockquote className="border-l-2 border-amber-400 pl-4 py-1">
+          <blockquote className="border-l-2 border-[var(--bp-gold)] pl-4 py-1">
             <p className="text-sm italic text-[var(--bp-brown)]">
               "For we are God&apos;s handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do."
             </p>

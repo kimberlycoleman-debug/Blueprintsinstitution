@@ -39,7 +39,7 @@ const STEPS = [
 ]
 
 const QUARTER_COLORS: Record<string, string> = {
-  Q1: 'bg-amber-50 border-amber-200 text-amber-900',
+  Q1: 'bg-[var(--bp-cream)] border-[var(--bp-sand)] text-[var(--bp-brown-deep)]',
   Q2: 'bg-green-50 border-green-200 text-green-900',
   Q3: 'bg-blue-50 border-blue-200 text-blue-900',
   Q4: 'bg-purple-50 border-purple-200 text-purple-900',
@@ -75,15 +75,15 @@ export default function OnboardingPage() {
         <div className="flex gap-2 mb-8 justify-center">
           {STEPS.map((s, i) => (
             <div key={i} className="flex items-center gap-2">
-              <div className={`w-2 h-2 rounded-full transition-all duration-300 ${i <= step ? 'bg-[#5C4A2A] w-6' : 'bg-amber-200'}`} />
+              <div className={`w-2 h-2 rounded-full transition-all duration-300 ${i <= step ? 'bg-[var(--bp-brown-deep)] w-6' : 'bg-[var(--bp-sand)]'}`} />
             </div>
           ))}
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-sm border border-amber-100 overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-sm border border-[var(--bp-warm)] overflow-hidden">
           {/* Top accent */}
-          <div className="h-1 bg-gradient-to-r from-[#5C4A2A] via-amber-400 to-[#5C4A2A]" />
+          <div className="h-1 bg-gradient-to-r from-[#5C4A2A] via-[var(--bp-gold)] to-[#5C4A2A]" />
 
           <div className="p-8 md:p-10">
             {/* Step label */}
@@ -104,7 +104,7 @@ export default function OnboardingPage() {
 
             {/* Scripture */}
             {'scripture' in current && current.scripture && (
-              <blockquote className="border-l-2 border-amber-400 pl-4 mb-6">
+              <blockquote className="border-l-2 border-[var(--bp-gold)] pl-4 mb-6">
                 <p className="text-sm italic text-[#5C4A2A]" style={{ fontFamily: 'Georgia, serif' }}>
                   {current.scripture.text}
                 </p>
@@ -130,7 +130,7 @@ export default function OnboardingPage() {
               <div className="space-y-3 mb-6">
                 {current.tools.map(t => (
                   <div key={t.name} className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--bp-cream)]0 mt-2 flex-shrink-0" />
                     <div>
                       <div className="font-semibold text-[#3D2E1A] text-sm">{t.name}</div>
                       <div className="text-xs text-[#7A6245] leading-relaxed">{t.desc}</div>
@@ -145,7 +145,7 @@ export default function OnboardingPage() {
               {step > 0 && (
                 <button
                   onClick={() => setStep(s => s - 1)}
-                  className="flex-1 py-3 rounded-lg border border-amber-200 text-[#5C4A2A] text-sm font-medium hover:bg-amber-50 transition-colors"
+                  className="flex-1 py-3 rounded-lg border border-[var(--bp-sand)] text-[#5C4A2A] text-sm font-medium hover:bg-[var(--bp-cream)] transition-colors"
                 >
                   Back
                 </button>
@@ -153,7 +153,7 @@ export default function OnboardingPage() {
               <button
                 onClick={handleNext}
                 disabled={loading}
-                className="flex-1 py-3 rounded-lg bg-[#5C4A2A] text-white text-sm font-semibold hover:bg-[#4A3820] transition-colors disabled:opacity-60"
+                className="flex-1 py-3 rounded-lg bg-[var(--bp-brown-deep)] text-white text-sm font-semibold hover:bg-[#4A3820] transition-colors disabled:opacity-60"
               >
                 {loading ? 'Starting your journey…' : isLast ? 'Begin My Formation' : 'Continue'}
               </button>
