@@ -1,15 +1,19 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createBrowserSupabaseClient } from '@/lib/supabase/browser'
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  // If arriving from an invite link, send to onboarding; otherwise back to login
+  const isInvite = searchParams.get('invite') === '1'
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [done, setDone] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -26,28 +30,52 @@ export default function ResetPasswordPage() {
 
     setLoading(true)
     const supabase = createBrowserSupabaseClient()
-    const { error } = await supabase.auth.updateUser({ password })
+    const { error: updateError } = await supabase.auth.updateUser({ password })
     setLoading(false)
 
-    if (error) {
-      setError(error.message)
+    if (updateError) {
+      setError(updateError.message)
     } else {
-      router.push('/dashboard')
+      setDone(true)
+      setTimeout(() => router.push('/onboarding'), 1500)
     }
+  }
+
+  if (done) {
+    return (
+      <div className="w-full max-w-md text-center">
+        <div className="bp-card-elevated p-10">
+          <div className="text-4xl mb-4">✓</div>
+          <h2 className="font-display font-light text-2xl mb-2" style={{ color: 'var(--bp-cream)' }}>
+            Password set. Welcome.
+          </h2>
+          <p style={{ color: 'rgba(245,240,232,0.55)' }}>Taking you to your dashboard…</p>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="w-full max-w-md">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-semibold mb-2">Create new password</h1>
-        <p className="text-[var(--bp-muted)]">Choose a strong password for your account.</p>
+        <div className="text-overline mb-3" style={{ color: 'var(--bp-gold)' }}>
+          {isInvite ? 'Account Activation' : 'Password Reset'}
+        </div>
+        <h1 className="font-display font-light text-4xl mb-2" style={{ color: 'var(--bp-cream)' }}>
+          {isInvite ? 'Set your password.' : 'Create new password.'}
+        </h1>
+        <p style={{ color: 'rgba(245,240,232,0.55)' }}>
+          {isInvite
+            ? 'Choose a strong password to activate your account.'
+            : 'Choose a new strong password for your account.'}
+        </p>
       </div>
 
-      <div className="bp-card p-8">
+      <div className="bp-card-elevated p-8">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label htmlFor="password" className="block text-sm font-medium mb-1.5">
-              New password
+              Password
             </label>
             <input
               id="password"
@@ -64,7 +92,7 @@ export default function ResetPasswordPage() {
 
           <div>
             <label htmlFor="confirm" className="block text-sm font-medium mb-1.5">
-              Confirm new password
+              Confirm password
             </label>
             <input
               id="confirm"
@@ -87,10 +115,18 @@ export default function ResetPasswordPage() {
             disabled={loading}
             className="bp-btn bp-btn-primary w-full"
           >
-            {loading ? 'Updating…' : 'Update password'}
+            {loading ? 'Setting password…' : isInvite ? 'Activate my account' : 'Update password'}
           </button>
         </form>
       </div>
     </div>
+  )
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={null}>
+      <ResetPasswordForm />
+    </Suspense>
   )
 }

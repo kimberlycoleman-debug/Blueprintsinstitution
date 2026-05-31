@@ -104,7 +104,7 @@ export async function PATCH(request: NextRequest) {
             type: 'invite',
             email: app.email,
             options: {
-              redirectTo: `${process.env.NEXT_PUBLIC_APP_URL ?? 'https://theblueprintsfoundation.org'}/auth/confirm`,
+              redirectTo: `${process.env.NEXT_PUBLIC_APP_URL ?? 'https://theblueprintsfoundation.org'}/auth/callback?next=/auth/reset-password`,
             },
           })
           inviteLink = linkData?.properties?.action_link ?? null
