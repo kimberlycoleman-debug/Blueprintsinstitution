@@ -9,7 +9,7 @@ export async function GET() {
   const admin = createAdminSupabaseClient()
 
   // Trigger a fresh compute (upserts today's snapshot)
-  await admin.rpc('compute_institute_metrics').catch(() => null)
+  try { await admin.rpc('compute_institute_metrics') } catch { /* non-fatal */ }
 
   // Fetch the latest snapshot
   const { data: metrics, error } = await admin
