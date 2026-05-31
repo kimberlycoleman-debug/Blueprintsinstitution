@@ -1,7 +1,22 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
+import { Inter, Cormorant_Garamond } from 'next/font/google'
 import InstallPrompt from '@/components/shared/InstallPrompt'
 import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -50,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <head>
         <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png" />
         <meta name="mobile-web-app-capable" content="yes" />
