@@ -148,9 +148,9 @@ export async function GET() {
     return {
       student_id: s.student_id,
       cohort_id: s.cohort_id,
-      full_name: (s.profiles as { full_name: string | null } | null)?.full_name ?? 'Unknown',
-      email: (s.profiles as { email: string } | null)?.email ?? '',
-      cohort_name: (s.cohorts as { cohort_name: string } | null)?.cohort_name ?? '',
+      full_name: (Array.isArray(s.profiles) ? s.profiles[0]?.full_name : (s.profiles as { full_name?: string | null } | null)?.full_name) ?? 'Unknown',
+      email: (Array.isArray(s.profiles) ? s.profiles[0]?.email : (s.profiles as { email?: string } | null)?.email) ?? '',
+      cohort_name: (Array.isArray(s.cohorts) ? s.cohorts[0]?.cohort_name : (s.cohorts as { cohort_name?: string } | null)?.cohort_name) ?? '',
       latest_checkpoint: latest?.checkpoint ?? null,
       composite_index: latest?.composite_index ?? null,
       baseline_index: baseline,
