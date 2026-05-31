@@ -12,7 +12,7 @@ const STEPS = [
   },
   {
     label: 'Your Journey',
-    title: 'Four quarters. Sixteen modules. One transformation.',
+    title: 'Four quarters. Thirteen modules. One transformation.',
     quarters: [
       { code: 'Q1', name: 'Alpha — Identity', desc: 'Discover who God says you are. Renounce identity lies. Build your Identity Blueprint.' },
       { code: 'Q2', name: 'Formation — Maturity', desc: 'Develop spiritual disciplines, emotional health, and authentic community.' },

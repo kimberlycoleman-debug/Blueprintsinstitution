@@ -43,5 +43,20 @@ export async function getCurrentProfile() {
     .eq('id', user.id)
     .single()
 
-  return profile
+  if (profile) return profile
+
+  // Self-heal: create the profile row if the handle_new_user trigger
+  // did not fire (can happen in certain Supabase cloud edge cases).
+  const { data: newProfile } = await supabase
+    .from('profiles')
+    .insert({
+      id: user.id,
+      email: user.email ?? '',
+      full_name: (user.user_metadata?.full_name as string | undefined) ?? '',
+      role: 'student',
+    })
+    .select('*')
+    .single()
+
+  return newProfile ?? null
 }

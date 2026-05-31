@@ -29,7 +29,11 @@ function LoginForm() {
     setLoading(false)
 
     if (error) {
-      setError('Invalid email or password. Please try again.')
+      if (error.message.toLowerCase().includes('email not confirmed')) {
+        setError('Please confirm your email before signing in. Check your inbox for the confirmation link.')
+      } else {
+        setError('Invalid email or password. Please try again.')
+      }
     } else {
       router.push(redirect)
       router.refresh()
