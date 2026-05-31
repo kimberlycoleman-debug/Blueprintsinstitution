@@ -56,19 +56,19 @@ export default async function FounderCommandCenter() {
       {/* Founder identity header */}
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs tracking-widest text-amber-600 uppercase font-semibold mb-1">
+          <div className="text-overline mb-3" style={{ color: 'var(--bp-gold)' }}>
             Founding Architect · Sovereign Access
-          </p>
-          <h1 className="text-3xl font-semibold">
+          </div>
+          <h1 className="font-display font-light text-[var(--bp-dark)]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.1 }}>
             Welcome, {profile?.full_name?.split(' ')[0] ?? 'Kimberly'}.
           </h1>
-          <p className="text-[var(--bp-muted)] mt-1 italic text-sm">
-            "{profile?.founding_scripture ?? 'Ephesians 2:10'}" · "{profile?.founding_mandate ?? 'Matthew 28:19-20'}"
+          <p className="text-[var(--bp-muted)] mt-2 italic text-sm font-display">
+            &ldquo;{profile?.founding_scripture ?? 'Ephesians 2:10'}&rdquo; &middot; &ldquo;{profile?.founding_mandate ?? 'Matthew 28:19-20'}&rdquo;
           </p>
         </div>
         <div className="text-right hidden md:block">
-          <p className="text-xs text-[var(--bp-muted)]">Last accessed</p>
-          <p className="text-sm font-medium">
+          <p className="text-[0.6875rem] text-[var(--bp-muted)] tracking-widest uppercase font-bold">Last accessed</p>
+          <p className="text-sm font-medium mt-1">
             {profile?.last_accessed_at
               ? new Date(profile.last_accessed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
               : 'First access'}
@@ -79,18 +79,19 @@ export default async function FounderCommandCenter() {
 
       {/* Institute vitals */}
       <div>
-        <h2 className="text-xs tracking-widest text-[var(--bp-muted)] uppercase font-semibold mb-4">
-          Institute Vitals — Live Snapshot
-        </h2>
+        <div className="text-overline mb-5">Institute Vitals — Live Snapshot</div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {vitals.map(({ label, value, href }) => (
             <Link
               key={label}
               href={href}
-              className="bg-[var(--bp-cream)] border border-[var(--bp-warm)] rounded-xl p-5 hover:border-amber-400 transition-colors"
+              className="bp-card bp-card-warm group transition-all hover:-translate-y-0.5"
+              style={{ '--hover-border': 'var(--bp-gold)' } as React.CSSProperties}
+              onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--bp-gold)')}
+              onMouseLeave={e => (e.currentTarget.style.borderColor = '')}
             >
-              <p className="text-xs text-[var(--bp-muted)] mb-1">{label}</p>
-              <p className="text-3xl font-semibold text-[var(--bp-brown-deep)]">{value}</p>
+              <p className="text-xs text-[var(--bp-muted)] mb-2 leading-snug">{label}</p>
+              <p className="font-display font-light text-[var(--bp-dark)]" style={{ fontSize: '2.25rem', lineHeight: 1 }}>{value}</p>
             </Link>
           ))}
         </div>
@@ -98,10 +99,10 @@ export default async function FounderCommandCenter() {
 
       {/* Transformation Index highlight */}
       {metrics && (
-        <div className="bg-[#1a120b] rounded-2xl p-6 text-white">
-          <p className="text-xs tracking-widest text-amber-400 uppercase font-semibold mb-3">
+        <div className="bp-dark-section rounded-2xl p-8">
+          <div className="text-overline mb-5" style={{ color: 'var(--bp-gold)' }}>
             Transformation Index™ — The Founding Distinctive
-          </p>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { label: 'Avg index (all-time)', value: metrics.avg_transformation_index_alltime ?? '—' },
@@ -110,12 +111,12 @@ export default async function FounderCommandCenter() {
               { label: 'Attendance avg', value: metrics.avg_attendance_rate_allcohorts != null ? `${metrics.avg_attendance_rate_allcohorts}%` : '—' },
             ].map(({ label, value }) => (
               <div key={label}>
-                <p className="text-xs text-amber-200 mb-1">{label}</p>
-                <p className="text-2xl font-semibold text-amber-400">{String(value)}</p>
+                <p className="text-xs mb-2" style={{ color: 'rgba(240,217,181,0.65)' }}>{label}</p>
+                <p className="font-display font-light" style={{ fontSize: '2rem', lineHeight: 1, color: 'var(--bp-gold)' }}>{String(value)}</p>
               </div>
             ))}
           </div>
-          <Link href="/founder/analytics" className="inline-block mt-4 text-xs text-amber-300 hover:text-amber-100">
+          <Link href="/founder/analytics" className="inline-block mt-6 text-xs font-semibold tracking-wide transition-colors" style={{ color: 'rgba(240,217,181,0.65)' }}>
             Full analytics →
           </Link>
         </div>
@@ -125,7 +126,7 @@ export default async function FounderCommandCenter() {
       <div className="grid md:grid-cols-2 gap-6">
         {/* Quick actions */}
         <div className="bp-card p-6">
-          <h2 className="font-semibold mb-4">Sovereign Actions</h2>
+          <div className="text-overline mb-5">Sovereign Actions</div>
           <div className="space-y-2">
             {[
               { href: '/founder/vault', label: 'Open Vault', desc: 'Legal, financial, strategic documents' },
@@ -151,7 +152,7 @@ export default async function FounderCommandCenter() {
         {/* Recent audit */}
         <div className="bp-card p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold">Recent Activity</h2>
+            <div className="text-overline">Recent Activity</div>
             <Link href="/founder/audit" className="text-xs text-[var(--bp-brown)] hover:underline">View all →</Link>
           </div>
           {auditEvents.length === 0 ? (

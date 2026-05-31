@@ -26,14 +26,14 @@ export default function FounderNav() {
   }
 
   return (
-    <header className="border-b border-amber-200 bg-[#1a120b] sticky top-0 z-30">
+    <header className="border-b border-[var(--bp-gold)]/20 sticky top-0 z-30" style={{ background: 'var(--bp-dark)' }}>
       <div className="bp-container flex items-center justify-between h-14">
         {/* Brand */}
         <div className="flex items-center gap-3">
-          <Link href="/founder" className="text-sm font-semibold tracking-tight text-amber-100">
-            B.L.U.E.P.R.I.N.T.S.
+          <Link href="/founder" className="font-display font-light text-base tracking-wide" style={{ color: 'var(--bp-gold-light)' }}>
+            The B.L.U.E.P.R.I.N.T.S. Foundation
           </Link>
-          <span className="text-xs bg-amber-500 text-[#1a120b] px-2 py-0.5 rounded-full font-bold tracking-wide uppercase">
+          <span className="text-[0.6rem] font-sans font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded-full" style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}>
             Sovereign
           </span>
         </div>
@@ -46,9 +46,13 @@ export default function FounderNav() {
               href={href}
               className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                 isActive(href, exact)
-                  ? 'bg-amber-500 text-[#1a120b] font-semibold'
-                  : 'text-amber-200 hover:text-amber-100 hover:bg-white/10'
+                  ? 'font-semibold'
+                  : 'hover:bg-white/10'
               }`}
+              style={isActive(href, exact)
+                ? { background: 'var(--bp-gold)', color: 'var(--bp-dark)' }
+                : { color: 'rgba(240,217,181,0.75)' }
+              }
             >
               {label}
             </Link>
@@ -57,12 +61,15 @@ export default function FounderNav() {
 
         {/* Founder identity + sign out */}
         <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded-full bg-amber-500 text-[#1a120b] text-xs font-bold flex items-center justify-center">
+          <div className="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center" style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}>
             KC
           </div>
           <button
             onClick={handleSignOut}
-            className="text-xs text-amber-300 hover:text-amber-100 transition-colors"
+            className="text-xs transition-colors"
+            style={{ color: 'rgba(240,217,181,0.6)' }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--bp-gold-light)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(240,217,181,0.6)')}
           >
             Sign out
           </button>
@@ -70,16 +77,18 @@ export default function FounderNav() {
       </div>
 
       {/* Mobile nav */}
-      <div className="md:hidden border-t border-white/10 flex overflow-x-auto bg-[#1a120b]">
+      <div className="md:hidden border-t border-white/10 flex overflow-x-auto" style={{ background: 'var(--bp-dark)' }}>
         {NAV_LINKS.map(({ href, label, exact }) => (
           <Link
             key={href}
             href={href}
             className={`flex-shrink-0 px-4 py-2 text-sm whitespace-nowrap ${
-              isActive(href, exact)
-                ? 'text-amber-400 font-semibold border-b-2 border-amber-400'
-                : 'text-amber-300'
+              isActive(href, exact) ? 'font-semibold border-b-2' : ''
             }`}
+            style={isActive(href, exact)
+              ? { color: 'var(--bp-gold)', borderColor: 'var(--bp-gold)' }
+              : { color: 'rgba(240,217,181,0.65)' }
+            }
           >
             {label}
           </Link>

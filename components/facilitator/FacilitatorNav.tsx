@@ -38,13 +38,13 @@ export default function FacilitatorNav({ profile }: { profile: Profile }) {
   }
 
   return (
-    <header className="border-b border-[var(--bp-warm)] bg-white sticky top-0 z-40">
-      <div className="bp-container flex items-center justify-between h-16">
+    <header className="border-b border-[var(--bp-warm)] bg-[var(--bp-white)] sticky top-0 z-40">
+      <div className="bp-container flex items-center justify-between h-14">
         <div className="flex items-center gap-3">
-          <Link href="/facilitator" className="font-semibold text-[var(--bp-brown-deep)] text-sm tracking-tight">
-            Blueprint Institute
+          <Link href="/facilitator" className="font-display font-light text-base tracking-wide text-[var(--bp-dark)]">
+            The B.L.U.E.P.R.I.N.T.S. Foundation
           </Link>
-          <span className="text-xs bg-[var(--bp-warm)] text-[var(--bp-brown)] px-2 py-0.5 rounded-full font-medium">
+          <span className="text-[0.6rem] font-sans font-bold tracking-[0.18em] uppercase bg-[var(--bp-cream)] text-[var(--bp-brown)] px-2 py-0.5 rounded-full border border-[var(--bp-sand)]">
             Facilitator
           </span>
         </div>
@@ -54,10 +54,10 @@ export default function FacilitatorNav({ profile }: { profile: Profile }) {
             <Link
               key={href}
               href={href}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                 isActive(href, exact)
-                  ? 'bg-[var(--bp-warm)] text-[var(--bp-brown-deep)]'
-                  : 'text-[var(--bp-muted)] hover:text-[var(--bp-text)] hover:bg-[var(--bp-white)]'
+                  ? 'bg-[var(--bp-cream)] text-[var(--bp-brown-deep)] font-medium border-b-2 border-[var(--bp-gold)]'
+                  : 'text-[var(--bp-muted)] hover:text-[var(--bp-text)] hover:bg-[var(--bp-cream)]'
               }`}
             >
               {label}
@@ -66,7 +66,7 @@ export default function FacilitatorNav({ profile }: { profile: Profile }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-[var(--bp-warm)] flex items-center justify-center text-xs font-semibold text-[var(--bp-brown-deep)]">
+          <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold" style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}>
             {initials}
           </div>
           <button
@@ -78,15 +78,15 @@ export default function FacilitatorNav({ profile }: { profile: Profile }) {
         </div>
       </div>
 
-      <div className="md:hidden flex gap-1 px-4 pb-3 overflow-x-auto">
+      <div className="md:hidden flex gap-1 px-4 pb-3 overflow-x-auto border-t border-[var(--bp-warm)]">
         {NAV_LINKS.map(({ href, label, exact }) => (
           <Link
             key={href}
             href={href}
             className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
               isActive(href, exact)
-                ? 'bg-[var(--bp-warm)] text-[var(--bp-brown-deep)]'
-                : 'text-[var(--bp-muted)] hover:bg-[var(--bp-white)]'
+                ? 'bg-[var(--bp-cream)] text-[var(--bp-brown-deep)] font-semibold'
+                : 'text-[var(--bp-muted)] hover:bg-[var(--bp-cream)]'
             }`}
           >
             {label}
