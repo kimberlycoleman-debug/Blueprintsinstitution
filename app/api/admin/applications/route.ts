@@ -76,7 +76,7 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: 'Failed to update application' }, { status: 500 })
   }
 
-  // Send enrollment email when application is approved
+  // Send enrollment email + Supabase invite when application is approved
   if (parsed.data.status === 'approved') {
     try {
       const adminSupabase2 = createAdminSupabaseClient()
@@ -96,7 +96,23 @@ export async function PATCH(request: NextRequest) {
             .single()
           if (cohort) cohortName = cohort.cohort_name
         }
-        await sendEnrollmentConfirmation(app.email, app.full_name ?? 'Student', cohortName)
+
+        // Generate a Supabase magic-link so the student can create their account
+        let inviteLink: string | null = null
+        try {
+          const { data: linkData } = await adminSupabase2.auth.admin.generateLink({
+            type: 'invite',
+            email: app.email,
+            options: {
+              redirectTo: `${process.env.NEXT_PUBLIC_APP_URL ?? 'https://theblueprintsfoundation.org'}/auth/confirm`,
+            },
+          })
+          inviteLink = linkData?.properties?.action_link ?? null
+        } catch (linkErr) {
+          console.error('[admin/applications] invite link error:', linkErr)
+        }
+
+        await sendEnrollmentConfirmation(app.email, app.full_name ?? 'Student', cohortName, inviteLink)
       }
     } catch (emailErr) {
       console.error('[admin/applications] enrollment email error:', emailErr)

@@ -74,7 +74,16 @@ export function applicationReceivedHtml(name: string): string {
 
 // ─── Template 2: Enrollment Confirmed ────────────────────────────────────────
 
-export function enrollmentConfirmedHtml(name: string, cohortName: string): string {
+export function enrollmentConfirmedHtml(name: string, cohortName: string, inviteLink?: string | null): string {
+  const ctaHref = inviteLink ?? 'https://theblueprintsfoundation.org/auth/login'
+  const ctaLabel = inviteLink ? 'Create Your Account &amp; Access Dashboard' : 'Access Your Dashboard'
+  const inviteNotice = inviteLink
+    ? `<p style="line-height:1.7;color:#3D2E1A;background:#FFF8EE;border:1px solid #D4A953;border-radius:4px;padding:14px 20px;">
+        <strong>Action required:</strong> Click the button below to create your account and access your student dashboard.
+        This link is valid for 24 hours.
+      </p>`
+    : `<p style="line-height:1.7;color:#3D2E1A;">Your account has been activated. Log in to begin your 12-month formation journey.</p>`
+
   return wrap(`
     <h2 style="color:#5C4A2A;margin-top:0;">You have been enrolled, ${name}.</h2>
     <p style="line-height:1.7;color:#3D2E1A;">
@@ -84,14 +93,11 @@ export function enrollmentConfirmedHtml(name: string, cohortName: string): strin
       <div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#D4A953;margin-bottom:4px;">Your Cohort</div>
       <div style="font-size:22px;font-weight:600;">${cohortName}</div>
     </div>
-    <p style="line-height:1.7;color:#3D2E1A;">
-      Your account has been activated. Log in to begin your 12-month formation journey —
-      discover identity, develop maturity, experience healing, and activate your calling.
-    </p>
+    ${inviteNotice}
     <div style="text-align:center;margin:32px 0;">
-      <a href="https://theblueprintsfoundation.org/login"
+      <a href="${ctaHref}"
          style="background:#5C4A2A;color:#FDFAF5;padding:14px 36px;text-decoration:none;border-radius:4px;font-weight:600;display:inline-block;">
-        Access Your Dashboard
+        ${ctaLabel}
       </a>
     </div>
     <p style="line-height:1.7;color:#3D2E1A;">Welcome to the family,<br><strong>The B.L.U.E.P.R.I.N.T.S. Foundation</strong></p>

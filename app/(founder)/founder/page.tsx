@@ -85,10 +85,10 @@ export default async function FounderCommandCenter() {
             <Link
               key={label}
               href={href}
-              className="bp-card bp-card-warm bp-card-interactive"
+              className="bp-card bp-card-warm bp-card-interactive block"
             >
-              <p className="text-xs text-[var(--bp-muted)] mb-3 leading-snug">{label}</p>
-              <p className="font-display font-light" style={{ fontSize: '2.5rem', lineHeight: 1, color: 'var(--bp-brown-deep)' }}>{value}</p>
+              <span className="block text-xs text-[var(--bp-muted)] mb-3 leading-snug">{label}</span>
+              <span className="block font-display font-light" style={{ fontSize: '2.5rem', lineHeight: 1, color: 'var(--bp-brown-deep)' }}>{value}</span>
             </Link>
           ))}
         </div>

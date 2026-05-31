@@ -62,22 +62,18 @@ export async function POST(request: NextRequest) {
     }
 
     const { error } = await supabase.from('applications').insert({
+      application_number: `APP-${new Date().getFullYear()}-${Date.now().toString(36).slice(-6).toUpperCase()}`,
       full_name: data.full_name,
       email: data.email,
       phone: data.phone ?? null,
       city: data.city ?? null,
       state: data.state ?? null,
-      age_range: data.age_range ?? null,
-      gender: data.gender ?? null,
-      church: data.church ?? null,
-      salvation_year: data.salvation_year ?? null,
-      discipleship_experience: data.discipleship_experience ?? null,
-      spiritual_gifts: data.spiritual_gifts ?? null,
-      why_applying: data.why_applying,
-      what_hoping: data.what_hoping ?? null,
-      current_challenges: data.current_challenges ?? null,
-      commitment_acknowledgment: data.commitment_acknowledgment,
-      status: 'pending',
+      current_church: data.church ?? null,
+      prior_discipleship_experience: data.discipleship_experience ?? null,
+      testimony: data.why_applying,
+      why_now: data.what_hoping ?? 'Not specified',
+      expectations: data.current_challenges ?? null,
+      status: 'submitted',
     })
 
     if (error) {

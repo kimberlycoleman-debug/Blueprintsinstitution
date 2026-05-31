@@ -21,14 +21,15 @@ export async function sendApplicationConfirmation(
 export async function sendEnrollmentConfirmation(
   to: string,
   name: string,
-  cohortName: string
+  cohortName: string,
+  inviteLink?: string | null
 ): Promise<void> {
   const resend = getResendClient()
   await resend.emails.send({
     from: FROM_ADDRESS,
     to,
     subject: `You're enrolled in ${cohortName} — B.L.U.E.P.R.I.N.T.S. Institute`,
-    html: enrollmentConfirmedHtml(name, cohortName),
+    html: enrollmentConfirmedHtml(name, cohortName, inviteLink),
   })
 }
 
