@@ -7,7 +7,7 @@
 >
 > **Update this document at the end of every work session.** It is the project's memory. As long as this file survives, nothing is ever lost.
 >
-> **⚠️ UPDATED — May 31, 2026 (Session 5).** Phase 6 Founder Sovereign Dashboard COMPLETE. See SESSION LOG for full details.
+> **⚠️ UPDATED — May 31, 2026 (Session 6).** Phase 7 Commissioning + Certificates COMPLETE. See SESSION LOG.
 
 ---
 
@@ -220,11 +220,19 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 | `app/api/admin/cohorts/enroll/route.ts` | POST enroll student (capacity check); GET facilitators list |
 | `app/api/admin/users/route.ts` | GET users with search/filter; PATCH role/is_active |
 
+### Commissioning + Certificates (Phase 7 — COMPLETE ✅)
+| Path | Purpose |
+|------|---------|
+| `app/(student)/commissions/page.tsx` | Student commissioning page — eligibility checklist, commissioning date/declaration/blessing/prophetic words |
+| `app/(student)/commissions/certificate/page.tsx` | Printable commissioning certificate — branded A4/Letter layout, `window.print()`, includes calling declaration + Ephesians 2:10 |
+| `app/(admin)/admin/commissions/page.tsx` | Admin commissioning management — tabs (Commissioned / Not Yet Commissioned), commission creation form, eligibility summary, issue certificate button, prophetic words, covenant toggle |
+| `app/api/commissions/route.ts` | GET — student's own commission record + live eligibility check (capstones, attendance, lesson count) + `studentName` |
+| `app/api/admin/commissions/route.ts` | GET all commissions + uncommissioned students; POST create commission (auto-computes eligibility, generates cert number); PATCH update/issue |
+
 ### ⏳ NOT YET BUILT — Code
 | Path | What it will do |
-|------|---------|
+|------|------|
 | Analytics dashboards | Student progress view, facilitator analytics, funder accountability reporting |
-| Commissioning ceremony | Digital commissioning page + certificate generation |
 | PWA manifest | Service worker, offline mode, home-screen install |
 | Launch prep | Email system, onboarding flow, legal/privacy pages |
 
@@ -251,13 +259,14 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - ✅ Phase 4: Complete facilitator dashboard — layout, nav, dashboard page, cohort health page, student detail + assessment entry page, attendance capture page, 6 API routes
 - ✅ Phase 5: Complete admin dashboard — layout, nav, dashboard, applications review, cohort management (create/assign/status), user management (role/active), 4 API routes
 - ✅ Phase 6: Complete founder sovereign dashboard — Command Center, Vault browser, Analytics (compute_institute_metrics()), Audit Log, Funding Records, 4 API routes
+- ✅ Phase 7: Commissioning + Certificates — student commissioning page (eligibility + declarations), printable certificate, admin commissioning management, 2 API routes
 
 ### NEXT (in build priority order)
 - ✅ **Phase 4:** Facilitator dashboard — COMPLETE
 - ✅ **Phase 5:** Admin dashboard — COMPLETE
 - ✅ **Phase 6:** Founder Sovereign Dashboard — COMPLETE (Command Center, Vault, Analytics, Audit Log, Funding + 4 API routes)
-- ⏳ **Phase 7 (NEXT):** Commissioning ceremony — digital commissioning page + certificate generation (`/commissions`, admin trigger)
-- ⏳ **Phase 8:** Analytics dashboards — student progress view, facilitator analytics view, funder accountability reporting
+- ✅ **Phase 7:** Commissioning + Certificates — COMPLETE (student page, printable cert, admin management, 2 API routes)
+- ⏳ **Phase 8 (NEXT):** Analytics dashboards — student progress view, facilitator analytics view, funder accountability reporting
 - ⏳ **Phase 9:** PWA / mobile readiness — service worker, offline mode, home-screen install prompt
 - ⏳ **Phase 10:** Launch prep — email system, onboarding flow, legal/privacy pages
 
@@ -395,6 +404,18 @@ All migrations live in `supabase/migrations/`. All 20 applied to remote Supabase
 - `app/api/founder/funding/route.ts` — GET (status/type filter); POST create (logs `grant_report_generate`); PATCH update
 - Every founder action is audit-logged via `logFounderAction()` — vault access, analytics views, dashboard views
 - **NEXT:** Phase 7 — Commissioning ceremony + certificates
+
+**Session — Phase 7 Complete (May 31, 2026 — Session 6)**
+- Built complete Commissioning system (Phase 7) — student page + printable certificate + admin management + 2 API routes
+- `app/(student)/commissions/page.tsx` — student commissioning page: live eligibility checklist (3 capstones + attendance ≥ 70% + covenant), commissioning date/location, calling declaration, final blessing, prophetic words
+- `app/(student)/commissions/certificate/page.tsx` — printable A4/Letter certificate: student name, cohort, commissioning date, calling declaration, Ephesians 2:10 anchor, certificate number, Kimberly Coleman signature line, `window.print()` button
+- `app/(admin)/admin/commissions/page.tsx` — admin commissioning hub: two-tab layout (Commissioned / Not Yet Commissioned), create commission form (calling declaration, date, location), eligibility summary badges, community covenant toggle, prophetic words list, issue certificate button (irreversible)
+- `app/api/commissions/route.ts` — GET student's own commission + live eligibility computed from 5 tables (identity_blueprints, purpose_statements, ministry_plans, attendance, progress) + `studentName` for certificate
+- `app/api/admin/commissions/route.ts` — GET all commissions + uncommissioned cohort students; POST create (auto-pulls eligibility, generates `BLUE-YYYY-NNNN` cert number); PATCH update/issue
+- `components/admin/AdminNav.tsx` — added Commissioning link (5th nav item)
+- `components/student/StudentNav.tsx` — added Commissioning link (5th nav item)
+- `middleware.ts` — added `/commissions` and `/founder` to protected routes
+- **NEXT:** Phase 8 — Analytics dashboards (student progress, facilitator view, funder reporting)
 
 ---
 

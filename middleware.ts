@@ -38,6 +38,8 @@ export async function middleware(request: NextRequest) {
     '/identity-blueprint',
     '/purpose-statement',
     '/ministry-plan',
+    '/commissions',
+    '/founder',
   ]
 
   const isProtected = protectedRoutes.some(route =>

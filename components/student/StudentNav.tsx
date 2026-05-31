@@ -18,6 +18,7 @@ const NAV_LINKS = [
   { href: '/lessons', label: 'Lessons' },
   { href: '/reflections', label: 'Reflections' },
   { href: '/cohort', label: 'My Cohort' },
+  { href: '/commissions', label: 'Commissioning' },
 ]
 
 export default function StudentNav({ profile }: { profile: Profile }) {
