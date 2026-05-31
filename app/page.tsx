@@ -269,8 +269,8 @@ export default function HomePage() {
           © 2026 The B.L.U.E.P.R.I.N.T.S. Foundation
         </div>
         <div className="text-xs mb-6 max-w-lg mx-auto" style={{ lineHeight: '1.7' }}>
-          Discipleship OS™, B.L.U.E.P.R.I.N.T.™, R.E.S.T.O.R.E.™, K.I.N.D.™ are
-          trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation.
+          B.L.U.E.P.R.I.N.T.S.™, Identity Blueprint Formation™, Identity Blueprint Statement™,
+          Purpose Statement™, and Ministry Launch Plan™ are trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation.
         </div>
         <div className="flex gap-6 justify-center text-xs">
           <Link href="/privacy" className="hover:text-bp-cream transition-colors" style={{ color: 'rgba(245,240,232,0.5)' }}>

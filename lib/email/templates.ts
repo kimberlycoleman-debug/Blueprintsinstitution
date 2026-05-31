@@ -44,7 +44,7 @@ function wrap(inner: string): string {
     <tr><td style="${BODY}">${inner}</td></tr>
     <tr><td style="${FOOTER_STYLE}">
       © ${new Date().getFullYear()} The B.L.U.E.P.R.I.N.T.S. Foundation · theblueprintsfoundation.org<br>
-      <span style="font-size:10px;">Discipleship OS™ and B.L.U.E.P.R.I.N.T.S.™ are trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation.</span>
+      <span style="font-size:10px;">B.L.U.E.P.R.I.N.T.S.™ and Identity Blueprint Formation™ are trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation.</span>
     </td></tr>
   </table>
 </body>

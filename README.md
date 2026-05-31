@@ -71,6 +71,6 @@ See `SETUP.md` for complete installation, environment, and deployment guidance.
 
 ---
 
-© 2026 The Blueprint Foundation. All rights reserved.
+© 2026 The B.L.U.E.P.R.I.N.T.S. Foundation. All rights reserved.
 
-Discipleship OS™, The B.L.U.E.P.R.I.N.T. Identity Framework™, The R.E.S.T.O.R.E. METHOD™, and The K.I.N.D. Identity Blueprint™ are trademarks of The Blueprint Foundation.
+B.L.U.E.P.R.I.N.T.S.™, Identity Blueprint Formation™, Identity Blueprint Statement™, Purpose Statement™, and Ministry Launch Plan™ are trademarks of The B.L.U.E.P.R.I.N.T.S. Foundation.
