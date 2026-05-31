@@ -29,16 +29,17 @@ export default function FounderNav() {
     <header className="border-b border-[var(--bp-gold)]/20 sticky top-0 z-30" style={{ background: 'rgba(26,18,11,0.92)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
       <div className="bp-container flex items-center justify-between h-16">
         {/* Brand */}
-        <div className="flex items-center gap-3">
-          <Link href="/founder" className="font-display font-light text-base tracking-wide" style={{ color: 'var(--bp-gold-light)' }}>
-            The B.L.U.E.P.R.I.N.T.S. Foundation
+        <div className="flex items-center gap-3 min-w-0">
+          <Link href="/founder" className="font-display font-light text-base tracking-wide truncate" style={{ color: 'var(--bp-gold-light)' }}>
+            <span className="hidden sm:inline">The B.L.U.E.P.R.I.N.T.S. Foundation</span>
+            <span className="sm:hidden">B.L.U.E.P.R.I.N.T.S.</span>
           </Link>
-          <span className="text-[0.6rem] font-sans font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded-full" style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}>
+          <span className="text-[0.6rem] font-sans font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}>
             Sovereign
           </span>
         </div>
 
-        {/* Nav */}
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           {NAV_LINKS.map(({ href, label, exact }) => (
             <Link
@@ -60,13 +61,13 @@ export default function FounderNav() {
         </nav>
 
         {/* Founder identity + sign out */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-shrink-0">
           <div className="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center" style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}>
             KC
           </div>
           <button
             onClick={handleSignOut}
-            className="text-xs transition-colors"
+            className="text-xs transition-colors hidden sm:block"
             style={{ color: 'rgba(240,217,181,0.6)' }}
             onMouseEnter={e => (e.currentTarget.style.color = 'var(--bp-gold-light)')}
             onMouseLeave={e => (e.currentTarget.style.color = 'rgba(240,217,181,0.6)')}
@@ -76,18 +77,18 @@ export default function FounderNav() {
         </div>
       </div>
 
-      {/* Mobile nav */}
-      <div className="md:hidden border-t border-white/10 flex overflow-x-auto" style={{ background: 'var(--bp-dark)' }}>
+      {/* Mobile nav row */}
+      <div className="md:hidden overflow-x-auto flex" style={{ borderTop: '1px solid rgba(196,146,58,0.15)' }}>
         {NAV_LINKS.map(({ href, label, exact }) => (
           <Link
             key={href}
             href={href}
-            className={`flex-shrink-0 px-4 py-2 text-sm whitespace-nowrap ${
-              isActive(href, exact) ? 'font-semibold border-b-2' : ''
+            className={`flex-shrink-0 px-4 py-2.5 text-xs font-medium whitespace-nowrap tracking-wide transition-colors ${
+              isActive(href, exact) ? 'border-b-2' : ''
             }`}
             style={isActive(href, exact)
               ? { color: 'var(--bp-gold)', borderColor: 'var(--bp-gold)' }
-              : { color: 'rgba(240,217,181,0.65)' }
+              : { color: 'rgba(240,217,181,0.55)' }
             }
           >
             {label}
