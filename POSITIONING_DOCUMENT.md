@@ -95,16 +95,18 @@ We do.
 
 ### LOCK 4 — THE FOUNDING DISTINCTIVE
 
-> **The B.L.U.E.P.R.I.N.T.S. Discipleship Institute is the first formation institute in the world to measure spiritual transformation.**
+> **The B.L.U.E.P.R.I.N.T.S. Discipleship Institute measures spiritual formation differently than anyone else: not as a one-time snapshot, but as a longitudinal, triangulated picture built into the formation journey itself.**
 >
-> Where others measure attendance, grades, or completed lessons, we track formation itself — depth of identity, healing experienced, calling activated — across 12 months, 80 lessons, 3 capstones, and every reflection between.
+> Most discipleship assessments are a survey a person fills out about themselves at a single moment. We track formation continuously across the full 12-month journey — triangulated across three independent sources: the student’s own reflection, a facilitator’s trained assessment, and the student’s actual written work — from baseline to commissioning.
 
-**This is the unrepeatable difference.** No one else has built infrastructure to measure formation. We have. That changes what is possible for:
+**This is the defensible difference.** Spiritual-formation assessment tools exist (Lifeway’s Discipleship Pathway Assessment, Willow Creek’s REVEAL, Discipleship Dynamics, and others). What none of them do is weave triangulated, longitudinal measurement into a structured 12-month formation program, free to the individual, with no church-membership requirement. That combination is what changes what is possible for:
 
-- **Grant funders** who need outcome evidence
-- **Institutional partners** who need proof of transformation
+- **Grant funders** who need outcome evidence, not point-in-time self-reports
+- **Institutional partners** who need proof of transformation in the people they sent
 - **Individual believers** who deserve to know it worked
-- **The kingdom** which has never had a replicable model for spiritual formation at scale
+- **The kingdom** which has never had a replicable, measurable formation model that is also free and open to every believer
+
+> **Note on language:** Do not claim “first to measure spiritual transformation” — measurement tools predate us and a sophisticated funder will know it. The defensible, true claim is the *kind* of measurement: longitudinal + triangulated + built into the journey + free + no church gate. Lead with that distinction, never with “first to measure.”
 
 **This is Identity Blueprint Formation. Accountable. Evidence-based. Scalable. Free for every believer. Funded by kingdom stewards who can finally see what their giving produced.**
 
@@ -283,7 +285,7 @@ For the first time, spiritual formation generates **structured data**. That data
 ### Audience 3: The Grant Funder (Foundation, Faith-Based Funder)
 **Who they are:** Christian foundations funding spiritual formation, leadership development, or theological education. Faith-based grantmakers seeking measurable kingdom outcomes.
 
-**What they need to hear:** "We are the first formation institute to produce measurable spiritual transformation. Grant funding produces evidence-based outcomes you can report. We are accountable, transparent, scalable, and biblically grounded."
+**What they need to hear:** “We produce longitudinal, triangulated evidence of formation — not point-in-time self-reports, but transformation tracked across a full 12-month journey from three independent sources. Grant funding produces outcome evidence you can report. We are accountable, transparent, scalable, and biblically grounded.”
 
 **Where to reach them:** Grant databases, faith-based funder networks, denominational philanthropic offices, foundation cold outreach with proof of concept.
 
@@ -365,7 +367,7 @@ This document is the canon. The canon is locked.
 
 ✅ **LOCK 3 — Category:** **Identity Blueprint Formation™** — new category. No competitors.
 
-✅ **LOCK 4 — Founding Distinctive:** **First formation institute in the world to measure spiritual transformation.**
+✅ **LOCK 4 — Founding Distinctive:** **Longitudinal, triangulated formation measurement built into the journey itself — free to every believer, no church-membership required.** (Not “first to measure” — the distinctive is the *kind* of measurement, not being first.)
 
 ---
 
