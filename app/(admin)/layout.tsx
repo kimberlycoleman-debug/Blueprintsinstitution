@@ -9,7 +9,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (profile.role !== 'admin') redirect('/dashboard')
 
   return (
-    <div className="min-h-screen bg-[var(--bp-white)]">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--bp-cream) 0%, var(--bp-white) 220px, var(--bp-white) 100%)' }}>
       <AdminNav profile={profile} />
       <main className="bp-container py-8">
         {children}

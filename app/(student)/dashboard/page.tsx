@@ -88,12 +88,21 @@ export default async function DashboardPage() {
     <div className="max-w-4xl mx-auto space-y-8">
 
       {/* Greeting */}
-      <div>
-        <div className="text-overline mb-1">
-          Formation Dashboard
-        </div>
-        <h1 className="text-3xl font-semibold">Welcome back, {firstName}.</h1>
-        <p className="text-[var(--bp-muted)] mt-1">
+      <div
+        className="rounded-2xl px-8 py-8 relative overflow-hidden"
+        style={{ background: 'linear-gradient(140deg, #F5EFE4 0%, #EDE5D5 100%)', border: '1px solid var(--bp-warm)' }}
+      >
+        {/* Decorative glow */}
+        <div
+          className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(196,146,58,0.07) 0%, transparent 70%)' }}
+          aria-hidden="true"
+        />
+        <div className="text-overline mb-2">Formation Dashboard</div>
+        <h1 className="font-display font-light text-4xl text-[var(--bp-dark)] leading-tight">
+          Welcome back, {firstName}.
+        </h1>
+        <p className="text-[var(--bp-brown)] mt-2 font-display italic text-lg">
           You are becoming who you were always meant to be.
         </p>
       </div>

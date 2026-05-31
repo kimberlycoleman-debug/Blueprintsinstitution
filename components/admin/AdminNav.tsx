@@ -38,8 +38,8 @@ export default function AdminNav({ profile }: { profile: Profile }) {
     : profile.email[0].toUpperCase()
 
   return (
-    <header className="border-b border-[var(--bp-warm)] bg-[var(--bp-white)] sticky top-0 z-30">
-      <div className="bp-container flex items-center justify-between h-14">
+    <header className="bp-glass-nav sticky top-0 z-30">
+      <div className="bp-container flex items-center justify-between h-16">
         {/* Brand + role badge */}
         <div className="flex items-center gap-3">
           <Link href="/admin" className="font-display font-light text-base tracking-wide text-[var(--bp-dark)]">

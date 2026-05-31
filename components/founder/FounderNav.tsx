@@ -26,8 +26,8 @@ export default function FounderNav() {
   }
 
   return (
-    <header className="border-b border-[var(--bp-gold)]/20 sticky top-0 z-30" style={{ background: 'var(--bp-dark)' }}>
-      <div className="bp-container flex items-center justify-between h-14">
+    <header className="border-b border-[var(--bp-gold)]/20 sticky top-0 z-30" style={{ background: 'rgba(26,18,11,0.92)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
+      <div className="bp-container flex items-center justify-between h-16">
         {/* Brand */}
         <div className="flex items-center gap-3">
           <Link href="/founder" className="font-display font-light text-base tracking-wide" style={{ color: 'var(--bp-gold-light)' }}>

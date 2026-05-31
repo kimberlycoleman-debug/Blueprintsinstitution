@@ -44,14 +44,11 @@ function LoginForm() {
     <div className="w-full max-w-md">
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="text-overline mb-3">
-          The Blueprint Discipleship Institute
-        </div>
-        <h1 className="text-3xl font-semibold mb-2">Welcome back</h1>
-        <p className="text-[var(--bp-muted)]">Sign in to continue your formation journey.</p>
+        <h1 className="font-display font-light text-4xl mb-2" style={{ color: 'var(--bp-cream)' }}>Welcome back</h1>
+        <p style={{ color: 'rgba(245,240,232,0.55)' }}>Sign in to continue your formation journey.</p>
       </div>
 
-      <div className="bp-card p-8">
+      <div className="bp-card-elevated p-8">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label htmlFor="email" className="block text-sm font-medium mb-1.5">
@@ -115,7 +112,7 @@ function LoginForm() {
       </div>
 
       {/* Scripture */}
-      <p className="text-center mt-8 text-sm serif italic text-[var(--bp-muted)]">
+      <p className="text-center mt-8 text-sm font-display italic" style={{ color: 'rgba(245,240,232,0.35)' }}>
         &ldquo;You are becoming who you were always meant to be.&rdquo;
       </p>
     </div>

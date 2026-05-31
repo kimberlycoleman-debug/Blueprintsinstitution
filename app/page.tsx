@@ -73,29 +73,31 @@ export default function HomePage() {
   return (
     <main className="min-h-screen">
       {/* ── Navigation ───────────────────────────────────────── */}
-      <header className="bp-container py-5 flex justify-between items-center">
-        <div className="font-display text-lg font-light tracking-wide text-bp-dark">
-          The B.L.U.E.P.R.I.N.T.S. Foundation
+      <header className="bp-glass-nav sticky top-0 z-50">
+        <div className="bp-container py-4 flex justify-between items-center">
+          <div className="font-display text-base font-light tracking-wide text-bp-dark">
+            The B.L.U.E.P.R.I.N.T.S. Foundation
+          </div>
+          <nav className="flex items-center gap-2">
+            <Link href="/login" className="bp-btn bp-btn-ghost text-sm">
+              Sign in
+            </Link>
+            <Link href="/application" className="bp-btn bp-btn-gold text-sm">
+              Apply Now
+            </Link>
+          </nav>
         </div>
-        <nav className="flex items-center gap-2">
-          <Link href="/login" className="bp-btn bp-btn-ghost text-sm">
-            Sign in
-          </Link>
-          <Link href="/application" className="bp-btn bp-btn-gold text-sm">
-            Apply Now
-          </Link>
-        </nav>
       </header>
 
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bp-container pt-16 pb-24 text-center">
+      <section className="bp-container pt-20 pb-28 text-center">
         <div className="text-overline mb-8 animate-fade-up">
           The Blueprint Discipleship Institute
         </div>
 
         <h1
           className="font-display font-light text-bp-dark mx-auto max-w-4xl animate-fade-up-delay"
-          style={{ lineHeight: '1.08' }}
+          style={{ lineHeight: '1.06', fontSize: 'clamp(3rem, 6.5vw, 5.5rem)' }}
         >
           You are becoming who you were{' '}
           <em className="text-gold not-italic" style={{ fontStyle: 'italic' }}>
@@ -117,6 +119,25 @@ export default function HomePage() {
           <Link href="#journey" className="bp-btn bp-btn-outline text-base px-10 py-4">
             Explore the Journey
           </Link>
+        </div>
+
+        {/* Stats strip */}
+        <div className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 animate-fade-up-delay-2">
+          {[
+            { value: '12', label: 'Months' },
+            { value: '52', label: 'Lessons' },
+            { value: '4', label: 'Quarters' },
+            { value: '3', label: 'Capstones' },
+            { value: '∞', label: 'Transformation' },
+          ].map(({ value, label }, i) => (
+            <div key={i} className="flex items-center gap-4">
+              {i > 0 && <div className="w-px h-6 bg-[var(--bp-sand)] hidden sm:block" />}
+              <div className="text-center">
+                <div className="font-display font-light text-2xl text-[var(--bp-brown-deep)]">{value}</div>
+                <div className="text-[0.625rem] font-bold tracking-[0.18em] uppercase text-[var(--bp-muted)]">{label}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

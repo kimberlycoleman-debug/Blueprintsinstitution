@@ -5,9 +5,9 @@ export default async function FounderLayout({ children }: { children: React.Reac
   await requireFounder()
 
   return (
-    <div className="min-h-screen bg-[var(--bp-white)]">
+    <div className="min-h-screen" style={{ background: 'var(--bp-dark)' }}>
       <FounderNav />
-      <main className="bp-container py-8">
+      <main className="bp-container py-8" style={{ color: 'var(--bp-cream)' }}>
         {children}
       </main>
     </div>

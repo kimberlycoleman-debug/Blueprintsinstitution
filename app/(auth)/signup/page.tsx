@@ -58,16 +58,13 @@ function SignupForm() {
     <div className="w-full max-w-md">
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="text-overline mb-3">
-          The Blueprint Discipleship Institute
-        </div>
-        <h1 className="text-3xl font-semibold mb-2">Create your account</h1>
-        <p className="text-[var(--bp-muted)]">
+        <h1 className="font-display font-light text-4xl mb-2" style={{ color: 'var(--bp-cream)' }}>Create your account</h1>
+        <p style={{ color: 'rgba(245,240,232,0.55)' }}>
           You&apos;ve been accepted. Set up your account to begin.
         </p>
       </div>
 
-      <div className="bp-card p-8">
+      <div className="bp-card-elevated p-8">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label htmlFor="fullName" className="block text-sm font-medium mb-1.5">

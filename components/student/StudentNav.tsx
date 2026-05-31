@@ -38,8 +38,8 @@ export default function StudentNav({ profile }: { profile: Profile }) {
     : profile.email[0].toUpperCase()
 
   return (
-    <header className="border-b border-[var(--bp-warm)] bg-[var(--bp-white)] sticky top-0 z-40">
-      <div className="bp-container flex items-center justify-between h-14">
+    <header className="bp-glass-nav sticky top-0 z-40">
+      <div className="bp-container flex items-center justify-between h-16">
         {/* Brand */}
         <Link href="/dashboard" className="font-display font-light text-base tracking-wide text-[var(--bp-dark)]">
           The B.L.U.E.P.R.I.N.T.S. Foundation
