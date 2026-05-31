@@ -40,6 +40,7 @@
 | `ANALYTICS_ARCHITECTURE.md` | The measurement system — founding distinctive operationalized | Locked v1.0 |
 | `BUILD_SEQUENCE.md` | The 10-phase build order, nothing skipped | Living |
 | `LINKEDIN_PROFILE.md` | Founder LinkedIn profile copy — funder & pastor facing, locked to verified facts | Locked v1.0 |
+| `FUNDING_COST_MODEL.md` | Dollar-by-dollar cost model — $4,500/student, cohort budget, institutional pricing, holding-company structure, salary escalation plan | Working |
 | `README.md` | Project overview | Stable |
 | `SETUP.md` | Deployment + setup instructions | Stable |
 
