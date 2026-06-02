@@ -74,7 +74,7 @@ const NEXT_ACTIONS: Record<string, { label: string; status: string }[]> = {
   ],
 }
 
-export function ApplicationsContent() {
+function ApplicationsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const statusFilter = searchParams.get('status') ?? ''
