@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { createBrowserSupabaseClient } from '@/lib/supabase/browser'
 
 const NAV_LINKS = [
@@ -16,15 +16,7 @@ const NAV_LINKS = [
 export default function FounderNav() {
   const pathname = usePathname()
   const router = useRouter()
-  const [isSmPlus, setIsSmPlus] = useState(false)
-
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 640px)')
-    setIsSmPlus(mq.matches)
-    const handler = (e: MediaQueryListEvent) => setIsSmPlus(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const isActive = (href: string, exact?: boolean) =>
     exact ? pathname === href : pathname === href || pathname.startsWith(href + '/')
@@ -36,32 +28,37 @@ export default function FounderNav() {
   }
 
   return (
-    <header className="border-b border-[var(--bp-gold)]/20 sticky top-0 z-30" style={{ background: 'rgba(26,18,11,0.92)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
-      <div className="bp-container flex items-center justify-between h-16">
-        {/* Brand */}
-        <div className="flex items-center gap-3 min-w-0">
-          <Link href="/founder" className="font-display font-light text-base tracking-wide min-w-0 truncate" style={{ color: 'var(--bp-gold-light)' }}>
-            {isSmPlus ? 'The B.L.U.E.P.R.I.N.T.S. Foundation' : 'B.L.U.E.P.R.I.N.T.S.'}
-          </Link>
-          <span className="text-[0.6rem] font-sans font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}>
-            Sovereign
-          </span>
-        </div>
+    <header
+      className="sticky top-0 z-30"
+      style={{
+        background: 'rgba(26,18,11,0.95)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(196,146,58,0.18)',
+      }}
+    >
+      <div className="bp-container flex items-center justify-between" style={{ height: '64px' }}>
 
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1">
+        {/* Brand — matches front page font exactly */}
+        <Link
+          href="/founder"
+          className="font-display font-light tracking-wide flex-shrink-0"
+          style={{ fontSize: '1rem', color: 'var(--bp-gold-light)', lineHeight: 1 }}
+        >
+          The B.L.U.E.P.R.I.N.T.S. Foundation
+        </Link>
+
+        {/* Desktop nav — centered */}
+        <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
           {NAV_LINKS.map(({ href, label, exact }) => (
             <Link
               key={href}
               href={href}
-              className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+              className="px-3 py-1.5 rounded-lg text-sm font-sans transition-colors"
+              style={
                 isActive(href, exact)
-                  ? 'font-semibold'
-                  : 'hover:bg-white/10'
-              }`}
-              style={isActive(href, exact)
-                ? { background: 'var(--bp-gold)', color: 'var(--bp-dark)' }
-                : { color: 'rgba(240,217,181,0.75)' }
+                  ? { background: 'var(--bp-gold)', color: 'var(--bp-dark)', fontWeight: 600 }
+                  : { color: 'rgba(240,217,181,0.7)', fontWeight: 400 }
               }
             >
               {label}
@@ -69,41 +66,70 @@ export default function FounderNav() {
           ))}
         </nav>
 
-        {/* Founder identity + sign out */}
+        {/* Right side — KC avatar + sign out (desktop) / hamburger (mobile) */}
         <div className="flex items-center gap-3 flex-shrink-0">
-          <div className="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center" style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}>
+          {/* Avatar */}
+          <div
+            className="w-7 h-7 rounded-full font-sans text-xs font-bold flex items-center justify-center flex-shrink-0"
+            style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}
+          >
             KC
           </div>
+
+          {/* Sign out — desktop only */}
           <button
             onClick={handleSignOut}
-            className="text-xs transition-colors hidden lg:block"
-            style={{ color: 'rgba(240,217,181,0.6)' }}
+            className="hidden lg:block font-sans text-xs transition-colors"
+            style={{ color: 'rgba(240,217,181,0.55)' }}
             onMouseEnter={e => (e.currentTarget.style.color = 'var(--bp-gold-light)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(240,217,181,0.6)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(240,217,181,0.55)')}
           >
             Sign out
+          </button>
+
+          {/* Hamburger — mobile only */}
+          <button
+            onClick={() => setMenuOpen(o => !o)}
+            className="lg:hidden flex flex-col justify-center items-center gap-1.5 w-7 h-7"
+            aria-label="Menu"
+          >
+            <span className="block w-5 h-px transition-all" style={{ background: 'var(--bp-gold-light)' }} />
+            <span className="block w-5 h-px transition-all" style={{ background: 'var(--bp-gold-light)' }} />
+            <span className="block w-5 h-px transition-all" style={{ background: 'var(--bp-gold-light)' }} />
           </button>
         </div>
       </div>
 
-      {/* Mobile nav row — shows on viewports < lg */}
-      <div className="lg:hidden overflow-x-auto flex" style={{ borderTop: '1px solid rgba(196,146,58,0.15)' }}>
-        {NAV_LINKS.map(({ href, label, exact }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`flex-shrink-0 px-4 py-2.5 text-xs font-medium whitespace-nowrap tracking-wide transition-colors ${
-              isActive(href, exact) ? 'border-b-2' : ''
-            }`}
-            style={isActive(href, exact)
-              ? { color: 'var(--bp-gold)', borderColor: 'var(--bp-gold)' }
-              : { color: 'rgba(240,217,181,0.55)' }
-            }
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <div
+          className="lg:hidden border-t"
+          style={{ background: 'rgba(26,18,11,0.98)', borderColor: 'rgba(196,146,58,0.18)' }}
+        >
+          {NAV_LINKS.map(({ href, label, exact }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setMenuOpen(false)}
+              className="block px-6 py-3 font-sans text-sm border-b transition-colors"
+              style={{
+                borderColor: 'rgba(196,146,58,0.1)',
+                color: isActive(href, exact) ? 'var(--bp-gold)' : 'rgba(240,217,181,0.7)',
+                fontWeight: isActive(href, exact) ? 600 : 400,
+              }}
+            >
+              {label}
+            </Link>
+          ))}
+          <button
+            onClick={handleSignOut}
+            className="block w-full text-left px-6 py-3 font-sans text-sm"
+            style={{ color: 'rgba(240,217,181,0.45)' }}
           >
-            {label}
-          </Link>
-        ))}
-      </div>
+            Sign out
+          </button>
+        </div>
+      )}
     </header>
   )
 }
