@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 
@@ -12,10 +12,15 @@ interface Application {
   phone: string | null
   city: string | null
   state: string | null
+  age_range: string | null
+  gender: string | null
   testimony: string
   why_now: string
   expectations: string | null
   current_church: string | null
+  salvation_year: string | null
+  spiritual_gifts: string | null
+  prior_discipleship_experience: string | null
   current_role_title: string | null
   hours_committed_weekly: number | null
   status: string
@@ -69,7 +74,7 @@ const NEXT_ACTIONS: Record<string, { label: string; status: string }[]> = {
   ],
 }
 
-export default function ApplicationsPage() {
+export function ApplicationsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const statusFilter = searchParams.get('status') ?? ''
@@ -78,6 +83,7 @@ export default function ApplicationsPage() {
   const [cohorts, setCohorts] = useState<Cohort[]>([])
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [fetchError, setFetchError] = useState(false)
   const [selected, setSelected] = useState<Application | null>(null)
   const [reviewerNotes, setReviewerNotes] = useState('')
   const [decisionNotes, setDecisionNotes] = useState('')
@@ -88,11 +94,17 @@ export default function ApplicationsPage() {
 
   const loadApplications = useCallback(async () => {
     setLoading(true)
-    const url = `/api/admin/applications${statusFilter ? `?status=${statusFilter}` : ''}`
-    const { data, total: t } = await fetch(url).then((r) => r.json())
-    setApplications(data ?? [])
-    setTotal(t ?? 0)
-    setLoading(false)
+    setFetchError(false)
+    try {
+      const url = `/api/admin/applications${statusFilter ? `?status=${statusFilter}` : ''}`
+      const { data, total: t } = await fetch(url).then((r) => r.json())
+      setApplications(data ?? [])
+      setTotal(t ?? 0)
+    } catch {
+      setFetchError(true)
+    } finally {
+      setLoading(false)
+    }
   }, [statusFilter])
 
   useEffect(() => { loadApplications() }, [loadApplications])
@@ -101,6 +113,7 @@ export default function ApplicationsPage() {
     fetch('/api/admin/cohorts')
       .then((r) => r.json())
       .then(({ data }) => setCohorts((data ?? []).filter((c: Cohort) => c.status === 'upcoming' || c.status === 'active')))
+      .catch(() => { /* cohorts are optional — silently ignore */ })
   }, [])
 
   const openApp = (app: Application) => {
@@ -169,6 +182,10 @@ export default function ApplicationsPage() {
         <div className="space-y-2">
           {loading ? (
             <div className="text-sm text-[var(--bp-muted)] py-8 text-center">Loading…</div>
+          ) : fetchError ? (
+            <div className="bp-card p-8 text-center">
+              <p className="text-[var(--bp-muted)] text-sm">Unable to load applications. Please refresh the page.</p>
+            </div>
           ) : applications.length === 0 ? (
             <div className="bp-card p-8 text-center text-[var(--bp-muted)] text-sm">No applications in this category.</div>
           ) : (
@@ -231,6 +248,11 @@ export default function ApplicationsPage() {
               )}
               <div className="grid grid-cols-2 gap-2 text-xs text-[var(--bp-muted)]">
                 {selected.current_church && <span>Church: {selected.current_church}</span>}
+                {selected.salvation_year && <span>Saved: {selected.salvation_year}</span>}
+                {selected.age_range && <span>Age: {selected.age_range}</span>}
+                {selected.gender && <span>Gender: {selected.gender}</span>}
+                {selected.prior_discipleship_experience && <span className="col-span-2">Discipleship: {selected.prior_discipleship_experience}</span>}
+                {selected.spiritual_gifts && <span className="col-span-2">Gifts: {selected.spiritual_gifts}</span>}
                 {selected.hours_committed_weekly && <span>{selected.hours_committed_weekly}h/wk committed</span>}
               </div>
             </div>
@@ -304,5 +326,13 @@ export default function ApplicationsPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function ApplicationsPage() {
+  return (
+    <Suspense fallback={<div className="py-12 text-center text-sm text-[var(--bp-muted)]">Loading applications…</div>}>
+      <ApplicationsContent />
+    </Suspense>
   )
 }

@@ -28,28 +28,32 @@ export interface Profile {
 // ---- Application -------------------------------------------
 export interface Application {
   id: string
-  user_id: string | null
+  application_number: string
   full_name: string
   email: string
   phone: string | null
   city: string | null
   state: string | null
-  church: string | null
   age_range: string | null
   gender: string | null
   salvation_year: string | null
-  discipleship_experience: string | null
-  why_applying: string
-  what_hoping: string | null
   spiritual_gifts: string | null
-  current_challenges: string | null
-  commitment_acknowledgment: boolean
+  current_church: string | null
+  prior_discipleship_experience: string | null
+  testimony: string
+  why_now: string
+  expectations: string | null
+  current_role_title: string | null
+  hours_committed_weekly: number | null
   status: ApplicationStatus
-  facilitator_notes: string | null
+  reviewer_notes: string | null
   reviewed_by: string | null
-  reviewed_at: string | null
-  cohort_id: string | null
-  created_at: string
+  interview_date: string | null
+  decision_date: string | null
+  decision_notes: string | null
+  assigned_cohort_id: string | null
+  submitted_at: string
+  updated_at: string
 }
 
 // ---- Curriculum ---------------------------------------------
