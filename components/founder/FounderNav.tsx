@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { createBrowserSupabaseClient } from '@/lib/supabase/browser'
 
 const NAV_LINKS = [
@@ -15,6 +16,15 @@ const NAV_LINKS = [
 export default function FounderNav() {
   const pathname = usePathname()
   const router = useRouter()
+  const [isSmPlus, setIsSmPlus] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 640px)')
+    setIsSmPlus(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsSmPlus(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   const isActive = (href: string, exact?: boolean) =>
     exact ? pathname === href : pathname === href || pathname.startsWith(href + '/')
@@ -30,9 +40,8 @@ export default function FounderNav() {
       <div className="bp-container flex items-center justify-between h-16">
         {/* Brand */}
         <div className="flex items-center gap-3 min-w-0">
-          <Link href="/founder" className="font-display font-light text-base tracking-wide truncate" style={{ color: 'var(--bp-gold-light)' }}>
-            <span className="hidden sm:inline">The B.L.U.E.P.R.I.N.T.S. Foundation</span>
-            <span className="sm:hidden">B.L.U.E.P.R.I.N.T.S.</span>
+          <Link href="/founder" className="font-display font-light text-base tracking-wide min-w-0 truncate" style={{ color: 'var(--bp-gold-light)' }}>
+            {isSmPlus ? 'The B.L.U.E.P.R.I.N.T.S. Foundation' : 'B.L.U.E.P.R.I.N.T.S.'}
           </Link>
           <span className="text-[0.6rem] font-sans font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: 'var(--bp-gold)', color: 'var(--bp-dark)' }}>
             Sovereign
