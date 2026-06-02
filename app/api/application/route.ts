@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { checkRateLimit } from '@/lib/rate-limit'
-import { sendApplicationConfirmation } from '@/lib/email/send'
+import { sendApplicationConfirmation, sendNewApplicationAlert } from '@/lib/email/send'
 
 const ApplicationSchema = z.object({
   full_name: z.string().min(2, 'Full name is required'),
@@ -61,8 +61,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const appNumber = `APP-${new Date().getFullYear()}-${Date.now().toString(36).slice(-6).toUpperCase()}`
     const { error } = await supabase.from('applications').insert({
-      application_number: `APP-${new Date().getFullYear()}-${Date.now().toString(36).slice(-6).toUpperCase()}`,
+      application_number: appNumber,
       full_name: data.full_name,
       email: data.email,
       phone: data.phone ?? null,
@@ -85,11 +86,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to submit application. Please try again.' }, { status: 500 })
     }
 
-    // Send confirmation email (non-blocking on failure)
+    // Send confirmation to applicant + alert to founder (both non-blocking)
     try {
       await sendApplicationConfirmation(data.email, data.full_name)
     } catch (emailErr) {
-      console.error('[application] email error:', emailErr)
+      console.error('[application] applicant email error:', emailErr)
+    }
+    try {
+      await sendNewApplicationAlert(data.full_name, data.email, appNumber)
+    } catch (alertErr) {
+      console.error('[application] founder alert email error:', alertErr)
     }
 
     return NextResponse.json({ message: 'Application submitted successfully.' }, { status: 201 })

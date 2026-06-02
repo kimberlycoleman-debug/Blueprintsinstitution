@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { createServerSupabaseClient, getCurrentProfile } from '@/lib/supabase/server'
+import { getCurrentProfile } from '@/lib/supabase/server'
 import { createAdminSupabaseClient } from '@/lib/supabase/admin'
 import { sendEnrollmentConfirmation } from '@/lib/email/send'
 
@@ -16,7 +16,9 @@ export async function GET(request: NextRequest) {
   const limit = 25
   const offset = (page - 1) * limit
 
-  const supabase = await createServerSupabaseClient()
+  // Use admin client — app-level auth check already verified admin/founder role above.
+  // The server client is blocked by is_admin() RLS which excludes the founder role.
+  const supabase = createAdminSupabaseClient()
   let query = supabase
     .from('applications')
     .select('*', { count: 'exact' })
