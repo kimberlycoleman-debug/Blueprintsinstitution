@@ -135,7 +135,11 @@ function ResetPasswordForm() {
 
 export default function ResetPasswordPage() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={
+      <div className="w-full max-w-md text-center" style={{ color: 'rgba(245,240,232,0.45)' }}>
+        <p className="text-sm">Loading…</p>
+      </div>
+    }>
       <ResetPasswordForm />
     </Suspense>
   )

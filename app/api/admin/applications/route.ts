@@ -99,17 +99,28 @@ export async function PATCH(request: NextRequest) {
           if (cohort) cohortName = cohort.cohort_name
         }
 
-        // Generate a Supabase magic-link so the student can create their account
+        // Generate a Supabase invite link so the student can create their account.
+        // Derive the app origin from the inbound request so the redirect works on
+        // any deployment (Vercel preview, production, localhost) without relying
+        // on an env var fallback to the wrong domain.
+        const host = request.headers.get('host') ?? ''
+        const proto = host.startsWith('localhost') ? 'http' : 'https'
+        const appOrigin = process.env.NEXT_PUBLIC_APP_URL ?? `${proto}://${host}`
+
         let inviteLink: string | null = null
         try {
-          const { data: linkData } = await adminSupabase2.auth.admin.generateLink({
+          const { data: linkData, error: linkError } = await adminSupabase2.auth.admin.generateLink({
             type: 'invite',
             email: app.email,
             options: {
-              redirectTo: `${process.env.NEXT_PUBLIC_APP_URL ?? 'https://theblueprintsfoundation.org'}/auth/callback?next=/auth/reset-password`,
+              redirectTo: `${appOrigin}/auth/callback?next=/auth/reset-password`,
             },
           })
-          inviteLink = linkData?.properties?.action_link ?? null
+          if (linkError) {
+            console.error('[admin/applications] generateLink error:', linkError.message)
+          } else {
+            inviteLink = linkData?.properties?.action_link ?? null
+          }
         } catch (linkErr) {
           console.error('[admin/applications] invite link error:', linkErr)
         }
