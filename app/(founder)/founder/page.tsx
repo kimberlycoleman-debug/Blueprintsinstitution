@@ -59,10 +59,10 @@ export default async function FounderCommandCenter() {
           <div className="text-overline mb-3" style={{ color: 'var(--bp-gold)' }}>
             Founding Architect · Sovereign Access
           </div>
-          <h1 className="font-display font-light text-[var(--bp-dark)]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.1 }}>
+          <h1 className="font-sans font-semibold" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', lineHeight: 1.15, color: 'var(--bp-dark)', letterSpacing: '-0.02em' }}>
             Welcome, {profile?.full_name?.split(' ')[0] ?? 'Kimberly'}.
           </h1>
-          <p className="text-[var(--bp-muted)] mt-2 italic text-sm font-display">
+          <p className="text-[var(--bp-muted)] mt-2 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
             &ldquo;{profile?.founding_scripture ?? 'Ephesians 2:10'}&rdquo; &middot; &ldquo;{profile?.founding_mandate ?? 'Matthew 28:19-20'}&rdquo;
           </p>
         </div>
@@ -85,11 +85,16 @@ export default async function FounderCommandCenter() {
             <Link
               key={label}
               href={href}
-              className="bp-card bp-card-warm bp-card-interactive block"
-              style={{ padding: '1.75rem 1.75rem 2rem' }}
+              className="block group rounded-xl p-5 transition-colors"
+              style={{
+                background: 'rgba(26,18,11,0.92)',
+                border: '1px solid rgba(196,146,58,0.22)',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(196,146,58,0.55)')}
+              onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(196,146,58,0.22)')}
             >
-              <span className="block text-xs font-semibold tracking-widest uppercase text-[var(--bp-muted)] mb-4 leading-snug">{label}</span>
-              <span className="block font-display font-light" style={{ fontSize: '3.5rem', lineHeight: 1, color: 'var(--bp-brown-deep)' }}>{value}</span>
+              <span className="block text-[0.6rem] font-sans font-bold tracking-[0.18em] uppercase mb-3 leading-snug" style={{ color: 'rgba(240,217,181,0.55)' }}>{label}</span>
+              <span className="block font-sans font-semibold tabular-nums" style={{ fontSize: '2.5rem', lineHeight: 1, color: 'var(--bp-gold)' }}>{value}</span>
             </Link>
           ))}
         </div>
@@ -123,8 +128,8 @@ export default async function FounderCommandCenter() {
       {/* Quick actions + recent audit */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* Quick actions */}
-        <div className="bp-card p-6">
-          <div className="text-overline mb-5">Sovereign Actions</div>
+        <div className="rounded-xl p-6" style={{ background: 'rgba(26,18,11,0.88)', border: '1px solid rgba(196,146,58,0.22)' }}>
+          <div className="text-overline mb-5" style={{ color: 'var(--bp-gold)' }}>Sovereign Actions</div>
           <div className="space-y-2">
             {[
               { href: '/founder/vault', label: 'Open Vault', desc: 'Legal, financial, strategic documents' },
@@ -136,11 +141,13 @@ export default async function FounderCommandCenter() {
               <Link
                 key={href}
                 href={href}
-                className="flex items-start gap-3 p-3 rounded-lg hover:bg-[var(--bp-cream)] transition-colors group"
+                className="flex items-start gap-3 p-3 rounded-lg transition-colors group"
+                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(196,146,58,0.08)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
               >
                 <div>
-                  <p className="text-sm font-medium group-hover:text-[var(--bp-brown-deep)]">{label}</p>
-                  <p className="text-xs text-[var(--bp-muted)]">{desc}</p>
+                  <p className="text-sm font-medium transition-colors" style={{ color: 'var(--bp-gold-light)' }}>{label}</p>
+                  <p className="text-xs" style={{ color: 'rgba(240,217,181,0.45)' }}>{desc}</p>
                 </div>
               </Link>
             ))}
@@ -148,24 +155,24 @@ export default async function FounderCommandCenter() {
         </div>
 
         {/* Recent audit */}
-        <div className="bp-card p-6">
+        <div className="rounded-xl p-6" style={{ background: 'rgba(26,18,11,0.88)', border: '1px solid rgba(196,146,58,0.22)' }}>
           <div className="flex items-center justify-between mb-4">
-            <div className="text-overline">Recent Activity</div>
-            <Link href="/founder/audit" className="text-xs text-[var(--bp-brown)] hover:underline">View all →</Link>
+            <div className="text-overline" style={{ color: 'var(--bp-gold)' }}>Recent Activity</div>
+            <Link href="/founder/audit" className="text-xs hover:underline" style={{ color: 'rgba(240,217,181,0.55)' }}>View all →</Link>
           </div>
           {auditEvents.length === 0 ? (
-            <p className="text-sm text-[var(--bp-muted)]">No activity recorded yet.</p>
+            <p className="text-sm" style={{ color: 'rgba(240,217,181,0.45)' }}>No activity recorded yet.</p>
           ) : (
             <div className="space-y-3">
               {auditEvents.map((event) => (
                 <div key={event.id} className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="text-sm">{ACTION_LABELS[event.action] ?? event.action}</p>
+                    <p className="text-sm" style={{ color: 'var(--bp-gold-light)' }}>{ACTION_LABELS[event.action] ?? event.action}</p>
                     {event.resource_label && (
-                      <p className="text-xs text-[var(--bp-muted)] truncate">{event.resource_label}</p>
+                      <p className="text-xs truncate" style={{ color: 'rgba(240,217,181,0.45)' }}>{event.resource_label}</p>
                     )}
                   </div>
-                  <p className="text-xs text-[var(--bp-muted)] flex-shrink-0">
+                  <p className="text-xs flex-shrink-0" style={{ color: 'rgba(240,217,181,0.4)' }}>
                     {new Date(event.occurred_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
                   </p>
                 </div>

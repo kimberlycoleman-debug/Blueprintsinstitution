@@ -19,12 +19,14 @@ const ROLE_FILTERS = [
   { label: 'Students', value: 'student' },
   { label: 'Facilitators', value: 'facilitator' },
   { label: 'Admins', value: 'admin' },
+  { label: 'Founder', value: 'founder' },
 ]
 
 const ROLE_STYLE: Record<string, string> = {
   student: 'bg-[var(--bp-cream)] text-[var(--bp-brown)]',
   facilitator: 'bg-blue-50 text-blue-700',
   admin: 'bg-[var(--bp-brown-deep)] text-white',
+  founder: 'bg-[var(--bp-gold)] text-[var(--bp-dark)]',
 }
 
 export default function UsersPage() {
@@ -142,6 +144,7 @@ export default function UsersPage() {
                       <option value="student">student</option>
                       <option value="facilitator">facilitator</option>
                       <option value="admin">admin</option>
+                      <option value="founder">founder</option>
                     </select>
                   </td>
                   <td className="px-4 py-3 text-[var(--bp-muted)] hidden sm:table-cell">

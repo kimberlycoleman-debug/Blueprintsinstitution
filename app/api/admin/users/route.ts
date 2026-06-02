@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
 
 const UpdateUserSchema = z.object({
   id: z.string().uuid(),
-  role: z.enum(['student', 'facilitator', 'admin']).optional(),
+  role: z.enum(['student', 'facilitator', 'admin', 'founder']).optional(),
   is_active: z.boolean().optional(),
   full_name: z.string().optional(),
 })
@@ -52,7 +52,7 @@ export async function PATCH(request: NextRequest) {
   }
 
   // Prevent admin from demoting themselves
-  if (parsed.data.id === profile.id && parsed.data.role && parsed.data.role !== 'admin') {
+  if (parsed.data.id === profile.id && parsed.data.role && !['admin', 'founder'].includes(parsed.data.role)) {
     return NextResponse.json({ error: 'Cannot change your own role' }, { status: 400 })
   }
 
