@@ -85,13 +85,7 @@ export default async function FounderCommandCenter() {
             <Link
               key={label}
               href={href}
-              className="block group rounded-xl p-5 transition-colors"
-              style={{
-                background: 'rgba(26,18,11,0.92)',
-                border: '1px solid rgba(196,146,58,0.22)',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(196,146,58,0.55)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(196,146,58,0.22)')}
+              className="founder-vital-card"
             >
               <span className="block text-[0.6rem] font-sans font-bold tracking-[0.18em] uppercase mb-3 leading-snug" style={{ color: 'rgba(240,217,181,0.55)' }}>{label}</span>
               <span className="block font-sans font-semibold tabular-nums" style={{ fontSize: '2.5rem', lineHeight: 1, color: 'var(--bp-gold)' }}>{value}</span>
@@ -141,9 +135,7 @@ export default async function FounderCommandCenter() {
               <Link
                 key={href}
                 href={href}
-                className="flex items-start gap-3 p-3 rounded-lg transition-colors group"
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(196,146,58,0.08)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                className="founder-action-link"
               >
                 <div>
                   <p className="text-sm font-medium transition-colors" style={{ color: 'var(--bp-gold-light)' }}>{label}</p>

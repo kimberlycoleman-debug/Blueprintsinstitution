@@ -462,6 +462,31 @@ h4 { font-size: 1.25rem; font-weight: 500; letter-spacing: -0.01em; }
   border: 1px solid rgba(196, 146, 58, 0.14);
 }
 
+/* ─── Founder-specific dark cards ────────────────────────── */
+.founder-vital-card {
+  display: block;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: rgba(26, 18, 11, 0.92);
+  border: 1px solid rgba(196, 146, 58, 0.22);
+  transition: border-color 0.2s ease;
+}
+.founder-vital-card:hover {
+  border-color: rgba(196, 146, 58, 0.55);
+}
+
+.founder-action-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+.founder-action-link:hover {
+  background: rgba(196, 146, 58, 0.08);
+}
+
 /* ─── Elevated Card ───────────────────────────────────────── */
 .bp-card-elevated {
   background: white;
