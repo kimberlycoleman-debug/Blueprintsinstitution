@@ -113,7 +113,7 @@ export async function PATCH(request: NextRequest) {
             type: 'invite',
             email: app.email,
             options: {
-              redirectTo: `${appOrigin}/auth/callback?next=/auth/reset-password`,
+              redirectTo: `${appOrigin}/auth/callback`,
             },
           })
           if (linkError) {
